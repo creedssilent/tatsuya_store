@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Tatsuya Store - Insane Dragon Nest</title>
     <style>
-        /* Desain Tema Tatsuya V3.1 (Ukuran Logo Disesuaikan) */
+        /* Desain Tema Tatsuya V3.2 (Dengan Ikon Item JPG) */
         :root {
             --primary-gold: #fbbf24;
             --primary-cyan: #00f0ff;
@@ -35,19 +35,17 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            gap: 30px; /* Jarak antar logo sedikit dirapatkan biar pas dengan ukuran baru */
+            gap: 30px;
             margin-bottom: 15px;
         }
 
-        /* INI BAGIAN YANG DIUBAH UKURANNYA */
         .side-logo {
-            width: 120px;  /* Dulu 80px, sekarang 120px */
-            height: 120px; /* Dulu 80px, sekarang 120px */
+            width: 120px;
+            height: 120px;
             object-fit: contain;
             filter: drop-shadow(0 0 10px rgba(0, 240, 255, 0.3));
             transition: 0.3s;
         }
-        /* ---------------------------------- */
 
         .side-logo:hover {
             transform: scale(1.1);
@@ -61,7 +59,7 @@
             background: linear-gradient(45deg, var(--primary-cyan), var(--primary-gold));
             box-shadow: 0 0 25px rgba(0, 240, 255, 0.6);
             animation: float 4s ease-in-out infinite;
-            z-index: 2; /* Biar logo utama tetep di depan kalau layar kecil */
+            z-index: 2;
         }
 
         .main-logo {
@@ -116,7 +114,7 @@
             backdrop-filter: blur(10px);
             border: 1px solid rgba(0, 240, 255, 0.3);
             border-radius: 15px;
-            padding: 25px 20px;
+            padding: 30px 20px; 
             text-align: center;
             transition: all 0.3s ease;
             box-shadow: 0 4px 15px rgba(0,0,0,0.6);
@@ -140,12 +138,24 @@
             box-shadow: 0 0 25px rgba(0, 240, 255, 0.3);
         }
 
+        /* STYLE UNTUK IKON ITEM */
+        .item-icon {
+            width: 80px;
+            height: 80px;
+            object-fit: cover; 
+            border-radius: 12px;
+            border: 2px solid var(--primary-cyan);
+            box-shadow: 0 0 15px rgba(0, 240, 255, 0.4);
+            margin-bottom: 15px; 
+        }
+
         .item-card h3 { 
             color: #fff; 
             margin-top: 0; 
             text-shadow: 0 0 8px var(--primary-cyan); 
             font-size: 1.3em;
             letter-spacing: 1px;
+            min-height: 1.3em; 
         }
         
         .price { font-size: 1.2em; font-weight: bold; color: var(--primary-gold); margin: 10px 0;}
@@ -206,7 +216,7 @@
 
     <header>
         <div class="header-logos">
-            <img src="logo_guild2.png" alt="Guild Logo" class="side-logo">
+            <img src="logo_guild.png" alt="Guild Logo" class="side-logo">
             
             <div class="main-logo-wrapper">
                 <img src="logo_tatsuya.png" alt="Tatsuya Store Logo" class="main-logo">
@@ -222,6 +232,7 @@
 
     <div class="container">
         <div class="item-card">
+            <img src="icon_refinement.jpg" alt="Refinement Dust Icon" class="item-icon">
             <h3>Refinement Dust</h3>
             <div class="price">Rp 5.000 / Stack</div>
             <div class="stock">Ready: <span id="stok-refinement">Loading...</span> Stack</div>
@@ -232,6 +243,7 @@
         </div>
 
         <div class="item-card">
+            <img src="icon_stone.jpg" alt="Enhancement Stone Icon" class="item-icon">
             <h3>Enhancement Stone</h3>
             <div class="price">Rp 5.000 / 2 Stack</div>
             <div class="stock">Ready: <span id="stok-stone">Loading...</span> Paket</div>
@@ -242,6 +254,7 @@
         </div>
 
         <div class="item-card">
+            <img src="icon_mount.jpg" alt="Mount Coupon Icon" class="item-icon">
             <h3>Insane Mount Coupon</h3>
             <div class="price">Rp 15.000 / Pcs</div>
             <div class="stock">Ready: <span id="stok-mount">Loading...</span> Coupon</div>
@@ -252,6 +265,7 @@
         </div>
 
         <div class="item-card">
+            <img src="icon_pet.jpg" alt="Pet Coupon Icon" class="item-icon">
             <h3>Insane Pet Coupon</h3>
             <div class="price">Rp 20.000 / Pcs</div>
             <div class="stock">Ready: <span id="stok-pet">Loading...</span> Coupon</div>
@@ -262,6 +276,7 @@
         </div>
 
         <div class="item-card">
+            <img src="icon_spirit.jpg" alt="Spirit Coupon Icon" class="item-icon">
             <h3>Insane Spirit Coupon</h3>
             <div class="price">Rp 30.000 / Pcs</div>
             <div class="stock">Ready: <span id="stok-spirit">Loading...</span> Coupon</div>
@@ -272,6 +287,7 @@
         </div>
 
         <div class="item-card" style="border-color: var(--primary-cyan);">
+            <img src="icon_gold.jpg" alt="Gold Icon" class="item-icon" style="box-shadow: 0 0 15px var(--primary-gold); border-color: var(--primary-gold);">
             <h3 style="color: var(--primary-cyan); text-shadow: 0 0 5px var(--primary-cyan);">Gold Currency</h3>
             <div class="price" style="color: white;">PM Price / Offer</div>
             <div class="stock" style="color: #d1d5db;">Ready: <span style="color: var(--primary-gold);">50</span> Juta</div>
@@ -286,7 +302,6 @@
         import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-app.js";
         import { getDatabase, ref, onValue, set } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-database.js";
 
-        // Konfigurasi Database & Webhook (Link Lu Masih Aktif, Aman)
         const firebaseConfig = { databaseURL: "https://tatsuya-store-3a57a-default-rtdb.asia-southeast1.firebasedatabase.app/" };
         const app = initializeApp(firebaseConfig);
         const db = getDatabase(app);
@@ -295,7 +310,6 @@
         let stokRealtime = {};
         const stokRef = ref(db, 'stok_tatsuya');
 
-        // Update Stok Realtime
         onValue(stokRef, (snapshot) => {
             const data = snapshot.val();
             if(data) {
@@ -310,7 +324,6 @@
             }
         });
 
-        // Eksekusi Beli Barang
         window.beliItem = function(idItem, namaItem) {
             const qty = parseInt(document.getElementById(`qty-${idItem}`).value);
             const ign = prompt("🔥 Masukkan IGN Karakter Lu (Pastikan benar biar gampang di PM):");
@@ -321,9 +334,8 @@
 
             if(confirm(`Yakin mau beli ${qty}x ${namaItem} buat karakter ${ign}?`)) {
                 stokRealtime[idItem] -= qty;
-                set(stokRef, stokRealtime); // Update ke Firebase
+                set(stokRef, stokRealtime); 
 
-                // Tembak notif ke Webhook Discord
                 fetch(discordWebhookURL, {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
@@ -334,7 +346,6 @@
             }
         }
 
-        // Khusus buat Gold (Beda Logic karena Nego)
         window.tanyaGold = function() {
             const ign = prompt("Masukkan IGN Lu buat nego Gold:");
             if(ign) {
@@ -349,6 +360,4 @@
         }
     </script>
 </body>
-
 </html>
-
