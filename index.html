@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Tatsuya Store - Insane Dragon Nest</title>
     <style>
-        /* Desain Tema Tatsuya V3.4 (Tambah Energy Catalyst & Fix Gold) */
+        /* Desain Tema Tatsuya V3.6 (Gold Kembali ke Nego PM) */
         :root {
             --primary-gold: #fbbf24;
             --primary-cyan: #00f0ff;
@@ -144,7 +144,7 @@
         <div class="item-card">
             <img src="icon_energy.jpg" alt="Energy Catalyst" class="item-icon" style="border-color: #f43f5e; box-shadow: 0 0 15px rgba(244, 63, 94, 0.4);">
             <h3 style="text-shadow: 0 0 8px #f43f5e;">Energy Catalyst</h3>
-            <div class="price" style="color: #f43f5e;">Rp 11.000 / Stack</div>
+            <div class="price" style="color: #f43f5e;">Rp 15.000 / Stack</div>
             <div class="stock">Ready: <span id="stok-energy">Loading...</span> Stack</div>
             <div class="input-group"><input type="number" id="qty-energy" value="1" min="1"></div>
             <button class="buy-btn" onclick="beliItem('energy', 'Energy Catalyst')" style="background: linear-gradient(45deg, #be123c, #f43f5e); color: white;">Beli Sekarang</button>
@@ -180,12 +180,11 @@
         <div class="item-card" style="border-color: var(--primary-cyan);">
             <img src="icon_gold.jpg" alt="Gold Icon" class="item-icon" style="box-shadow: 0 0 15px var(--primary-gold); border-color: var(--primary-gold);">
             <h3 style="color: var(--primary-cyan); text-shadow: 0 0 5px var(--primary-cyan);">Gold Currency</h3>
-            <div class="price" style="color: white;">Rp 10.000 / 1 Juta</div>
+            <div class="price" style="color: white;">PM Price / Offer</div>
             <div class="stock" style="color: #d1d5db;">Ready: <span id="stok-gold" style="color: var(--primary-gold);">Loading...</span> Juta</div>
-            <div class="input-group">
-                <input type="number" id="qty-gold" value="1" min="1"> 
+            <div class="input-group" style="visibility: hidden; height: 35px;"> <input type="number" id="qty-gold" value="1" min="1"> 
             </div>
-            <button class="buy-btn gold-btn" onclick="beliItem('gold', 'Gold (Juta)')">Beli Sekarang</button>
+            <button class="buy-btn gold-btn" onclick="tanyaGold()">Nego Harga via PM</button>
         </div>
     </div>
 
@@ -247,6 +246,26 @@
                     })
                 }).then(() => alert("✅ Pesanan terkirim! Gua bakal PM lu di game atau Discord secepatnya.")).catch(() => alert("Notif gagal, tapi stok aman."));
             }
+        }
+
+        window.tanyaGold = function() {
+            // Tanya IGN
+            const ign = prompt("Masukkan IGN Lu buat nego Gold:");
+            if(!ign) return;
+
+            // Tanya Username Discord
+            const discordUser = prompt("👾 Masukkan Username Discord Lu (Biar gampang dihubungin): \n*Kosongkan saja jika tidak ada");
+            
+            // Format tampilan user Discord (kalau kosong dikasih tanda '-')
+            const textDiscord = discordUser ? discordUser : "-";
+
+            fetch(discordWebhookURL, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                    content: `@everyone 💰 **ADA YANG MAU NEGO GOLD NIH!** 💰\n\n👤 **IGN:** \`${ign}\`\n👾 **Discord:** ${textDiscord}\n💬 Coba langsung di PM / Whisper orangnya in-game bro.`
+                })
+            }).then(() => alert("✅ Info terkirim! Tunggu gua PM lu in-game atau Discord buat nego harganya.")).catch(() => alert("Notif gagal."));
         }
     </script>
 </body>
