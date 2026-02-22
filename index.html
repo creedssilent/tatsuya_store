@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Tatsuya Store - Insane Dragon Nest</title>
     <style>
-        /* Desain Tema Tatsuya V3.3 (Dengan Input Discord) */
+        /* Desain Tema Tatsuya V3.4 (Tambah Energy Catalyst & Fix Gold) */
         :root {
             --primary-gold: #fbbf24;
             --primary-cyan: #00f0ff;
@@ -21,7 +21,6 @@
                         url('https://images.unsplash.com/photo-1542831371-29b0f74f9713?q=80&w=1920') center/cover fixed;
         }
 
-        /* --- HEADER & LOGO SECTION --- */
         header {
             text-align: center;
             padding: 30px 20px 20px;
@@ -31,45 +30,16 @@
             position: relative;
         }
 
-        .header-logos {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            gap: 30px;
-            margin-bottom: 15px;
-        }
-
-        .side-logo {
-            width: 120px;
-            height: 120px;
-            object-fit: contain;
-            filter: drop-shadow(0 0 10px rgba(0, 240, 255, 0.3));
-            transition: 0.3s;
-        }
-
-        .side-logo:hover {
-            transform: scale(1.1);
-            filter: drop-shadow(0 0 15px var(--primary-cyan));
-        }
-
+        .header-logos { display: flex; justify-content: center; align-items: center; gap: 30px; margin-bottom: 15px; }
+        .side-logo { width: 120px; height: 120px; object-fit: contain; filter: drop-shadow(0 0 10px rgba(0, 240, 255, 0.3)); transition: 0.3s; }
+        .side-logo:hover { transform: scale(1.1); filter: drop-shadow(0 0 15px var(--primary-cyan)); }
+        
         .main-logo-wrapper {
-            position: relative;
-            padding: 5px;
-            border-radius: 50%;
+            position: relative; padding: 5px; border-radius: 50%;
             background: linear-gradient(45deg, var(--primary-cyan), var(--primary-gold));
-            box-shadow: 0 0 25px rgba(0, 240, 255, 0.6);
-            animation: float 4s ease-in-out infinite;
-            z-index: 2;
+            box-shadow: 0 0 25px rgba(0, 240, 255, 0.6); animation: float 4s ease-in-out infinite; z-index: 2;
         }
-
-        .main-logo {
-            width: 180px;
-            height: 180px;
-            border-radius: 50%;
-            object-fit: cover;
-            border: 4px solid var(--dark-navy);
-            display: block;
-        }
+        .main-logo { width: 180px; height: 180px; border-radius: 50%; object-fit: cover; border: 4px solid var(--dark-navy); display: block; }
 
         @keyframes float {
             0% { transform: translateY(0px); box-shadow: 0 0 20px rgba(0, 240, 255, 0.5); }
@@ -78,136 +48,61 @@
         }
 
         .ign-badge {
-            display: inline-block;
-            background: linear-gradient(90deg, transparent, rgba(0, 240, 255, 0.2), transparent);
-            border: 1px solid var(--primary-cyan);
-            color: var(--primary-cyan);
-            padding: 5px 25px;
-            border-radius: 20px;
-            font-size: 1.2em;
-            font-weight: bold;
-            letter-spacing: 2px;
-            text-shadow: 0 0 8px var(--primary-cyan);
-            margin-top: 15px;
+            display: inline-block; background: linear-gradient(90deg, transparent, rgba(0, 240, 255, 0.2), transparent);
+            border: 1px solid var(--primary-cyan); color: var(--primary-cyan); padding: 5px 25px;
+            border-radius: 20px; font-size: 1.2em; font-weight: bold; letter-spacing: 2px;
+            text-shadow: 0 0 8px var(--primary-cyan); margin-top: 15px;
         }
 
-        .server-info {
-            color: var(--primary-gold);
-            font-size: 1em;
-            letter-spacing: 2px;
-            margin-top: 15px;
-            text-shadow: 0 0 5px black;
-        }
+        .server-info { color: var(--primary-gold); font-size: 1em; letter-spacing: 2px; margin-top: 15px; text-shadow: 0 0 5px black; }
 
-        /* --- ITEM CARDS --- */
         .container {
-            max-width: 1100px;
-            margin: 40px auto;
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-            gap: 25px;
-            padding: 0 20px;
+            max-width: 1100px; margin: 40px auto; display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 25px; padding: 0 20px;
         }
 
         .item-card {
-            background: var(--card-bg);
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(0, 240, 255, 0.3);
-            border-radius: 15px;
-            padding: 30px 20px; 
-            text-align: center;
-            transition: all 0.3s ease;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.6);
-            position: relative;
-            overflow: hidden;
+            background: var(--card-bg); backdrop-filter: blur(10px); border: 1px solid rgba(0, 240, 255, 0.3);
+            border-radius: 15px; padding: 30px 20px; text-align: center; transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.6); position: relative; overflow: hidden;
         }
 
         .item-card::before {
-            content: '';
-            position: absolute;
-            top: 0; left: -100%; width: 50%; height: 100%;
+            content: ''; position: absolute; top: 0; left: -100%; width: 50%; height: 100%;
             background: linear-gradient(to right, transparent, rgba(0, 240, 255, 0.1), transparent);
-            transform: skewX(-25deg);
-            transition: 0.5s;
+            transform: skewX(-25deg); transition: 0.5s;
         }
 
         .item-card:hover::before { left: 150%; }
-        .item-card:hover {
-            transform: translateY(-5px);
-            border-color: var(--primary-cyan);
-            box-shadow: 0 0 25px rgba(0, 240, 255, 0.3);
-        }
+        .item-card:hover { transform: translateY(-5px); border-color: var(--primary-cyan); box-shadow: 0 0 25px rgba(0, 240, 255, 0.3); }
 
         .item-icon {
-            width: 80px;
-            height: 80px;
-            object-fit: cover; 
-            border-radius: 12px;
-            border: 2px solid var(--primary-cyan);
-            box-shadow: 0 0 15px rgba(0, 240, 255, 0.4);
-            margin-bottom: 15px; 
+            width: 80px; height: 80px; object-fit: cover; border-radius: 12px;
+            border: 2px solid var(--primary-cyan); box-shadow: 0 0 15px rgba(0, 240, 255, 0.4); margin-bottom: 15px; 
         }
 
-        .item-card h3 { 
-            color: #fff; 
-            margin-top: 0; 
-            text-shadow: 0 0 8px var(--primary-cyan); 
-            font-size: 1.3em;
-            letter-spacing: 1px;
-            min-height: 1.3em; 
-        }
-        
+        .item-card h3 { color: #fff; margin-top: 0; text-shadow: 0 0 8px var(--primary-cyan); font-size: 1.3em; letter-spacing: 1px; min-height: 1.3em; }
         .price { font-size: 1.2em; font-weight: bold; color: var(--primary-gold); margin: 10px 0;}
         .stock { font-size: 0.95em; color: #94a3b8; margin-bottom: 15px; }
         .stock span { color: var(--primary-cyan); font-weight: bold; font-size: 1.1em; text-shadow: 0 0 5px var(--primary-cyan); }
         
         .input-group { margin-bottom: 15px; }
         input[type="number"] {
-            width: 70px;
-            padding: 8px;
-            text-align: center;
-            background: rgba(0,0,0,0.6);
-            border: 1px solid var(--primary-cyan);
-            color: var(--primary-cyan);
-            border-radius: 5px;
-            font-weight: bold;
-            outline: none;
+            width: 70px; padding: 8px; text-align: center; background: rgba(0,0,0,0.6);
+            border: 1px solid var(--primary-cyan); color: var(--primary-cyan); border-radius: 5px;
+            font-weight: bold; outline: none;
         }
-        
-        input[type="number"]:focus {
-            box-shadow: 0 0 10px var(--primary-cyan);
-        }
+        input[type="number"]:focus { box-shadow: 0 0 10px var(--primary-cyan); }
 
         .buy-btn {
-            background: linear-gradient(45deg, #d97706, #fbbf24);
-            color: #000;
-            border: none;
-            padding: 12px;
-            font-size: 1.1em;
-            font-weight: bold;
-            border-radius: 6px;
-            cursor: pointer;
-            width: 100%;
-            text-transform: uppercase;
-            transition: 0.3s;
-            box-shadow: 0 4px 10px rgba(251, 191, 36, 0.3);
+            background: linear-gradient(45deg, #d97706, #fbbf24); color: #000; border: none; padding: 12px;
+            font-size: 1.1em; font-weight: bold; border-radius: 6px; cursor: pointer; width: 100%;
+            text-transform: uppercase; transition: 0.3s; box-shadow: 0 4px 10px rgba(251, 191, 36, 0.3);
         }
-
-        .buy-btn:hover { 
-            background: linear-gradient(45deg, #f59e0b, #fde68a); 
-            box-shadow: 0 0 15px var(--primary-gold); 
-            transform: scale(1.02);
-        }
+        .buy-btn:hover { background: linear-gradient(45deg, #f59e0b, #fde68a); box-shadow: 0 0 15px var(--primary-gold); transform: scale(1.02); }
         
-        .gold-btn { 
-            background: linear-gradient(45deg, #0284c7, #38bdf8); 
-            color: white; 
-            box-shadow: 0 4px 10px rgba(56, 189, 248, 0.3);
-        }
-        .gold-btn:hover { 
-            background: linear-gradient(45deg, #0ea5e9, #7dd3fc); 
-            box-shadow: 0 0 15px var(--primary-cyan); 
-        }
+        .gold-btn { background: linear-gradient(45deg, #0284c7, #38bdf8); color: white; box-shadow: 0 4px 10px rgba(56, 189, 248, 0.3); }
+        .gold-btn:hover { background: linear-gradient(45deg, #0ea5e9, #7dd3fc); box-shadow: 0 0 15px var(--primary-cyan); }
 
     </style>
 </head>
@@ -216,84 +111,81 @@
     <header>
         <div class="header-logos">
             <img src="logo_guild2.png" alt="Guild Logo" class="side-logo">
-            
             <div class="main-logo-wrapper">
                 <img src="logo_tatsuya.png" alt="Tatsuya Store Logo" class="main-logo">
             </div>
-            
             <img src="logo_insane.png" alt="Insane DN Logo" class="side-logo">
         </div>
 
         <div class="ign-badge">IGN : TATSUYA</div>
         <div class="server-info">INSANE DRAGON NEST - TRUSTED SELLER</div>
-        <div style="color: #cbd5e1; font-size: 0.9em; margin-top: 5px;">Payment: DANA</div>
+        <div style="color: #cbd5e1; font-size: 0.9em; margin-top: 5px;">Payment: DANA / Wise (for PH)</div>
     </header>
 
     <div class="container">
         <div class="item-card">
-            <img src="icon_refinement.jpg" alt="Refinement Dust Icon" class="item-icon">
+            <img src="icon_refinement.jpg" alt="Refinement Dust" class="item-icon">
             <h3>Refinement Dust</h3>
             <div class="price">Rp 5.000 / Stack</div>
             <div class="stock">Ready: <span id="stok-refinement">Loading...</span> Stack</div>
-            <div class="input-group">
-                <input type="number" id="qty-refinement" value="1" min="1">
-            </div>
+            <div class="input-group"><input type="number" id="qty-refinement" value="1" min="1"></div>
             <button class="buy-btn" onclick="beliItem('refinement', 'Refinement Dust')">Beli Sekarang</button>
         </div>
 
         <div class="item-card">
-            <img src="icon_stone.jpg" alt="Enhancement Stone Icon" class="item-icon">
+            <img src="icon_stone.jpg" alt="Enhancement Stone" class="item-icon">
             <h3>Enhancement Stone</h3>
             <div class="price">Rp 5.000 / 2 Stack</div>
             <div class="stock">Ready: <span id="stok-stone">Loading...</span> Paket</div>
-            <div class="input-group">
-                <input type="number" id="qty-stone" value="1" min="1">
-            </div>
+            <div class="input-group"><input type="number" id="qty-stone" value="1" min="1"></div>
             <button class="buy-btn" onclick="beliItem('stone', 'Enhancement Stone (Paket)')">Beli Sekarang</button>
         </div>
 
         <div class="item-card">
-            <img src="icon_mount.jpg" alt="Mount Coupon Icon" class="item-icon">
+            <img src="icon_energy.jpg" alt="Energy Catalyst" class="item-icon" style="border-color: #f43f5e; box-shadow: 0 0 15px rgba(244, 63, 94, 0.4);">
+            <h3 style="text-shadow: 0 0 8px #f43f5e;">Energy Catalyst</h3>
+            <div class="price" style="color: #f43f5e;">Rp 11.000 / Stack</div>
+            <div class="stock">Ready: <span id="stok-energy">Loading...</span> Stack</div>
+            <div class="input-group"><input type="number" id="qty-energy" value="1" min="1"></div>
+            <button class="buy-btn" onclick="beliItem('energy', 'Energy Catalyst')" style="background: linear-gradient(45deg, #be123c, #f43f5e); color: white;">Beli Sekarang</button>
+        </div>
+
+        <div class="item-card">
+            <img src="icon_mount.jpg" alt="Mount Coupon" class="item-icon">
             <h3>Insane Mount Coupon</h3>
             <div class="price">Rp 15.000 / Pcs</div>
             <div class="stock">Ready: <span id="stok-mount">Loading...</span> Coupon</div>
-            <div class="input-group">
-                <input type="number" id="qty-mount" value="1" min="1">
-            </div>
+            <div class="input-group"><input type="number" id="qty-mount" value="1" min="1"></div>
             <button class="buy-btn" onclick="beliItem('mount', 'Insane Mount Coupon')">Beli Sekarang</button>
         </div>
 
         <div class="item-card">
-            <img src="icon_pet.jpg" alt="Pet Coupon Icon" class="item-icon">
+            <img src="icon_pet.jpg" alt="Pet Coupon" class="item-icon">
             <h3>Insane Pet Coupon</h3>
             <div class="price">Rp 20.000 / Pcs</div>
             <div class="stock">Ready: <span id="stok-pet">Loading...</span> Coupon</div>
-            <div class="input-group">
-                <input type="number" id="qty-pet" value="1" min="1">
-            </div>
+            <div class="input-group"><input type="number" id="qty-pet" value="1" min="1"></div>
             <button class="buy-btn" onclick="beliItem('pet', 'Insane Pet Coupon')">Beli Sekarang</button>
         </div>
 
         <div class="item-card">
-            <img src="icon_spirit.jpg" alt="Spirit Coupon Icon" class="item-icon">
+            <img src="icon_spirit.jpg" alt="Spirit Coupon" class="item-icon">
             <h3>Insane Spirit Coupon</h3>
             <div class="price">Rp 30.000 / Pcs</div>
             <div class="stock">Ready: <span id="stok-spirit">Loading...</span> Coupon</div>
-            <div class="input-group">
-                <input type="number" id="qty-spirit" value="1" min="1">
-            </div>
+            <div class="input-group"><input type="number" id="qty-spirit" value="1" min="1"></div>
             <button class="buy-btn" onclick="beliItem('spirit', 'Insane Spirit Coupon')">Beli Sekarang</button>
         </div>
 
         <div class="item-card" style="border-color: var(--primary-cyan);">
             <img src="icon_gold.jpg" alt="Gold Icon" class="item-icon" style="box-shadow: 0 0 15px var(--primary-gold); border-color: var(--primary-gold);">
             <h3 style="color: var(--primary-cyan); text-shadow: 0 0 5px var(--primary-cyan);">Gold Currency</h3>
-            <div class="price" style="color: white;">PM Price / Offer</div>
-            <div class="stock" style="color: #d1d5db;">Ready: <span style="color: var(--primary-gold);">50</span> Juta</div>
-            <div class="input-group" style="visibility: hidden;">
-                <input type="number" value="1"> 
+            <div class="price" style="color: white;">Rp 10.000 / 1 Juta</div>
+            <div class="stock" style="color: #d1d5db;">Ready: <span id="stok-gold" style="color: var(--primary-gold);">Loading...</span> Juta</div>
+            <div class="input-group">
+                <input type="number" id="qty-gold" value="1" min="1"> 
             </div>
-            <button class="buy-btn gold-btn" onclick="tanyaGold()">Nego Harga via PM</button>
+            <button class="buy-btn gold-btn" onclick="beliItem('gold', 'Gold (Juta)')">Beli Sekarang</button>
         </div>
     </div>
 
@@ -313,24 +205,29 @@
             const data = snapshot.val();
             if(data) {
                 stokRealtime = data;
-                document.getElementById('stok-refinement').innerText = data.refinement;
-                document.getElementById('stok-stone').innerText = data.stone;
-                document.getElementById('stok-mount').innerText = data.mount;
-                document.getElementById('stok-pet').innerText = data.pet;
-                document.getElementById('stok-spirit').innerText = data.spirit;
+                
+                // Mencegah error kalau lu belum nambahin item baru di Firebase
+                if(stokRealtime.energy === undefined) stokRealtime.energy = 58;
+                if(stokRealtime.gold === undefined) stokRealtime.gold = 50; 
+
+                document.getElementById('stok-refinement').innerText = stokRealtime.refinement;
+                document.getElementById('stok-stone').innerText = stokRealtime.stone;
+                document.getElementById('stok-mount').innerText = stokRealtime.mount;
+                document.getElementById('stok-pet').innerText = stokRealtime.pet;
+                document.getElementById('stok-spirit').innerText = stokRealtime.spirit;
+                document.getElementById('stok-energy').innerText = stokRealtime.energy;
+                document.getElementById('stok-gold').innerText = stokRealtime.gold;
             } else {
-                set(stokRef, { refinement: 116, stone: 67, mount: 10, pet: 2, spirit: 1 });
+                set(stokRef, { refinement: 180, stone: 142, mount: 10, pet: 2, spirit: 1, energy: 58, gold: 50 });
             }
         });
 
         window.beliItem = function(idItem, namaItem) {
             const qty = parseInt(document.getElementById(`qty-${idItem}`).value);
             
-            // Tanya IGN
             const ign = prompt("🔥 Masukkan IGN Karakter Lu (Pastikan benar biar gampang di PM):");
             if(!ign) return;
             
-            // Tanya Username Discord
             const discordUser = prompt("👾 Masukkan Username Discord Lu (Biar gampang dihubungin): \n*Kosongkan saja jika tidak ada");
 
             if(qty <= 0 || isNaN(qty)) return alert("Jumlahnya yang bener dong bos!");
@@ -340,37 +237,16 @@
                 stokRealtime[idItem] -= qty;
                 set(stokRef, stokRealtime); 
 
-                // Format tampilan user Discord (kalau kosong dikasih tanda '-')
                 const textDiscord = discordUser ? discordUser : "-";
 
                 fetch(discordWebhookURL, {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify({
-                        content: `@everyone 🚨 **PESANAN MASUK BOS!** 🚨\n\n🐲 **DARI TATSUYA STORE!** 🐲\n👤 **IGN:** \`${ign}\`\n👾 **Discord:** ${textDiscord}\n🛍️ **Item:** ${namaItem}\n📦 **Jumlah:** ${qty}\n📉 **Sisa Stok Web:** ${stokRealtime[idItem]}\n💳 **Metode:** DANA (Segera PM ke orangnya!)`
+                        content: `@everyone 🚨 **PESANAN MASUK BOS!** 🚨\n\n🐲 **DARI TATSUYA STORE!** 🐲\n👤 **IGN:** \`${ign}\`\n👾 **Discord:** ${textDiscord}\n🛍️ **Item:** ${namaItem}\n📦 **Jumlah:** ${qty}\n📉 **Sisa Stok Web:** ${stokRealtime[idItem]}\n💳 **Metode:** DANA / Wise (Segera PM ke orangnya!)`
                     })
                 }).then(() => alert("✅ Pesanan terkirim! Gua bakal PM lu di game atau Discord secepatnya.")).catch(() => alert("Notif gagal, tapi stok aman."));
             }
-        }
-
-        window.tanyaGold = function() {
-            // Tanya IGN
-            const ign = prompt("Masukkan IGN Lu buat nego Gold:");
-            if(!ign) return;
-
-            // Tanya Username Discord
-            const discordUser = prompt("👾 Masukkan Username Discord Lu (Biar gampang dihubungin): \n*Kosongkan saja jika tidak ada");
-            
-            // Format tampilan user Discord (kalau kosong dikasih tanda '-')
-            const textDiscord = discordUser ? discordUser : "-";
-
-            fetch(discordWebhookURL, {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({
-                    content: `@everyone 💰 **ADA YANG MAU NEGO GOLD NIH!** 💰\n\n👤 **IGN:** \`${ign}\`\n👾 **Discord:** ${textDiscord}\n💬 Coba langsung di PM / Whisper orangnya in-game bro.`
-                })
-            }).then(() => alert("✅ Info terkirim! Tunggu gua PM lu in-game atau Discord buat nego harganya.")).catch(() => alert("Notif gagal."));
         }
     </script>
 </body>
