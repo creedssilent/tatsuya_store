@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tatsuya Store - Insane Dragon Nest</title>
+    <style>
+        /* Desain Tema Tatsuya V3.1 (Ukuran Logo Disesuaikan) */
+        :root {
+            --primary-gold: #fbbf24;
+            --primary-cyan: #00f0ff;
+            --dark-navy: #0b132b;
+            --card-bg: rgba(11, 19, 43, 0.75);
+        }
+
+        body {
+            margin: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            color: white;
+            background: radial-gradient(circle at top, rgba(11, 19, 43, 0.85), rgba(2, 4, 15, 0.95)), 
+                        url('https://images.unsplash.com/photo-1542831371-29b0f74f9713?q=80&w=1920') center/cover fixed;
+        }
+
+        /* --- HEADER & LOGO SECTION --- */
+        header {
+            text-align: center;
+            padding: 30px 20px 20px;
+            border-bottom: 2px solid var(--primary-cyan);
+            box-shadow: 0 5px 30px rgba(0, 240, 255, 0.2);
+            background: linear-gradient(to bottom, rgba(11, 19, 43, 0.95), transparent);
+            position: relative;
+        }
+
+        .header-logos {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 30px; /* Jarak antar logo sedikit dirapatkan biar pas dengan ukuran baru */
+            margin-bottom: 15px;
+        }
+
+        /* INI BAGIAN YANG DIUBAH UKURANNYA */
+        .side-logo {
+            width: 120px;  /* Dulu 80px, sekarang 120px */
+            height: 120px; /* Dulu 80px, sekarang 120px */
+            object-fit: contain;
+            filter: drop-shadow(0 0 10px rgba(0, 240, 255, 0.3));
+            transition: 0.3s;
+        }
+        /* ---------------------------------- */
+
+        .side-logo:hover {
+            transform: scale(1.1);
+            filter: drop-shadow(0 0 15px var(--primary-cyan));
+        }
+
+        .main-logo-wrapper {
+            position: relative;
+            padding: 5px;
+            border-radius: 50%;
+            background: linear-gradient(45deg, var(--primary-cyan), var(--primary-gold));
+            box-shadow: 0 0 25px rgba(0, 240, 255, 0.6);
+            animation: float 4s ease-in-out infinite;
+            z-index: 2; /* Biar logo utama tetep di depan kalau layar kecil */
+        }
+
+        .main-logo {
+            width: 180px;
+            height: 180px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 4px solid var(--dark-navy);
+            display: block;
+        }
+
+        @keyframes float {
+            0% { transform: translateY(0px); box-shadow: 0 0 20px rgba(0, 240, 255, 0.5); }
+            50% { transform: translateY(-10px); box-shadow: 0 0 35px rgba(0, 240, 255, 0.8); }
+            100% { transform: translateY(0px); box-shadow: 0 0 20px rgba(0, 240, 255, 0.5); }
+        }
+
+        .ign-badge {
+            display: inline-block;
+            background: linear-gradient(90deg, transparent, rgba(0, 240, 255, 0.2), transparent);
+            border: 1px solid var(--primary-cyan);
+            color: var(--primary-cyan);
+            padding: 5px 25px;
+            border-radius: 20px;
+            font-size: 1.2em;
+            font-weight: bold;
+            letter-spacing: 2px;
+            text-shadow: 0 0 8px var(--primary-cyan);
+            margin-top: 15px;
+        }
+
+        .server-info {
+            color: var(--primary-gold);
+            font-size: 1em;
+            letter-spacing: 2px;
+            margin-top: 15px;
+            text-shadow: 0 0 5px black;
+        }
+
+        /* --- ITEM CARDS --- */
+        .container {
+            max-width: 1100px;
+            margin: 40px auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 25px;
+            padding: 0 20px;
+        }
+
+        .item-card {
+            background: var(--card-bg);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(0, 240, 255, 0.3);
+            border-radius: 15px;
+            padding: 25px 20px;
+            text-align: center;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.6);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .item-card::before {
+            content: '';
+            position: absolute;
+            top: 0; left: -100%; width: 50%; height: 100%;
+            background: linear-gradient(to right, transparent, rgba(0, 240, 255, 0.1), transparent);
+            transform: skewX(-25deg);
+            transition: 0.5s;
+        }
+
+        .item-card:hover::before { left: 150%; }
+        .item-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--primary-cyan);
+            box-shadow: 0 0 25px rgba(0, 240, 255, 0.3);
+        }
+
+        .item-card h3 { 
+            color: #fff; 
+            margin-top: 0; 
+            text-shadow: 0 0 8px var(--primary-cyan); 
+            font-size: 1.3em;
+            letter-spacing: 1px;
+        }
+        
+        .price { font-size: 1.2em; font-weight: bold; color: var(--primary-gold); margin: 10px 0;}
+        .stock { font-size: 0.95em; color: #94a3b8; margin-bottom: 15px; }
+        .stock span { color: var(--primary-cyan); font-weight: bold; font-size: 1.1em; text-shadow: 0 0 5px var(--primary-cyan); }
+        
+        .input-group { margin-bottom: 15px; }
+        input[type="number"] {
+            width: 70px;
+            padding: 8px;
+            text-align: center;
+            background: rgba(0,0,0,0.6);
+            border: 1px solid var(--primary-cyan);
+            color: var(--primary-cyan);
+            border-radius: 5px;
+            font-weight: bold;
+            outline: none;
+        }
+        
+        input[type="number"]:focus {
+            box-shadow: 0 0 10px var(--primary-cyan);
+        }
+
+        .buy-btn {
+            background: linear-gradient(45deg, #d97706, #fbbf24);
+            color: #000;
+            border: none;
+            padding: 12px;
+            font-size: 1.1em;
+            font-weight: bold;
+            border-radius: 6px;
+            cursor: pointer;
+            width: 100%;
+            text-transform: uppercase;
+            transition: 0.3s;
+            box-shadow: 0 4px 10px rgba(251, 191, 36, 0.3);
+        }
+
+        .buy-btn:hover { 
+            background: linear-gradient(45deg, #f59e0b, #fde68a); 
+            box-shadow: 0 0 15px var(--primary-gold); 
+            transform: scale(1.02);
+        }
+        
+        .gold-btn { 
+            background: linear-gradient(45deg, #0284c7, #38bdf8); 
+            color: white; 
+            box-shadow: 0 4px 10px rgba(56, 189, 248, 0.3);
+        }
+        .gold-btn:hover { 
+            background: linear-gradient(45deg, #0ea5e9, #7dd3fc); 
+            box-shadow: 0 0 15px var(--primary-cyan); 
+        }
+
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="header-logos">
+            <img src="logo_guild2.png" alt="Guild Logo" class="side-logo">
+            
+            <div class="main-logo-wrapper">
+                <img src="logo_tatsuya.png" alt="Tatsuya Store Logo" class="main-logo">
+            </div>
+            
+            <img src="logo_insane.png" alt="Insane DN Logo" class="side-logo">
+        </div>
+
+        <div class="ign-badge">IGN : TATSUYA</div>
+        <div class="server-info">INSANE DRAGON NEST - TRUSTED SELLER</div>
+        <div style="color: #cbd5e1; font-size: 0.9em; margin-top: 5px;">Payment: DANA</div>
+    </header>
+
+    <div class="container">
+        <div class="item-card">
+            <h3>Refinement Dust</h3>
+            <div class="price">Rp 5.000 / Stack</div>
+            <div class="stock">Ready: <span id="stok-refinement">Loading...</span> Stack</div>
+            <div class="input-group">
+                <input type="number" id="qty-refinement" value="1" min="1">
+            </div>
+            <button class="buy-btn" onclick="beliItem('refinement', 'Refinement Dust')">Beli Sekarang</button>
+        </div>
+
+        <div class="item-card">
+            <h3>Enhancement Stone</h3>
+            <div class="price">Rp 5.000 / 2 Stack</div>
+            <div class="stock">Ready: <span id="stok-stone">Loading...</span> Paket</div>
+            <div class="input-group">
+                <input type="number" id="qty-stone" value="1" min="1">
+            </div>
+            <button class="buy-btn" onclick="beliItem('stone', 'Enhancement Stone (Paket)')">Beli Sekarang</button>
+        </div>
+
+        <div class="item-card">
+            <h3>Insane Mount Coupon</h3>
+            <div class="price">Rp 15.000 / Pcs</div>
+            <div class="stock">Ready: <span id="stok-mount">Loading...</span> Coupon</div>
+            <div class="input-group">
+                <input type="number" id="qty-mount" value="1" min="1">
+            </div>
+            <button class="buy-btn" onclick="beliItem('mount', 'Insane Mount Coupon')">Beli Sekarang</button>
+        </div>
+
+        <div class="item-card">
+            <h3>Insane Pet Coupon</h3>
+            <div class="price">Rp 20.000 / Pcs</div>
+            <div class="stock">Ready: <span id="stok-pet">Loading...</span> Coupon</div>
+            <div class="input-group">
+                <input type="number" id="qty-pet" value="1" min="1">
+            </div>
+            <button class="buy-btn" onclick="beliItem('pet', 'Insane Pet Coupon')">Beli Sekarang</button>
+        </div>
+
+        <div class="item-card">
+            <h3>Insane Spirit Coupon</h3>
+            <div class="price">Rp 30.000 / Pcs</div>
+            <div class="stock">Ready: <span id="stok-spirit">Loading...</span> Coupon</div>
+            <div class="input-group">
+                <input type="number" id="qty-spirit" value="1" min="1">
+            </div>
+            <button class="buy-btn" onclick="beliItem('spirit', 'Insane Spirit Coupon')">Beli Sekarang</button>
+        </div>
+
+        <div class="item-card" style="border-color: var(--primary-cyan);">
+            <h3 style="color: var(--primary-cyan); text-shadow: 0 0 5px var(--primary-cyan);">Gold Currency</h3>
+            <div class="price" style="color: white;">PM Price / Offer</div>
+            <div class="stock" style="color: #d1d5db;">Ready: <span style="color: var(--primary-gold);">50</span> Juta</div>
+            <div class="input-group" style="visibility: hidden;">
+                <input type="number" value="1"> 
+            </div>
+            <button class="buy-btn gold-btn" onclick="tanyaGold()">Nego Harga via PM</button>
+        </div>
+    </div>
+
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-app.js";
+        import { getDatabase, ref, onValue, set } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-database.js";
+
+        // Konfigurasi Database & Webhook (Link Lu Masih Aktif, Aman)
+        const firebaseConfig = { databaseURL: "https://tatsuya-store-3a57a-default-rtdb.asia-southeast1.firebasedatabase.app/" };
+        const app = initializeApp(firebaseConfig);
+        const db = getDatabase(app);
+        const discordWebhookURL = "https://discord.com/api/webhooks/1474887935928303646/uLIKq-GSjJjiXtej96caYB1Q3foj9KvqI4P1rZrWJfPO8ohByxgjfidDgoA4LlzyC1u-";
+
+        let stokRealtime = {};
+        const stokRef = ref(db, 'stok_tatsuya');
+
+        // Update Stok Realtime
+        onValue(stokRef, (snapshot) => {
+            const data = snapshot.val();
+            if(data) {
+                stokRealtime = data;
+                document.getElementById('stok-refinement').innerText = data.refinement;
+                document.getElementById('stok-stone').innerText = data.stone;
+                document.getElementById('stok-mount').innerText = data.mount;
+                document.getElementById('stok-pet').innerText = data.pet;
+                document.getElementById('stok-spirit').innerText = data.spirit;
+            } else {
+                set(stokRef, { refinement: 116, stone: 67, mount: 10, pet: 2, spirit: 1 });
+            }
+        });
+
+        // Eksekusi Beli Barang
+        window.beliItem = function(idItem, namaItem) {
+            const qty = parseInt(document.getElementById(`qty-${idItem}`).value);
+            const ign = prompt("🔥 Masukkan IGN Karakter Lu (Pastikan benar biar gampang di PM):");
+            
+            if(!ign) return;
+            if(qty <= 0 || isNaN(qty)) return alert("Jumlahnya yang bener dong bos!");
+            if(qty > stokRealtime[idItem]) return alert(`Wah, sisa stok cuma ${stokRealtime[idItem]} nih!`);
+
+            if(confirm(`Yakin mau beli ${qty}x ${namaItem} buat karakter ${ign}?`)) {
+                stokRealtime[idItem] -= qty;
+                set(stokRef, stokRealtime); // Update ke Firebase
+
+                // Tembak notif ke Webhook Discord
+                fetch(discordWebhookURL, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        content: `🐲 **PESANAN DARI TATSUYA STORE!** 🐲\n\n👤 **IGN:** \`${ign}\`\n🛍️ **Item:** ${namaItem}\n📦 **Jumlah:** ${qty}\n📉 **Sisa Stok Web:** ${stokRealtime[idItem]}\n💳 **Metode:** DANA (Segera PM ke orangnya!)`
+                    })
+                }).then(() => alert("✅ Pesanan terkirim! Gua bakal PM lu di game secepatnya.")).catch(() => alert("Notif gagal, tapi stok aman."));
+            }
+        }
+
+        // Khusus buat Gold (Beda Logic karena Nego)
+        window.tanyaGold = function() {
+            const ign = prompt("Masukkan IGN Lu buat nego Gold:");
+            if(ign) {
+                fetch(discordWebhookURL, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        content: `💰 **ADA YANG MAU NEGO GOLD NIH!** 💰\n\n👤 **IGN:** \`${ign}\`\n💬 Coba langsung di PM / Whisper orangnya in-game bro.`
+                    })
+                }).then(() => alert("✅ Info terkirim! Tunggu gua PM lu in-game buat nego harganya.")).catch(() => alert("Notif gagal."));
+            }
+        }
+    </script>
+</body>
+</html>
