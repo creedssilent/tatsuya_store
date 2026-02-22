@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Tatsuya Store - Insane Dragon Nest</title>
     <style>
-        /* Desain Tema Tatsuya V3.2 (Dengan Ikon Item JPG) */
+        /* Desain Tema Tatsuya V3.3 (Dengan Input Discord) */
         :root {
             --primary-gold: #fbbf24;
             --primary-cyan: #00f0ff;
@@ -138,7 +138,6 @@
             box-shadow: 0 0 25px rgba(0, 240, 255, 0.3);
         }
 
-        /* STYLE UNTUK IKON ITEM */
         .item-icon {
             width: 80px;
             height: 80px;
@@ -326,9 +325,14 @@
 
         window.beliItem = function(idItem, namaItem) {
             const qty = parseInt(document.getElementById(`qty-${idItem}`).value);
-            const ign = prompt("🔥 Masukkan IGN Karakter Lu (Pastikan benar biar gampang di PM):");
             
+            // Tanya IGN
+            const ign = prompt("🔥 Masukkan IGN Karakter Lu (Pastikan benar biar gampang di PM):");
             if(!ign) return;
+            
+            // Tanya Username Discord
+            const discordUser = prompt("👾 Masukkan Username Discord Lu (Biar gampang dihubungin): \n*Kosongkan saja jika tidak ada");
+
             if(qty <= 0 || isNaN(qty)) return alert("Jumlahnya yang bener dong bos!");
             if(qty > stokRealtime[idItem]) return alert(`Wah, sisa stok cuma ${stokRealtime[idItem]} nih!`);
 
@@ -336,29 +340,38 @@
                 stokRealtime[idItem] -= qty;
                 set(stokRef, stokRealtime); 
 
+                // Format tampilan user Discord (kalau kosong dikasih tanda '-')
+                const textDiscord = discordUser ? discordUser : "-";
+
                 fetch(discordWebhookURL, {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify({
-                        content: `@everyone 🚨 **PESANAN MASUK BOS!** 🚨\n\n🐲 **DARI TATSUYA STORE!** 🐲\n👤 **IGN:** \`${ign}\`\n🛍️ **Item:** ${namaItem}\n📦 **Jumlah:** ${qty}\n📉 **Sisa Stok Web:** ${stokRealtime[idItem]}\n💳 **Metode:** DANA (Segera PM ke orangnya!)`
+                        content: `@everyone 🚨 **PESANAN MASUK BOS!** 🚨\n\n🐲 **DARI TATSUYA STORE!** 🐲\n👤 **IGN:** \`${ign}\`\n👾 **Discord:** ${textDiscord}\n🛍️ **Item:** ${namaItem}\n📦 **Jumlah:** ${qty}\n📉 **Sisa Stok Web:** ${stokRealtime[idItem]}\n💳 **Metode:** DANA (Segera PM ke orangnya!)`
                     })
-                }).then(() => alert("✅ Pesanan terkirim! Gua bakal PM lu di game secepatnya.")).catch(() => alert("Notif gagal, tapi stok aman."));
+                }).then(() => alert("✅ Pesanan terkirim! Gua bakal PM lu di game atau Discord secepatnya.")).catch(() => alert("Notif gagal, tapi stok aman."));
             }
         }
 
         window.tanyaGold = function() {
+            // Tanya IGN
             const ign = prompt("Masukkan IGN Lu buat nego Gold:");
-            if(ign) {
-                fetch(discordWebhookURL, {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({
-                        content: `@everyone 💰 **ADA YANG MAU NEGO GOLD NIH!** 💰\n\n👤 **IGN:** \`${ign}\`\n💬 Coba langsung di PM / Whisper orangnya in-game bro.`
-                    })
-                }).then(() => alert("✅ Info terkirim! Tunggu gua PM lu in-game buat nego harganya.")).catch(() => alert("Notif gagal."));
-            }
+            if(!ign) return;
+
+            // Tanya Username Discord
+            const discordUser = prompt("👾 Masukkan Username Discord Lu (Biar gampang dihubungin): \n*Kosongkan saja jika tidak ada");
+            
+            // Format tampilan user Discord (kalau kosong dikasih tanda '-')
+            const textDiscord = discordUser ? discordUser : "-";
+
+            fetch(discordWebhookURL, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                    content: `@everyone 💰 **ADA YANG MAU NEGO GOLD NIH!** 💰\n\n👤 **IGN:** \`${ign}\`\n👾 **Discord:** ${textDiscord}\n💬 Coba langsung di PM / Whisper orangnya in-game bro.`
+                })
+            }).then(() => alert("✅ Info terkirim! Tunggu gua PM lu in-game atau Discord buat nego harganya.")).catch(() => alert("Notif gagal."));
         }
     </script>
 </body>
 </html>
-
