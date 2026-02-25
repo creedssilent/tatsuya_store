@@ -7,7 +7,7 @@
     <title>Tatsuya Store - Insane DN</title>
     
     <style>
-        /* Desain Tema Tatsuya V6.2 (IGN Gura & Tier 9 Locked) */
+        /* Desain Tema Tatsuya V6.4 (Evolution Menu Locked) */
         :root {
             --primary-gold: #fbbf24; --primary-cyan: #00f0ff; --dark-navy: #0b132b;
             --card-bg: rgba(11, 19, 43, 0.75); --glass-bg: rgba(2, 4, 15, 0.85);
@@ -130,7 +130,8 @@
         <button class="nav-btn active" onclick="showPage('materials', this)">BASIC MATERIALS</button>
         <button class="nav-btn" onclick="showPage('coupons', this)">COUPONS</button>
         <button class="nav-btn" onclick="showPage('gold', this)">GOLD</button>
-        <button class="nav-btn" onclick="showPage('evolution', this)">EVOLUTION (TIER)</button>
+        
+        <button class="nav-btn" onclick="alert('🚧 Menu Evolution (Tier) Coming Soon! 🚧\nSabar ya bro, barangnya lagi disiapin.')">EVOLUTION (TIER)</button>
     </nav>
 
     <div class="main-content">
@@ -209,24 +210,7 @@
             <div id="tier-menus">
                 <p style="text-align: center; color: #ccc;">Pilih Tier equipment yang mau lu upgrade:</p>
                 <div class="tier-grid">
-                    <div class="tier-btn" onclick="alert('Material Tier 2 belum ready bos, coming soon!')">Tier 2</div>
-                    <div class="tier-btn" onclick="alert('Material Tier 3 belum ready bos, coming soon!')">Tier 3</div>
-                    <div class="tier-btn" onclick="alert('Material Tier 4 belum ready bos, coming soon!')">Tier 4</div>
-                    <div class="tier-btn" onclick="alert('Material Tier 5 belum ready bos, coming soon!')">Tier 5</div>
-                    <div class="tier-btn" onclick="alert('Material Tier 6 belum ready bos, coming soon!')">Tier 6</div>
-                    <div class="tier-btn" onclick="alert('Material Tier 7 belum ready bos, coming soon!')">Tier 7</div>
-                    <div class="tier-btn" onclick="alert('Material Tier 8 belum ready bos, coming soon!')">Tier 8</div>
-                    
-                    <div class="tier-btn" onclick="alert('Material Tier 9 belum ready bos, coming soon!')">Tier 9</div>
-                    
-                    <div class="tier-btn" onclick="alert('Material Tier 10 belum ready bos, coming soon!')">Tier 10</div>
-                    <div class="tier-btn" onclick="alert('Material Tier 11 belum ready bos, coming soon!')">Tier 11</div>
-                    <div class="tier-btn" onclick="alert('Material Tier 12 belum ready bos, coming soon!')">Tier 12</div>
-                    <div class="tier-btn" onclick="alert('Material Tier 13 belum ready bos, coming soon!')">Tier 13</div>
-                    <div class="tier-btn" onclick="alert('Material Tier 14 belum ready bos, coming soon!')">Tier 14</div>
-                    <div class="tier-btn" onclick="alert('Material Tier 15 belum ready bos, coming soon!')">Tier 15</div>
-                    <div class="tier-btn" onclick="alert('Material Tier 16 belum ready bos, coming soon!')">Tier 16</div>
-                </div>
+                    </div>
             </div>
         </div>
     </div>
@@ -282,8 +266,10 @@
             if(data) {
                 stokRealtime = data;
                 
+                // Set Default Stok (Sesuai update terakhir)
                 if(stokRealtime.energy === undefined) stokRealtime.energy = 49;
-                if(stokRealtime.gold === undefined) stokRealtime.gold = 50; 
+                if(stokRealtime.singularity === undefined) stokRealtime.singularity = 52; // Sisa 55 - 3 = 52
+                if(stokRealtime.gold === undefined) stokRealtime.gold = 40; // Sisa 50 - 10 = 40
 
                 const elements = ['refinement', 'stone', 'energy', 'mount', 'pet', 'spirit', 'gold'];
                 elements.forEach(id => {
@@ -292,7 +278,7 @@
                     }
                 });
             } else {
-                set(stokRef, { refinement: 172, stone: 109, mount: 10, pet: 2, spirit: 1, energy: 49, gold: 50 });
+                set(stokRef, { refinement: 172, stone: 109, mount: 10, pet: 2, spirit: 1, energy: 49, singularity: 52, gold: 40 });
             }
         });
 
