@@ -3,163 +3,107 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tatsuya Store - Insane Dragon Nest</title>
+    <link rel="icon" type="image/png" href="logo_tatsuya.png"> 
+    <title>Tatsuya Store - Insane DN</title>
+    
     <style>
-        /* Desain Tema Tatsuya V4 (Multi-Color Tier Drop Aura) */
+        /* Desain Tema Tatsuya V6.2 (IGN Gura & Tier 9 Locked) */
         :root {
-            --primary-gold: #fbbf24;
-            --primary-cyan: #00f0ff;
-            --dark-navy: #0b132b;
-            --card-bg: rgba(11, 19, 43, 0.75);
+            --primary-gold: #fbbf24; --primary-cyan: #00f0ff; --dark-navy: #0b132b;
+            --card-bg: rgba(11, 19, 43, 0.75); --glass-bg: rgba(2, 4, 15, 0.85);
         }
 
         body {
-            margin: 0;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            color: white;
+            margin: 0; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            color: white; padding-bottom: 80px; 
             background: radial-gradient(circle at top, rgba(11, 19, 43, 0.85), rgba(2, 4, 15, 0.95)), 
                         url('https://images.unsplash.com/photo-1542831371-29b0f74f9713?q=80&w=1920') center/cover fixed;
+            display: flex; flex-direction: column; min-height: 100vh;
         }
 
-        header {
-            text-align: center;
-            padding: 30px 20px 20px;
-            border-bottom: 2px solid var(--primary-cyan);
-            box-shadow: 0 5px 30px rgba(0, 240, 255, 0.2);
-            background: linear-gradient(to bottom, rgba(11, 19, 43, 0.95), transparent);
-            position: relative;
-        }
-
+        /* --- HEADER & LOGO --- */
+        header { text-align: center; padding: 30px 20px 20px; background: linear-gradient(to bottom, rgba(11, 19, 43, 0.95), transparent); }
         .header-logos { display: flex; justify-content: center; align-items: center; gap: 30px; margin-bottom: 15px; }
+        .logo-link { transition: 0.3s; position: relative; display: inline-block; }
         .side-logo { width: 120px; height: 120px; object-fit: contain; filter: drop-shadow(0 0 10px rgba(0, 240, 255, 0.3)); transition: 0.3s; }
-        .side-logo:hover { transform: scale(1.1); filter: drop-shadow(0 0 15px var(--primary-cyan)); }
+        .logo-link:hover .side-logo { transform: scale(1.15) rotate(5deg); filter: drop-shadow(0 0 20px var(--primary-cyan)); }
         
-        .main-logo-wrapper {
-            position: relative; padding: 5px; border-radius: 50%;
-            background: linear-gradient(45deg, var(--primary-cyan), var(--primary-gold));
-            box-shadow: 0 0 25px rgba(0, 240, 255, 0.6); animation: float 4s ease-in-out infinite; z-index: 2;
-        }
+        .logo-link::after { content: attr(data-tooltip); position: absolute; bottom: -30px; left: 50%; transform: translateX(-50%); background: rgba(0,0,0,0.8); color: var(--primary-cyan); padding: 5px 10px; border-radius: 5px; font-size: 0.8em; white-space: nowrap; opacity: 0; pointer-events: none; transition: 0.3s; border: 1px solid var(--primary-cyan); z-index: 100; }
+        .logo-link:hover::after { opacity: 1; bottom: -40px; }
+
+        .main-logo-wrapper { position: relative; padding: 5px; border-radius: 50%; background: linear-gradient(45deg, var(--primary-cyan), var(--primary-gold)); box-shadow: 0 0 25px rgba(0, 240, 255, 0.6); animation: float 4s ease-in-out infinite; z-index: 2; }
         .main-logo { width: 180px; height: 180px; border-radius: 50%; object-fit: cover; border: 4px solid var(--dark-navy); display: block; }
+        @keyframes float { 0%, 100% { transform: translateY(0px); box-shadow: 0 0 20px rgba(0, 240, 255, 0.5); } 50% { transform: translateY(-10px); box-shadow: 0 0 35px rgba(0, 240, 255, 0.8); } }
 
-        @keyframes float {
-            0% { transform: translateY(0px); box-shadow: 0 0 20px rgba(0, 240, 255, 0.5); }
-            50% { transform: translateY(-10px); box-shadow: 0 0 35px rgba(0, 240, 255, 0.8); }
-            100% { transform: translateY(0px); box-shadow: 0 0 20px rgba(0, 240, 255, 0.5); }
-        }
-
-        .ign-badge {
-            display: inline-block; background: linear-gradient(90deg, transparent, rgba(0, 240, 255, 0.2), transparent);
-            border: 1px solid var(--primary-cyan); color: var(--primary-cyan); padding: 5px 25px;
-            border-radius: 20px; font-size: 1.2em; font-weight: bold; letter-spacing: 2px;
-            text-shadow: 0 0 8px var(--primary-cyan); margin-top: 15px;
-        }
-
+        .ign-badge { display: inline-block; background: linear-gradient(90deg, transparent, rgba(0, 240, 255, 0.2), transparent); border: 1px solid var(--primary-cyan); color: var(--primary-cyan); padding: 5px 25px; border-radius: 20px; font-size: 1.2em; font-weight: bold; letter-spacing: 2px; text-shadow: 0 0 8px var(--primary-cyan); margin-top: 15px; }
         .server-info { color: var(--primary-gold); font-size: 1em; letter-spacing: 2px; margin-top: 15px; text-shadow: 0 0 5px black; }
 
-        .container {
-            max-width: 1100px; margin: 40px auto; display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 25px; padding: 0 20px;
-        }
+        /* --- NAVBAR --- */
+        .navbar { display: flex; justify-content: center; background: rgba(11, 19, 43, 0.95); padding: 15px; border-top: 1px solid rgba(0, 240, 255, 0.3); border-bottom: 2px solid var(--primary-cyan); box-shadow: 0 5px 20px rgba(0, 240, 255, 0.2); flex-wrap: wrap; gap: 15px; margin-bottom: 30px; position: sticky; top: 0; z-index: 50; }
+        .nav-btn { background: rgba(0, 0, 0, 0.5); border: 1px solid var(--primary-cyan); color: var(--primary-cyan); padding: 10px 25px; border-radius: 25px; cursor: pointer; font-weight: bold; transition: 0.3s; text-transform: uppercase; font-size: 0.9em; letter-spacing: 1px; }
+        .nav-btn:hover, .nav-btn.active { background: var(--primary-cyan); color: var(--dark-navy); box-shadow: 0 0 15px var(--primary-cyan); transform: scale(1.05); }
 
-        /* --- BASE CSS BUAT KOTAK ITEM --- */
-        .item-card {
-            background: var(--card-bg); backdrop-filter: blur(10px); 
-            border: 1px solid transparent; border-radius: 15px; padding: 30px 20px; 
-            text-align: center; transition: all 0.3s ease; box-shadow: 0 4px 15px rgba(0,0,0,0.6); 
-            position: relative; overflow: hidden;
-        }
+        /* --- SECTIONS & GRID --- */
+        .main-content { flex: 1; }
+        .page-section { display: none; animation: fadeIn 0.5s; max-width: 1100px; margin: 0 auto; padding: 0 20px 40px; }
+        .page-section.active { display: block; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(15px); } to { opacity: 1; transform: translateY(0); } }
+        .grid-container { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 25px; }
 
-        .item-card::before {
-            content: ''; position: absolute; top: 0; left: -100%; width: 50%; height: 100%;
-            background: linear-gradient(to right, transparent, rgba(255, 255, 255, 0.1), transparent);
-            transform: skewX(-25deg); transition: 0.5s;
-        }
-
-        .item-card:hover::before { left: 150%; }
-        .item-card:hover { transform: translateY(-5px); }
-        
+        /* --- ITEM CARDS --- */
+        .item-card { background: var(--card-bg); backdrop-filter: blur(10px); border: 1px solid transparent; border-radius: 15px; padding: 30px 20px; text-align: center; transition: all 0.3s ease; box-shadow: 0 4px 15px rgba(0,0,0,0.6); position: relative; overflow: hidden; }
+        .badge-hot { position: absolute; top: 15px; right: -35px; background: linear-gradient(45deg, #e11d48, #f43f5e); color: white; padding: 5px 40px; font-size: 0.8em; font-weight: bold; letter-spacing: 1px; transform: rotate(45deg); box-shadow: 0 2px 10px rgba(244, 63, 94, 0.5); z-index: 10; }
+        .item-icon { width: 80px; height: 80px; object-fit: cover; border-radius: 12px; border: 2px solid transparent; margin-bottom: 15px; transition: 0.3s; cursor: pointer; }
+        .item-icon:hover { transform: scale(1.1); }
         .item-card h3 { margin-top: 0; font-size: 1.3em; letter-spacing: 1px; min-height: 1.3em; }
         .price { font-size: 1.2em; font-weight: bold; margin: 10px 0; }
         .stock { font-size: 0.95em; color: #94a3b8; margin-bottom: 15px; }
         .stock span { font-weight: bold; font-size: 1.1em; }
-        
         .input-group { margin-bottom: 15px; }
-        input[type="number"] {
-            width: 70px; padding: 8px; text-align: center; background: rgba(0,0,0,0.6);
-            border-radius: 5px; font-weight: bold; outline: none; transition: 0.3s;
-        }
+        input[type="number"] { width: 70px; padding: 8px; text-align: center; background: rgba(0,0,0,0.6); border-radius: 5px; font-weight: bold; outline: none; transition: 0.3s; color: white; }
+        .buy-btn { border: none; padding: 12px; font-size: 1.1em; font-weight: bold; border-radius: 6px; cursor: pointer; width: 100%; text-transform: uppercase; transition: 0.3s; color: white; }
+
+        /* THEMES */
+        .theme-purple { border-color: rgba(168, 85, 247, 0.4); } .theme-purple .item-icon { border-color: #a855f7; box-shadow: 0 0 15px rgba(168, 85, 247, 0.5); } .theme-purple h3 { color: #fff; text-shadow: 0 0 8px #a855f7; } .theme-purple .price { color: #d8b4fe; } .theme-purple .stock span { color: #a855f7; } .theme-purple input { border: 1px solid #a855f7; } .theme-purple .buy-btn { background: linear-gradient(45deg, #7e22ce, #a855f7); } .theme-purple .buy-btn:hover { background: #9333ea; box-shadow: 0 0 15px #a855f7; }
+        .theme-orange { border-color: rgba(249, 115, 22, 0.4); } .theme-orange .item-icon { border-color: #f97316; box-shadow: 0 0 15px rgba(249, 115, 22, 0.5); } .theme-orange h3 { color: #fff; text-shadow: 0 0 8px #f97316; } .theme-orange .price { color: #fdba74; } .theme-orange .stock span { color: #f97316; } .theme-orange input { border: 1px solid #f97316; } .theme-orange .buy-btn { background: linear-gradient(45deg, #c2410c, #ea580c); } .theme-orange .buy-btn:hover { background: #ea580c; box-shadow: 0 0 15px #f97316; }
+        .theme-red { border-color: rgba(244, 63, 94, 0.4); } .theme-red .item-icon { border-color: #f43f5e; box-shadow: 0 0 15px rgba(244, 63, 94, 0.5); } .theme-red h3 { color: #fff; text-shadow: 0 0 8px #f43f5e; } .theme-red .price { color: #fda4af; } .theme-red .stock span { color: #f43f5e; } .theme-red input { border: 1px solid #f43f5e; } .theme-red .buy-btn { background: linear-gradient(45deg, #be123c, #e11d48); } .theme-red .buy-btn:hover { background: #e11d48; box-shadow: 0 0 15px #f43f5e; }
+        .theme-blue { border-color: rgba(0, 240, 255, 0.4); } .theme-blue .item-icon { border-color: #00f0ff; box-shadow: 0 0 15px rgba(0, 240, 255, 0.5); } .theme-blue h3 { color: #fff; text-shadow: 0 0 8px #00f0ff; } .theme-blue .price { color: #67e8f9; } .theme-blue .stock span { color: #00f0ff; } .theme-blue input { border: 1px solid #00f0ff; } .theme-blue .buy-btn { background: linear-gradient(45deg, #0284c7, #0ea5e9); } .theme-blue .buy-btn:hover { background: #0ea5e9; box-shadow: 0 0 15px #00f0ff; }
+        .theme-gold { border-color: rgba(251, 191, 36, 0.4); } .theme-gold .item-icon { border-color: #fbbf24; box-shadow: 0 0 15px rgba(251, 191, 36, 0.5); } .theme-gold h3 { color: #fbbf24; text-shadow: 0 0 8px #fbbf24; } .theme-gold .price { color: #fff; } .theme-gold .stock span { color: #fbbf24; } .theme-gold input { border: 1px solid #fbbf24; } .theme-gold .buy-btn { background: linear-gradient(45deg, #b45309, #d97706); } .theme-gold .buy-btn:hover { background: #d97706; box-shadow: 0 0 15px #fbbf24; }
+
+        /* TIER GRID */
+        .tier-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(100px, 1fr)); gap: 15px; text-align: center; }
+        .tier-btn { background: rgba(0,0,0,0.5); border: 1px solid var(--primary-cyan); color: white; padding: 15px; border-radius: 10px; cursor: pointer; transition: 0.3s; }
+        .tier-btn:hover { background: var(--primary-cyan); color: black; box-shadow: 0 0 15px var(--primary-cyan); transform: scale(1.05); }
+
+        /* --- FLOATING CART BUTTON --- */
+        .cart-fab { position: fixed; bottom: 30px; right: 30px; background: linear-gradient(45deg, var(--primary-cyan), #0ea5e9); color: var(--dark-navy); width: 60px; height: 60px; border-radius: 50%; display: flex; justify-content: center; align-items: center; font-size: 1.5em; cursor: pointer; box-shadow: 0 0 20px rgba(0, 240, 255, 0.5); z-index: 100; transition: 0.3s; border: 2px solid #fff; }
+        .cart-fab:hover { transform: scale(1.1); box-shadow: 0 0 30px var(--primary-cyan); }
+        .cart-badge { position: absolute; top: -5px; right: -5px; background: #e11d48; color: white; font-size: 0.6em; font-weight: bold; width: 24px; height: 24px; border-radius: 50%; display: flex; justify-content: center; align-items: center; border: 2px solid #fff; }
+
+        /* --- MODALS --- */
+        .modal-overlay { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.8); backdrop-filter: blur(5px); z-index: 200; justify-content: center; align-items: center; }
+        .modal-content { background: var(--dark-navy); border: 2px solid var(--primary-cyan); border-radius: 15px; padding: 25px; width: 90%; max-width: 500px; box-shadow: 0 0 30px rgba(0, 240, 255, 0.3); position: relative; max-height: 80vh; overflow-y: auto; }
+        .close-btn { position: absolute; top: 15px; right: 20px; font-size: 1.5em; color: var(--primary-cyan); cursor: pointer; }
         
-        .item-icon {
-            width: 80px; height: 80px; object-fit: cover; border-radius: 12px;
-            border: 2px solid transparent; margin-bottom: 15px; transition: 0.3s;
-        }
+        .cart-item { display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid rgba(255,255,255,0.1); padding: 10px 0; }
+        .cart-total { font-size: 1.3em; font-weight: bold; color: var(--primary-gold); text-align: right; margin-top: 20px; }
+        .checkout-btn { background: linear-gradient(45deg, #10b981, #34d399); width: 100%; padding: 15px; border: none; border-radius: 8px; color: #000; font-size: 1.2em; font-weight: bold; margin-top: 20px; cursor: pointer; transition: 0.3s; }
+        .checkout-btn:hover { box-shadow: 0 0 15px #10b981; transform: scale(1.02); }
 
-        .buy-btn {
-            border: none; padding: 12px; font-size: 1.1em; font-weight: bold;
-            border-radius: 6px; cursor: pointer; width: 100%; text-transform: uppercase;
-            transition: 0.3s; color: white;
-        }
+        /* Lore Game Modal Text */
+        .lore-title { color: var(--primary-gold); font-size: 1.5em; margin-bottom: 5px; text-shadow: 0 0 5px var(--primary-gold); }
+        .lore-rarity { color: #a855f7; font-weight: bold; margin-bottom: 15px; }
+        .lore-desc { font-style: italic; color: #cbd5e1; line-height: 1.5; border-left: 3px solid var(--primary-cyan); padding-left: 10px; margin-bottom: 15px; }
+        .lore-drop { color: #94a3b8; font-size: 0.9em; }
 
-        /* --- WARNA TEMA KHUSUS ITEM --- */
-        
-        /* 1. Ungu (Refinement Dust) */
-        .theme-purple { border-color: rgba(168, 85, 247, 0.4); }
-        .theme-purple:hover { border-color: #a855f7; box-shadow: 0 0 25px rgba(168, 85, 247, 0.3); }
-        .theme-purple .item-icon { border-color: #a855f7; box-shadow: 0 0 15px rgba(168, 85, 247, 0.5); }
-        .theme-purple h3 { color: #fff; text-shadow: 0 0 8px #a855f7; }
-        .theme-purple .price { color: #d8b4fe; }
-        .theme-purple .stock span { color: #a855f7; text-shadow: 0 0 5px #a855f7; }
-        .theme-purple input { border: 1px solid #a855f7; color: #d8b4fe; }
-        .theme-purple input:focus { box-shadow: 0 0 10px #a855f7; }
-        .theme-purple .buy-btn { background: linear-gradient(45deg, #7e22ce, #a855f7); box-shadow: 0 4px 10px rgba(168, 85, 247, 0.3); }
-        .theme-purple .buy-btn:hover { background: linear-gradient(45deg, #9333ea, #c084fc); box-shadow: 0 0 15px #a855f7; transform: scale(1.02); }
+        /* --- TOAST NOTIFICATIONS --- */
+        .toast-container { position: fixed; bottom: 30px; left: 30px; z-index: 90; display: flex; flex-direction: column; gap: 10px; pointer-events: none; }
+        .toast { background: rgba(11, 19, 43, 0.9); border-left: 4px solid var(--primary-cyan); color: white; padding: 15px 20px; border-radius: 5px; box-shadow: 0 5px 15px rgba(0,0,0,0.5); font-size: 0.9em; animation: slideIn 0.5s, fadeOut 0.5s 6s forwards; display: flex; align-items: center; gap: 10px; }
+        @keyframes slideIn { from { transform: translateX(-100%); opacity: 0; } to { transform: translateX(0); opacity: 1; } }
+        @keyframes fadeOut { to { opacity: 0; display: none; } }
 
-        /* 2. Orange (Enhancement Stone) */
-        .theme-orange { border-color: rgba(249, 115, 22, 0.4); }
-        .theme-orange:hover { border-color: #f97316; box-shadow: 0 0 25px rgba(249, 115, 22, 0.3); }
-        .theme-orange .item-icon { border-color: #f97316; box-shadow: 0 0 15px rgba(249, 115, 22, 0.5); }
-        .theme-orange h3 { color: #fff; text-shadow: 0 0 8px #f97316; }
-        .theme-orange .price { color: #fdba74; }
-        .theme-orange .stock span { color: #f97316; text-shadow: 0 0 5px #f97316; }
-        .theme-orange input { border: 1px solid #f97316; color: #fdba74; }
-        .theme-orange input:focus { box-shadow: 0 0 10px #f97316; }
-        .theme-orange .buy-btn { background: linear-gradient(45deg, #c2410c, #ea580c); box-shadow: 0 4px 10px rgba(249, 115, 22, 0.3); }
-        .theme-orange .buy-btn:hover { background: linear-gradient(45deg, #ea580c, #f97316); box-shadow: 0 0 15px #f97316; transform: scale(1.02); }
-
-        /* 3. Merah (Energy Catalyst) */
-        .theme-red { border-color: rgba(244, 63, 94, 0.4); }
-        .theme-red:hover { border-color: #f43f5e; box-shadow: 0 0 25px rgba(244, 63, 94, 0.3); }
-        .theme-red .item-icon { border-color: #f43f5e; box-shadow: 0 0 15px rgba(244, 63, 94, 0.5); }
-        .theme-red h3 { color: #fff; text-shadow: 0 0 8px #f43f5e; }
-        .theme-red .price { color: #fda4af; }
-        .theme-red .stock span { color: #f43f5e; text-shadow: 0 0 5px #f43f5e; }
-        .theme-red input { border: 1px solid #f43f5e; color: #fda4af; }
-        .theme-red input:focus { box-shadow: 0 0 10px #f43f5e; }
-        .theme-red .buy-btn { background: linear-gradient(45deg, #be123c, #e11d48); box-shadow: 0 4px 10px rgba(244, 63, 94, 0.3); }
-        .theme-red .buy-btn:hover { background: linear-gradient(45deg, #e11d48, #f43f5e); box-shadow: 0 0 15px #f43f5e; transform: scale(1.02); }
-
-        /* 4. Biru Ancient (Semua Coupon) */
-        .theme-blue { border-color: rgba(0, 240, 255, 0.4); }
-        .theme-blue:hover { border-color: #00f0ff; box-shadow: 0 0 25px rgba(0, 240, 255, 0.3); }
-        .theme-blue .item-icon { border-color: #00f0ff; box-shadow: 0 0 15px rgba(0, 240, 255, 0.5); }
-        .theme-blue h3 { color: #fff; text-shadow: 0 0 8px #00f0ff; }
-        .theme-blue .price { color: #67e8f9; }
-        .theme-blue .stock span { color: #00f0ff; text-shadow: 0 0 5px #00f0ff; }
-        .theme-blue input { border: 1px solid #00f0ff; color: #67e8f9; }
-        .theme-blue input:focus { box-shadow: 0 0 10px #00f0ff; }
-        .theme-blue .buy-btn { background: linear-gradient(45deg, #0284c7, #0ea5e9); box-shadow: 0 4px 10px rgba(0, 240, 255, 0.3); }
-        .theme-blue .buy-btn:hover { background: linear-gradient(45deg, #0369a1, #38bdf8); box-shadow: 0 0 15px #00f0ff; transform: scale(1.02); }
-
-        /* 5. Emas (Gold Currency) */
-        .theme-gold { border-color: rgba(251, 191, 36, 0.4); }
-        .theme-gold:hover { border-color: #fbbf24; box-shadow: 0 0 25px rgba(251, 191, 36, 0.3); }
-        .theme-gold .item-icon { border-color: #fbbf24; box-shadow: 0 0 15px rgba(251, 191, 36, 0.5); }
-        .theme-gold h3 { color: #fbbf24; text-shadow: 0 0 8px #fbbf24; }
-        .theme-gold .price { color: #fff; }
-        .theme-gold .stock span { color: #fbbf24; text-shadow: 0 0 5px #fbbf24; }
-        .theme-gold input { border: 1px solid #fbbf24; color: #fbbf24; }
-        .theme-gold .buy-btn { background: linear-gradient(45deg, #b45309, #d97706); box-shadow: 0 4px 10px rgba(251, 191, 36, 0.3); }
-        .theme-gold .buy-btn:hover { background: linear-gradient(45deg, #d97706, #fbbf24); box-shadow: 0 0 15px #fbbf24; transform: scale(1.02); }
+        footer { background: rgba(2, 4, 15, 0.9); border-top: 1px solid var(--primary-cyan); text-align: center; padding: 20px; font-size: 0.9em; color: #94a3b8; margin-top: auto; }
+        footer span { color: var(--primary-cyan); font-weight: bold; }
 
     </style>
 </head>
@@ -167,88 +111,157 @@
 
     <header>
         <div class="header-logos">
-            <img src="logo_guild2.png" alt="Guild Logo" class="side-logo">
-            
+            <a href="LINK_DISCORD_GUILDMU" target="_blank" class="logo-link" data-tooltip="Join Discord OctaGrup!">
+                <img src="logo_guild2.png" alt="Guild Logo" class="side-logo">
+            </a>
             <div class="main-logo-wrapper">
                 <img src="logo_tatsuya.png" alt="Tatsuya Store Logo" class="main-logo">
             </div>
-            
-            <img src="logo_insane.png" alt="Insane DN Logo" class="side-logo">
+            <a href="LINK_DISCORD_INSANE" target="_blank" class="logo-link" data-tooltip="Official Insane DN">
+                <img src="logo_insane.png" alt="Insane DN Logo" class="side-logo">
+            </a>
         </div>
-
         <div class="ign-badge">IGN : TATSUYA</div>
         <div class="server-info">INSANE DRAGON NEST - TRUSTED SELLER</div>
-        <div style="color: #cbd5e1; font-size: 0.9em; margin-top: 5px;">Payment: DANA / Wise (for PH)</div>
+        <div style="color: #cbd5e1; font-size: 0.9em; margin-top: 5px;">Payment: DANA / Wise</div>
     </header>
 
-    <div class="container">
-        
-        <div class="item-card theme-purple">
-            <img src="icon_refinement.jpg" alt="Refinement Dust" class="item-icon">
-            <h3>Refinement Dust</h3>
-            <div class="price">Rp 5.000 / Stack</div>
-            <div class="stock">Ready: <span id="stok-refinement">Loading...</span> Stack</div>
-            <div class="input-group"><input type="number" id="qty-refinement" value="1" min="1"></div>
-            <button class="buy-btn" onclick="beliItem('refinement', 'Refinement Dust')">Beli Sekarang</button>
-        </div>
+    <nav class="navbar">
+        <button class="nav-btn active" onclick="showPage('materials', this)">BASIC MATERIALS</button>
+        <button class="nav-btn" onclick="showPage('coupons', this)">COUPONS</button>
+        <button class="nav-btn" onclick="showPage('gold', this)">GOLD</button>
+        <button class="nav-btn" onclick="showPage('evolution', this)">EVOLUTION (TIER)</button>
+    </nav>
 
-        <div class="item-card theme-orange">
-            <img src="icon_stone.jpg" alt="Enhancement Stone" class="item-icon">
-            <h3>Enhancement Stone</h3>
-            <div class="price">Rp 5.000 / 2 Stack</div>
-            <div class="stock">Ready: <span id="stok-stone">Loading...</span> Paket</div>
-            <div class="input-group"><input type="number" id="qty-stone" value="1" min="1"></div>
-            <button class="buy-btn" onclick="beliItem('stone', 'Enhancement Stone (Paket)')">Beli Sekarang</button>
-        </div>
-
-        <div class="item-card theme-red">
-            <img src="icon_energy.jpg" alt="Energy Catalyst" class="item-icon">
-            <h3>Energy Catalyst</h3>
-            <div class="price">Rp 11.000 / Stack</div>
-            <div class="stock">Ready: <span id="stok-energy">Loading...</span> Stack</div>
-            <div class="input-group"><input type="number" id="qty-energy" value="1" min="1"></div>
-            <button class="buy-btn" onclick="beliItem('energy', 'Energy Catalyst')">Beli Sekarang</button>
-        </div>
-
-        <div class="item-card theme-blue">
-            <img src="icon_mount.jpg" alt="Mount Coupon" class="item-icon">
-            <h3>Insane Mount Coupon</h3>
-            <div class="price">Rp 15.000 / Pcs</div>
-            <div class="stock">Ready: <span id="stok-mount">Loading...</span> Coupon</div>
-            <div class="input-group"><input type="number" id="qty-mount" value="1" min="1"></div>
-            <button class="buy-btn" onclick="beliItem('mount', 'Insane Mount Coupon')">Beli Sekarang</button>
-        </div>
-
-        <div class="item-card theme-blue">
-            <img src="icon_pet.jpg" alt="Pet Coupon" class="item-icon">
-            <h3>Insane Pet Coupon</h3>
-            <div class="price">Rp 20.000 / Pcs</div>
-            <div class="stock">Ready: <span id="stok-pet">Loading...</span> Coupon</div>
-            <div class="input-group"><input type="number" id="qty-pet" value="1" min="1"></div>
-            <button class="buy-btn" onclick="beliItem('pet', 'Insane Pet Coupon')">Beli Sekarang</button>
-        </div>
-
-        <div class="item-card theme-blue">
-            <img src="icon_spirit.jpg" alt="Spirit Coupon" class="item-icon">
-            <h3>Insane Spirit Coupon</h3>
-            <div class="price">Rp 30.000 / Pcs</div>
-            <div class="stock">Ready: <span id="stok-spirit">Loading...</span> Coupon</div>
-            <div class="input-group"><input type="number" id="qty-spirit" value="1" min="1"></div>
-            <button class="buy-btn" onclick="beliItem('spirit', 'Insane Spirit Coupon')">Beli Sekarang</button>
-        </div>
-
-        <div class="item-card theme-gold">
-            <img src="icon_gold.jpg" alt="Gold Icon" class="item-icon">
-            <h3>Gold Currency</h3>
-            <div class="price">PM Price / Offer</div>
-            <div class="stock">Ready: <span id="stok-gold">Loading...</span> Juta</div>
-            <div class="input-group" style="visibility: hidden; height: 35px;"> 
-                <input type="number" id="qty-gold" value="1" min="1"> 
+    <div class="main-content">
+        <div id="materials" class="page-section active">
+            <div class="grid-container">
+                <div class="item-card theme-purple">
+                    <img src="icon_refinement.jpg" class="item-icon" onclick="showLore('Refinement Dust', 'Epic', 'Material used for basic refining of equipment.', 'Dropped From:\n- Manticore Nest\n- Apocalypse Nest')">
+                    <h3>Refinement Dust</h3>
+                    <div class="price">Rp 5.000 / Stack</div>
+                    <div class="stock">Ready: <span id="stok-refinement">Loading...</span></div>
+                    <div class="input-group"><input type="number" id="qty-refinement" value="1" min="1"></div>
+                    <button class="buy-btn" onclick="addToCart('refinement', 'Refinement Dust', 5000)">+ Keranjang</button>
+                </div>
+                <div class="item-card theme-orange">
+                    <img src="icon_stone.jpg" class="item-icon" onclick="showLore('Enhancement Stone', 'Epic', 'A basic stone used to enhance equipment power. Cannot increase seal count.', 'Dropped From:\n- Manticore Nest Normal/Hard\n- Apocalypse Nest Normal/Hard')">
+                    <h3>Enhancement Stone</h3>
+                    <div class="price">Rp 5.000 / 2 Stack</div>
+                    <div class="stock">Ready: <span id="stok-stone">Loading...</span> Pkt</div>
+                    <div class="input-group"><input type="number" id="qty-stone" value="1" min="1"></div>
+                    <button class="buy-btn" onclick="addToCart('stone', 'Enhancement Stone Pkt', 5000)">+ Keranjang</button>
+                </div>
+                <div class="item-card theme-red">
+                    <div class="badge-hot">HOT ITEM</div>
+                    <img src="icon_energy.jpg" class="item-icon" onclick="showLore('Energy Catalyst', 'Unique', 'A rare catalyst brimming with mysterious energy. Crucial for high-tier crafting.', 'Dropped From:\n- Manticore Nest Hell')">
+                    <h3>Energy Catalyst</h3>
+                    <div class="price">Rp 11.000 / Stack</div>
+                    <div class="stock">Ready: <span id="stok-energy">Loading...</span></div>
+                    <div class="input-group"><input type="number" id="qty-energy" value="1" min="1"></div>
+                    <button class="buy-btn" onclick="addToCart('energy', 'Energy Catalyst', 11000)">+ Keranjang</button>
+                </div>
             </div>
-            <button class="buy-btn" onclick="tanyaGold()">Nego Harga via PM</button>
         </div>
 
+        <div id="coupons" class="page-section">
+            <div class="grid-container">
+                <div class="item-card theme-blue">
+                    <img src="icon_mount.jpg" class="item-icon" onclick="showLore('Mount Coupon', 'Unique', 'Exchange this at the NPC for an exclusive Insane Mount.', 'Special Event / Cash Shop')">
+                    <h3>Mount Coupon</h3>
+                    <div class="price">Rp 15.000</div>
+                    <div class="stock">Ready: <span id="stok-mount">Loading...</span></div>
+                    <div class="input-group"><input type="number" id="qty-mount" value="1" min="1"></div>
+                    <button class="buy-btn" onclick="addToCart('mount', 'Mount Coupon', 15000)">+ Keranjang</button>
+                </div>
+                <div class="item-card theme-blue">
+                    <img src="icon_pet.jpg" class="item-icon" onclick="showLore('Pet Coupon', 'Unique', 'Exchange this for a loyal companion.', 'Special Event')">
+                    <h3>Pet Coupon</h3>
+                    <div class="price">Rp 20.000</div>
+                    <div class="stock">Ready: <span id="stok-pet">Loading...</span></div>
+                    <div class="input-group"><input type="number" id="qty-pet" value="1" min="1"></div>
+                    <button class="buy-btn" onclick="addToCart('pet', 'Pet Coupon', 20000)">+ Keranjang</button>
+                </div>
+                <div class="item-card theme-blue">
+                    <img src="icon_spirit.jpg" class="item-icon">
+                    <h3>Spirit Coupon</h3>
+                    <div class="price">Rp 30.000</div>
+                    <div class="stock">Ready: <span id="stok-spirit">Loading...</span></div>
+                    <div class="input-group"><input type="number" id="qty-spirit" value="1" min="1"></div>
+                    <button class="buy-btn" onclick="addToCart('spirit', 'Spirit Coupon', 30000)">+ Keranjang</button>
+                </div>
+            </div>
+        </div>
+
+        <div id="gold" class="page-section">
+            <div class="grid-container" style="justify-content: center; display: flex;">
+                <div class="item-card theme-gold" style="width: 100%; max-width: 400px;">
+                    <img src="icon_gold.jpg" class="item-icon" style="width: 120px; height: 120px;">
+                    <h3>Gold Currency</h3>
+                    <div class="price" style="font-size: 1.5em; color: white;">PM Price / Offer</div>
+                    <div class="stock" style="margin-bottom: 20px;">Ready: <span id="stok-gold">Loading...</span> Juta</div>
+                    <button class="buy-btn" style="padding: 15px; font-size: 1.2em;" onclick="tanyaGold()">NEGO VIA PM</button>
+                </div>
+            </div>
+        </div>
+
+        <div id="evolution" class="page-section">
+            <div id="tier-menus">
+                <p style="text-align: center; color: #ccc;">Pilih Tier equipment yang mau lu upgrade:</p>
+                <div class="tier-grid">
+                    <div class="tier-btn" onclick="alert('Material Tier 2 belum ready bos, coming soon!')">Tier 2</div>
+                    <div class="tier-btn" onclick="alert('Material Tier 3 belum ready bos, coming soon!')">Tier 3</div>
+                    <div class="tier-btn" onclick="alert('Material Tier 4 belum ready bos, coming soon!')">Tier 4</div>
+                    <div class="tier-btn" onclick="alert('Material Tier 5 belum ready bos, coming soon!')">Tier 5</div>
+                    <div class="tier-btn" onclick="alert('Material Tier 6 belum ready bos, coming soon!')">Tier 6</div>
+                    <div class="tier-btn" onclick="alert('Material Tier 7 belum ready bos, coming soon!')">Tier 7</div>
+                    <div class="tier-btn" onclick="alert('Material Tier 8 belum ready bos, coming soon!')">Tier 8</div>
+                    
+                    <div class="tier-btn" onclick="alert('Material Tier 9 belum ready bos, coming soon!')">Tier 9</div>
+                    
+                    <div class="tier-btn" onclick="alert('Material Tier 10 belum ready bos, coming soon!')">Tier 10</div>
+                    <div class="tier-btn" onclick="alert('Material Tier 11 belum ready bos, coming soon!')">Tier 11</div>
+                    <div class="tier-btn" onclick="alert('Material Tier 12 belum ready bos, coming soon!')">Tier 12</div>
+                    <div class="tier-btn" onclick="alert('Material Tier 13 belum ready bos, coming soon!')">Tier 13</div>
+                    <div class="tier-btn" onclick="alert('Material Tier 14 belum ready bos, coming soon!')">Tier 14</div>
+                    <div class="tier-btn" onclick="alert('Material Tier 15 belum ready bos, coming soon!')">Tier 15</div>
+                    <div class="tier-btn" onclick="alert('Material Tier 16 belum ready bos, coming soon!')">Tier 16</div>
+                </div>
+            </div>
+        </div>
     </div>
+
+    <div class="cart-fab" onclick="toggleCart()">
+        🛒<div class="cart-badge" id="cart-count">0</div>
+    </div>
+
+    <div class="modal-overlay" id="cart-modal">
+        <div class="modal-content">
+            <span class="close-btn" onclick="toggleCart()">&times;</span>
+            <h2 style="color: var(--primary-cyan); margin-top: 0;">🛒 Keranjang Lu</h2>
+            <div id="cart-items-container">
+                <p style="color: #94a3b8; text-align: center;">Keranjang masih kosong bro.</p>
+            </div>
+            <div class="cart-total" id="cart-total-price">Total: Rp 0</div>
+            <button class="checkout-btn" onclick="checkoutOrder()">CHECKOUT SEKARANG</button>
+        </div>
+    </div>
+
+    <div class="modal-overlay" id="lore-modal">
+        <div class="modal-content" style="border-color: var(--primary-gold);">
+            <span class="close-btn" onclick="closeLore()">&times;</span>
+            <div class="lore-title" id="lore-title">Item Name</div>
+            <div class="lore-rarity" id="lore-rarity">Rarity</div>
+            <div class="lore-desc" id="lore-desc">Description goes here...</div>
+            <div class="lore-drop" id="lore-drop">How to obtain</div>
+        </div>
+    </div>
+
+    <div class="toast-container" id="toast-box"></div>
+
+    <footer>
+        <p>&copy; 2026 <span>Tatsuya Store</span>. All rights reserved.<br>Fastest & Trusted Seller in Insane DN</p>
+    </footer>
 
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-app.js";
@@ -260,70 +273,162 @@
         const discordWebhookURL = "https://discord.com/api/webhooks/1474887935928303646/uLIKq-GSjJjiXtej96caYB1Q3foj9KvqI4P1rZrWJfPO8ohByxgjfidDgoA4LlzyC1u-";
 
         let stokRealtime = {};
-        const stokRef = ref(db, 'stok_tatsuya');
+        let cart = {}; 
 
+        // 1. FIREBASE SYNC
+        const stokRef = ref(db, 'stok_tatsuya');
         onValue(stokRef, (snapshot) => {
             const data = snapshot.val();
             if(data) {
                 stokRealtime = data;
                 
-                if(stokRealtime.energy === undefined) stokRealtime.energy = 58;
+                if(stokRealtime.energy === undefined) stokRealtime.energy = 49;
                 if(stokRealtime.gold === undefined) stokRealtime.gold = 50; 
 
-                document.getElementById('stok-refinement').innerText = stokRealtime.refinement;
-                document.getElementById('stok-stone').innerText = stokRealtime.stone;
-                document.getElementById('stok-mount').innerText = stokRealtime.mount;
-                document.getElementById('stok-pet').innerText = stokRealtime.pet;
-                document.getElementById('stok-spirit').innerText = stokRealtime.spirit;
-                document.getElementById('stok-energy').innerText = stokRealtime.energy;
-                document.getElementById('stok-gold').innerText = stokRealtime.gold;
+                const elements = ['refinement', 'stone', 'energy', 'mount', 'pet', 'spirit', 'gold'];
+                elements.forEach(id => {
+                    if(document.getElementById(`stok-${id}`)) {
+                        document.getElementById(`stok-${id}`).innerText = stokRealtime[id];
+                    }
+                });
             } else {
-                set(stokRef, { refinement: 180, stone: 142, mount: 10, pet: 2, spirit: 1, energy: 58, gold: 50 });
+                set(stokRef, { refinement: 172, stone: 109, mount: 10, pet: 2, spirit: 1, energy: 49, gold: 50 });
             }
         });
 
-        window.beliItem = function(idItem, namaItem) {
-            const qty = parseInt(document.getElementById(`qty-${idItem}`).value);
-            
-            const ign = prompt("🔥 Masukkan IGN Karakter Lu (Pastikan benar biar gampang di PM):");
-            if(!ign) return;
-            
-            const discordUser = prompt("👾 Masukkan Username Discord Lu (Biar gampang dihubungin): \n*Kosongkan saja jika tidak ada");
-
-            if(qty <= 0 || isNaN(qty)) return alert("Jumlahnya yang bener dong bos!");
-            if(qty > stokRealtime[idItem]) return alert(`Wah, sisa stok cuma ${stokRealtime[idItem]} nih!`);
-
-            if(confirm(`Yakin mau beli ${qty}x ${namaItem} buat karakter ${ign}?`)) {
-                stokRealtime[idItem] -= qty;
-                set(stokRef, stokRealtime); 
-
-                const textDiscord = discordUser ? discordUser : "-";
-
-                fetch(discordWebhookURL, {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({
-                        content: `@everyone 🚨 **PESANAN MASUK BOS!** 🚨\n\n🐲 **DARI TATSUYA STORE!** 🐲\n👤 **IGN:** \`${ign}\`\n👾 **Discord:** ${textDiscord}\n🛍️ **Item:** ${namaItem}\n📦 **Jumlah:** ${qty}\n📉 **Sisa Stok Web:** ${stokRealtime[idItem]}\n💳 **Metode:** DANA / Wise (Segera PM ke orangnya!)`
-                    })
-                }).then(() => alert("✅ Pesanan terkirim! Gua bakal PM lu di game atau Discord secepatnya.")).catch(() => alert("Notif gagal, tapi stok aman."));
-            }
+        // 2. NAVIGASI TABS
+        window.showPage = function(pageId, btn) {
+            document.querySelectorAll('.page-section').forEach(s => s.classList.remove('active'));
+            document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
+            document.getElementById(pageId).classList.add('active');
+            btn.classList.add('active');
         }
 
+        // 3. KERANJANG BELANJA (CART)
+        window.addToCart = function(id, name, price) {
+            const qtyInput = document.getElementById(`qty-${id}`).value;
+            const qty = parseInt(qtyInput);
+
+            if(qty <= 0 || isNaN(qty)) return alert("Isi jumlah yang bener bos!");
+            
+            const currentCartQty = cart[id] ? cart[id].qty : 0;
+            if((qty + currentCartQty) > stokRealtime[id]) {
+                return alert(`Stok sisa ${stokRealtime[id]}, nggak cukup buat ditambah ke keranjang lagi.`);
+            }
+
+            if(cart[id]) cart[id].qty += qty;
+            else cart[id] = { name: name, qty: qty, price: price };
+
+            updateCartUI();
+            showToast(`🛒 ${qty}x ${name} masuk keranjang!`);
+        }
+
+        function updateCartUI() {
+            const container = document.getElementById('cart-items-container');
+            const countBadge = document.getElementById('cart-count');
+            const totalText = document.getElementById('cart-total-price');
+            
+            container.innerHTML = '';
+            let totalItem = 0;
+            let totalPrice = 0;
+
+            for(let id in cart) {
+                const item = cart[id];
+                totalItem += item.qty;
+                const subtotal = item.qty * item.price;
+                totalPrice += subtotal;
+
+                container.innerHTML += `
+                    <div class="cart-item">
+                        <div>
+                            <div style="font-weight:bold; color:var(--primary-cyan);">${item.name}</div>
+                            <div style="font-size:0.8em; color:#94a3b8;">${item.qty}x @ Rp ${item.price.toLocaleString('id-ID')}</div>
+                        </div>
+                        <div style="font-weight:bold;">Rp ${subtotal.toLocaleString('id-ID')}</div>
+                        <button onclick="removeFromCart('${id}')" style="background:red; color:white; border:none; border-radius:3px; cursor:pointer; padding: 2px 8px;">X</button>
+                    </div>
+                `;
+            }
+
+            if(totalItem === 0) container.innerHTML = '<p style="color: #94a3b8; text-align: center;">Keranjang masih kosong bro.</p>';
+            countBadge.innerText = totalItem;
+            totalText.innerText = `Total: Rp ${totalPrice.toLocaleString('id-ID')}`;
+        }
+
+        window.removeFromCart = function(id) { delete cart[id]; updateCartUI(); }
+        window.toggleCart = function() {
+            const modal = document.getElementById('cart-modal');
+            modal.style.display = modal.style.display === 'flex' ? 'none' : 'flex';
+        }
+
+        // 4. TOAST NOTIFICATION REALISTIS (Nama Gura)
+        window.showToast = function(message) {
+            const box = document.getElementById('toast-box');
+            const toast = document.createElement('div');
+            toast.className = 'toast';
+            toast.innerText = message;
+            box.appendChild(toast);
+            setTimeout(() => { toast.remove(); }, 6500); 
+        }
+
+        // History asli pakai IGN Gura
+        setTimeout(() => { showToast(`🔥 Gura baru saja melakukan transaksi Gold pakai Wise!`); }, 2000);
+        setTimeout(() => { showToast(`🔥 Gura baru saja order 60 Pkt Enhancement Stone!`); }, 8000);
+
+        // 5. CHECKOUT
+        window.checkoutOrder = function() {
+            if(Object.keys(cart).length === 0) return alert("Keranjang lu kosong, belanja dulu ngab!");
+
+            const ign = prompt("🔥 Masukkan IGN Karakter Lu (PENTING!):");
+            if(!ign) return;
+            const discordUser = prompt("👾 Masukkan Username Discord Lu (Optional):");
+
+            let invoiceText = `🛒 **INVOICE TATSUYA STORE** 🛒\n👤 **IGN:** \`${ign}\`\n👾 **Discord:** ${discordUser ? discordUser : "-"}\n\n**Rincian Pesanan:**\n`;
+            let grandTotal = 0;
+
+            for(let id in cart) {
+                const item = cart[id];
+                stokRealtime[id] -= item.qty; 
+                const subtotal = item.qty * item.price;
+                grandTotal += subtotal;
+                invoiceText += `📦 ${item.qty}x ${item.name} = Rp ${subtotal.toLocaleString('id-ID')}\n`;
+            }
+            invoiceText += `\n💰 **TOTAL TAGIHAN: Rp ${grandTotal.toLocaleString('id-ID')}**\n💳 **Metode:** DANA / Wise`;
+
+            set(stokRef, stokRealtime);
+
+            fetch(discordWebhookURL, {
+                method: 'POST', headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ content: `@everyone 🚨 **ORDER CHECKOUT MASUK BOS!** 🚨\n\n${invoiceText}` })
+            }).then(() => {
+                alert("✅ Checkout Sukses! Segera PM Tatsuya untuk pembayaran.");
+                
+                showToast(`⚡ Transaksi dari ${ign} senilai Rp ${grandTotal.toLocaleString('id-ID')} diproses!`);
+
+                cart = {}; 
+                updateCartUI();
+                toggleCart();
+            }).catch(() => alert("Notif webhook gagal, tapi stok aman."));
+        }
+
+        // 6. MODAL LORE IN-GAME
+        window.showLore = function(title, rarity, desc, drop) {
+            document.getElementById('lore-title').innerText = title;
+            document.getElementById('lore-rarity').innerText = `Rarity: ${rarity}`;
+            document.getElementById('lore-desc').innerText = desc;
+            document.getElementById('lore-drop').innerText = drop;
+            document.getElementById('lore-modal').style.display = 'flex';
+        }
+        window.closeLore = function() { document.getElementById('lore-modal').style.display = 'none'; }
+
+        // GOLD PM 
         window.tanyaGold = function() {
             const ign = prompt("Masukkan IGN Lu buat nego Gold:");
             if(!ign) return;
-
-            const discordUser = prompt("👾 Masukkan Username Discord Lu (Biar gampang dihubungin): \n*Kosongkan saja jika tidak ada");
-            
-            const textDiscord = discordUser ? discordUser : "-";
-
             fetch(discordWebhookURL, {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({
-                    content: `@everyone 💰 **ADA YANG MAU NEGO GOLD NIH!** 💰\n\n👤 **IGN:** \`${ign}\`\n👾 **Discord:** ${textDiscord}\n💬 Coba langsung di PM / Whisper orangnya in-game bro.`
-                })
-            }).then(() => alert("✅ Info terkirim! Tunggu gua PM lu in-game atau Discord buat nego harganya.")).catch(() => alert("Notif gagal."));
+                method: 'POST', headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ content: `@everyone 💰 **NEGO GOLD** 💰\n👤 **IGN:** \`${ign}\`\n💬 PM In-game bro.` })
+            }).then(() => alert("✅ Info terkirim!"));
         }
     </script>
 </body>
