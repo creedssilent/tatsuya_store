@@ -7,30 +7,23 @@
     <title>Tatsuya Store - Insane DN</title>
     
     <style>
-        /* Desain Tema Tatsuya V7.1 (Hidden Scrollbars for Clean Look) */
+        /* Desain Tema Tatsuya V7.2 (Firebase Synced Live History) */
         :root {
             --primary-gold: #fbbf24; --primary-cyan: #00f0ff; --dark-navy: #0b132b;
             --card-bg: rgba(11, 19, 43, 0.75); --glass-bg: rgba(2, 4, 15, 0.85);
         }
 
         /* --- CSS KHUSUS UNTUK MENGHILANGKAN SCROLLBAR UTAMA --- */
-        /* Untuk Chrome, Safari, dan Opera */
-        body::-webkit-scrollbar {
-            display: none;
-        }
-        /* Untuk Firefox, IE, dan Edge Legacy */
-        html {
-            scrollbar-width: none; /* Firefox */
-            -ms-overflow-style: none;  /* IE 10+ */
-        }
+        body::-webkit-scrollbar { display: none; }
+        html { scrollbar-width: none; -ms-overflow-style: none; }
 
         body {
             margin: 0; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             color: white; padding-bottom: 80px; 
+            /* BACKGROUND NAGA HITAM LU YANG KEREN */
             background: radial-gradient(circle at top, rgba(11, 19, 43, 0.7), rgba(2, 4, 15, 0.95)), 
                         url('bg_tatsuya.jpg') center/cover fixed;
             display: flex; flex-direction: column; min-height: 100vh;
-            /* Memastikan scroll tetap berfungsi meski barnya hilang */
             overflow-y: scroll; 
         }
 
@@ -94,17 +87,12 @@
         /* --- MODALS --- */
         .modal-overlay { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.8); backdrop-filter: blur(5px); z-index: 200; justify-content: center; align-items: center; }
         
-        /* MENGHILANGKAN SCROLLBAR DI DALAM MODAL (History & Cart) */
+        /* MENGHILANGKAN SCROLLBAR DI DALAM MODAL */
         .modal-content { 
             background: var(--dark-navy); border: 2px solid var(--primary-cyan); border-radius: 15px; padding: 25px; width: 90%; max-width: 500px; box-shadow: 0 0 30px rgba(0, 240, 255, 0.3); position: relative; max-height: 80vh; 
-            overflow-y: auto; /* Tetap bisa discroll */
-            scrollbar-width: none; /* Firefox Hide */
-            -ms-overflow-style: none; /* IE Hide */
+            overflow-y: auto; scrollbar-width: none; -ms-overflow-style: none; 
         }
-        /* Chrome/Safari Hide untuk Modal */
-        .modal-content::-webkit-scrollbar {
-            display: none;
-        }
+        .modal-content::-webkit-scrollbar { display: none; }
 
         .close-btn { position: absolute; top: 15px; right: 20px; font-size: 1.5em; color: var(--primary-cyan); cursor: pointer; transition: 0.3s; }
         .close-btn:hover { color: #fff; transform: scale(1.1); }
@@ -289,36 +277,16 @@
 
         let stokRealtime = {};
         let cart = {}; 
+        let historyData = [];
 
-        // -- SISTEM NAMA ANONIM (GRAM SYSTEM) --
         const aliasNames = ['Monogram', 'Bigram', 'Trigram', 'Tetragram', 'Pentagram', 'Hexagram', 'Heptagram', 'Octagram', 'Enneagram', 'Decagram'];
-        
-        // Mulai dari Octagram karena 7 index awal udah dipakai di history default bawah ini
-        let historyIndex = 7; 
 
-        // Default Data History yang lu request (Total 7 Transaksi Awal)
-        let historyData = [
-            "💰 Player <span>Monogram</span> sukses mengamankan <span>10 Juta Gold</span>!",
-            "🔥 Player <span>Bigram</span> telah memborong <span>20 Stack Energy Catalyst</span>!",
-            "✨ Player <span>Trigram</span> baru saja menarik <span>30 Stack Refinement Dust</span>!",
-            "☠️ Player <span>Tetragram</span> berhasil mendapatkan <span>3 Stack Unstable Singularity</span>!",
-            "💎 Player <span>Pentagram</span> telah menyikat <span>40 Stack Refinement Dust</span>!",
-            "⚡ Player <span>Hexagram</span> sukses mengamankan <span>30 Paket Enhancement Stone</span>!",
-            "🔮 Player <span>Heptagram</span> baru saja menarik <span>15 Stack Polished Charm Fragment</span>!"
-        ];
-
-        // 1. FIREBASE SYNC
+        // 1. FIREBASE SYNC: STOK BARANG
         const stokRef = ref(db, 'stok_tatsuya');
         onValue(stokRef, (snapshot) => {
             const data = snapshot.val();
             if(data) {
                 stokRealtime = data;
-                
-                // Set default untuk angka terbaru lu
-                if(stokRealtime.stone === undefined) stokRealtime.stone = 203; 
-                if(stokRealtime.energy === undefined) stokRealtime.energy = 49;
-                if(stokRealtime.gold === undefined) stokRealtime.gold = 40; 
-
                 const elements = ['refinement', 'stone', 'energy', 'mount', 'pet', 'spirit', 'gold'];
                 elements.forEach(id => {
                     if(document.getElementById(`stok-${id}`)) {
@@ -330,7 +298,33 @@
             }
         });
 
-        // 2. CUSTOM ALERT FUNCTION
+        // 2. FIREBASE SYNC: LIVE HISTORY
+        const historyRef = ref(db, 'history_tatsuya');
+        onValue(historyRef, (snapshot) => {
+            const data = snapshot.val();
+            if(data) {
+                historyData = data;
+            } else {
+                // Kalau history di database kosong, inject 7 data awal ini ke Firebase
+                historyData = [
+                    "💰 Player <span>Monogram</span> sukses mengamankan <span>10 Juta Gold</span>!",
+                    "🔥 Player <span>Bigram</span> telah memborong <span>20 Stack Energy Catalyst</span>!",
+                    "✨ Player <span>Trigram</span> baru saja menarik <span>30 Stack Refinement Dust</span>!",
+                    "☠️ Player <span>Tetragram</span> berhasil mendapatkan <span>3 Stack Unstable Singularity</span>!",
+                    "💎 Player <span>Pentagram</span> telah menyikat <span>40 Stack Refinement Dust</span>!",
+                    "⚡ Player <span>Hexagram</span> sukses mengamankan <span>30 Paket Enhancement Stone</span>!",
+                    "🔮 Player <span>Heptagram</span> baru saja menarik <span>15 Stack Polished Charm Fragment</span>!"
+                ];
+                set(historyRef, historyData);
+            }
+            
+            // Render ulang isi history kalau pop-up nya lagi dibuka sama pembeli
+            if(document.getElementById('history-modal').style.display === 'flex') {
+                renderHistory();
+            }
+        });
+
+        // CUSTOM ALERT FUNCTION
         window.showCustomAlert = function(message) {
             document.getElementById('custom-alert-text').innerHTML = message;
             document.getElementById('custom-alert-modal').style.display = 'flex';
@@ -339,7 +333,7 @@
             document.getElementById('custom-alert-modal').style.display = 'none';
         }
 
-        // 3. NAVIGASI TABS
+        // NAVIGASI TABS
         window.showPage = function(pageId, btn) {
             document.querySelectorAll('.page-section').forEach(s => s.classList.remove('active'));
             document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
@@ -347,7 +341,7 @@
             btn.classList.add('active');
         }
 
-        // 4. KERANJANG BELANJA (CART)
+        // KERANJANG BELANJA (CART)
         window.addToCart = function(id, name, price) {
             const qtyInput = document.getElementById(`qty-${id}`).value;
             const qty = parseInt(qtyInput);
@@ -364,7 +358,6 @@
 
             updateCartUI();
             
-            // TOAST NOTIFIKASI SUKSES (Bukan Popup Modal, Biar Nggak Mengganggu Klik)
             let toast = document.createElement("div");
             toast.innerText = `🛒 ${qty}x ${name} masuk keranjang!`;
             toast.style.cssText = "position:fixed; bottom:100px; right:30px; background:#0ea5e9; color:#fff; padding:10px 20px; border-radius:5px; box-shadow:0 0 10px rgba(0,240,255,0.5); z-index:999; animation:fadeIn 0.3s;";
@@ -410,7 +403,7 @@
             modal.style.display = modal.style.display === 'flex' ? 'none' : 'flex';
         }
 
-        // 5. RIWAYAT TRANSAKSI (HISTORY MODAL)
+        // RIWAYAT TRANSAKSI (HISTORY MODAL)
         window.toggleHistory = function() {
             const modal = document.getElementById('history-modal');
             if(modal.style.display === 'flex') {
@@ -425,13 +418,13 @@
             const container = document.getElementById('history-items-container');
             container.innerHTML = '';
             
-            // Loop terbalik biar transaksi terbaru muncul di paling atas
+            // Loop terbalik biar transaksi terbaru muncul di atas
             for(let i = historyData.length - 1; i >= 0; i--) {
                 container.innerHTML += `<div class="history-item">${historyData[i]}</div>`;
             }
         }
 
-        // 6. CHECKOUT & UPDATE HISTORY
+        // CHECKOUT & UPDATE FIREBASE HISTORY
         window.checkoutOrder = function() {
             if(Object.keys(cart).length === 0) return showCustomAlert("Keranjang lu kosong, belanja dulu ngab!");
 
@@ -454,6 +447,7 @@
             }
             invoiceText += `\n💰 **TOTAL TAGIHAN: Rp ${grandTotal.toLocaleString('id-ID')}**\n💳 **Metode:** DANA / Wise`;
 
+            // Update Stok ke Firebase
             set(stokRef, stokRealtime);
 
             fetch(discordWebhookURL, {
@@ -462,11 +456,22 @@
             }).then(() => {
                 showCustomAlert("✅ Checkout Sukses!<br>Segera PM Tatsuya untuk pembayaran.");
                 
-                // Tambahin ke History Pake Nama Gram System
-                let buyerAlias = aliasNames[historyIndex % 10]; 
+                // --- UPDATE LIVE HISTORY KE FIREBASE ---
+                // Tentukan nama berdasarkan panjang array saat ini
+                let buyerAlias = aliasNames[historyData.length % 10]; 
                 let itemsString = boughtItemsArray.join(" & ");
-                historyData.push(`⚡ Player <span>${buyerAlias}</span> baru saja menarik <span>${itemsString}</span>!`);
-                historyIndex++;
+                
+                // Tambah data baru
+                historyData.push(`🔔 Player <span>${buyerAlias}</span> baru saja menarik <span>${itemsString}</span>!`);
+                
+                // Batasi cuma nyimpan 20 riwayat terakhir biar database ga penuh
+                if(historyData.length > 20) {
+                    historyData.shift(); 
+                }
+
+                // Kirim array history terbaru ke Firebase
+                set(historyRef, historyData); 
+                // ---------------------------------------
 
                 cart = {}; 
                 updateCartUI();
@@ -474,7 +479,7 @@
             }).catch(() => showCustomAlert("Notif webhook gagal, tapi stok aman."));
         }
 
-        // 7. MODAL LORE IN-GAME
+        // MODAL LORE IN-GAME
         window.showLore = function(title, rarity, desc, drop) {
             document.getElementById('lore-title').innerText = title;
             document.getElementById('lore-rarity').innerText = `Rarity: ${rarity}`;
