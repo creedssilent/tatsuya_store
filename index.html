@@ -638,6 +638,16 @@
                 body: JSON.stringify({ content: `@everyone 🚨 **ORDER CHECKOUT MASUK BOS!** 🚨\n\n${invoiceText}` })
             }).then(() => {
                 showCustomAlert("✅ Checkout Sukses!<br>Segera PM Tatsuya untuk pembayaran.");
+
+            const teleToken = "7457880426:AAEgJvDhHjta1ihIhSXBIFP-aeO545fVewA"; // Ganti pakai token lu
+            const teleChatId = "1600454088"; // Ganti pakai angka ID lu
+            
+            const teleText = encodeURIComponent(`🚨 *ORDER CHECKOUT MASUK BOS!* 🚨\n\n👤 IGN: ${ign}\n💰 Total: Rp ${grandTotal.toLocaleString('id-ID')}\n\nBangun dan amankan cuan! Cek Discord sekarang.`);
+            const teleUrl = `https://api.telegram.org/bot${teleToken}/sendMessage?chat_id=${teleChatId}&text=${teleText}&parse_mode=Markdown`;
+
+            fetch(teleUrl)
+                .then(response => console.log("Notif Telegram sukses dieksekusi."))
+                .catch(err => console.error("Sistem gagal:", err));
                 
                 let buyerAlias = aliasNames[historyData.length % 10]; 
                 let itemsString = boughtItemsArray.join(" & ");
