@@ -72,7 +72,7 @@
         /* ANCIENT (Cyan/Biru Terang) */
         .theme-blue { border-color: rgba(0, 240, 255, 0.4); } .theme-blue .item-icon { border-color: #00f0ff; box-shadow: 0 0 15px rgba(0, 240, 255, 0.5); } .theme-blue h3 { color: #fff; text-shadow: 0 0 8px #00f0ff; } .theme-blue .price { color: #67e8f9; } .theme-blue .stock span { color: #00f0ff; } .theme-blue input { border-color: #00f0ff; } .theme-blue .buy-btn { background: linear-gradient(45deg, #0284c7, #0ea5e9); } .theme-blue .buy-btn:hover { background: #0ea5e9; box-shadow: 0 0 15px #00f0ff; transform: scale(1.02); }
         
-        /* RARE (Biru Tua/Deep Blue) - INI TEMA BARU BUAT ITEM RARE LU */
+        /* RARE (Biru Tua/Deep Blue) */
         .theme-rare { border-color: rgba(59, 130, 246, 0.4); } .theme-rare .item-icon { border-color: #3b82f6; box-shadow: 0 0 15px rgba(59, 130, 246, 0.5); } .theme-rare h3 { color: #fff; text-shadow: 0 0 8px #3b82f6; } .theme-rare .price { color: #93c5fd; } .theme-rare .stock span { color: #3b82f6; } .theme-rare input { border-color: #3b82f6; } .theme-rare .buy-btn { background: linear-gradient(45deg, #1d4ed8, #3b82f6); } .theme-rare .buy-btn:hover { background: #3b82f6; box-shadow: 0 0 15px #3b82f6; transform: scale(1.02); }
 
         /* UNIQUE (Ungu/Pinkish) */
@@ -86,28 +86,6 @@
         
         /* GOLD ITEM */
         .theme-gold { border-color: rgba(251, 191, 36, 0.4); } .theme-gold .item-icon { border-color: #fbbf24; box-shadow: 0 0 15px rgba(251, 191, 36, 0.5); } .theme-gold h3 { color: #fbbf24; text-shadow: 0 0 8px #fbbf24; } .theme-gold .price { color: #fff; } .theme-gold .stock span { color: #fbbf24; } .theme-gold input { border-color: #fbbf24; } .theme-gold .buy-btn { background: linear-gradient(45deg, #b45309, #d97706); } .theme-gold .buy-btn:hover { background: #d97706; box-shadow: 0 0 15px #fbbf24; transform: scale(1.02); }
-
-        /* TIER GRID & ANIMASI GLOW TIER 9 */
-        .tier-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(100px, 1fr)); gap: 15px; text-align: center; }
-        .tier-btn { background: rgba(0,0,0,0.5); border: 1px solid var(--primary-cyan); color: white; padding: 15px; border-radius: 10px; cursor: pointer; transition: 0.3s; font-weight: bold; }
-        .tier-btn:hover { background: var(--primary-cyan); color: black; box-shadow: 0 0 15px var(--primary-cyan); transform: scale(1.05); }
-        
-        /* Animasi Berkedip/Glow Khusus Tier 9 */
-        @keyframes pulseGlow {
-            0% { box-shadow: 0 0 8px #a855f7; transform: scale(1); }
-            50% { box-shadow: 0 0 25px #d8b4fe, 0 0 10px #fff; transform: scale(1.08); background: rgba(168, 85, 247, 0.3); }
-            100% { box-shadow: 0 0 8px #a855f7; transform: scale(1); }
-        }
-        .tier-btn.highlight { 
-            background: linear-gradient(45deg, #7e22ce, #a855f7); 
-            color: white; 
-            border: none; 
-            animation: pulseGlow 1.5s infinite ease-in-out; 
-        }
-        .tier-btn.highlight:hover { background: #9333ea; box-shadow: 0 0 25px #d8b4fe; animation: none; transform: scale(1.1); }
-        
-        .back-btn { background: transparent; border: 1px solid var(--primary-cyan); color: var(--primary-cyan); padding: 8px 20px; border-radius: 5px; cursor: pointer; margin-bottom: 20px; display: inline-block; transition: 0.3s; }
-        .back-btn:hover { background: var(--primary-cyan); color: var(--dark-navy); }
 
         /* --- FLOATING BUTTONS (CART KANAN, HISTORY KIRI) --- */
         .cart-fab { position: fixed; bottom: 30px; right: 30px; background: linear-gradient(45deg, var(--primary-cyan), #0ea5e9); color: var(--dark-navy); width: 60px; height: 60px; border-radius: 50%; display: flex; justify-content: center; align-items: center; font-size: 1.5em; cursor: pointer; box-shadow: 0 0 20px rgba(0, 240, 255, 0.5); z-index: 100; transition: 0.3s; border: 2px solid #fff; }
@@ -196,7 +174,6 @@
         <button class="nav-btn active" onclick="showPage('materials', this)">BASIC MATERIALS</button>
         <button class="nav-btn" onclick="showPage('coupons', this)">COUPONS</button>
         <button class="nav-btn" onclick="showPage('gold', this)">GOLD</button>
-        <button class="nav-btn" onclick="showPage('evolution', this)">EVOLUTION (TIER)</button>
     </nav>
 
     <div class="main-content">
@@ -300,82 +277,6 @@
             </div>
         </div>
 
-        <div id="evolution" class="page-section">
-            <div id="tier-menus">
-                <p style="text-align: center; color: #ccc;">Pilih Tier equipment yang mau lu upgrade:</p>
-                <div class="tier-grid">
-                    <div class="tier-btn" onclick="showCustomAlert('🚧 Material Tier 2 belum ready bos, coming soon!')">Tier 2</div>
-                    <div class="tier-btn" onclick="showCustomAlert('🚧 Material Tier 3 belum ready bos, coming soon!')">Tier 3</div>
-                    <div class="tier-btn" onclick="showCustomAlert('🚧 Material Tier 4 belum ready bos, coming soon!')">Tier 4</div>
-                    <div class="tier-btn" onclick="showCustomAlert('🚧 Material Tier 5 belum ready bos, coming soon!')">Tier 5</div>
-                    <div class="tier-btn" onclick="showCustomAlert('🚧 Material Tier 6 belum ready bos, coming soon!')">Tier 6</div>
-                    <div class="tier-btn" onclick="showCustomAlert('🚧 Material Tier 7 belum ready bos, coming soon!')">Tier 7</div>
-                    <div class="tier-btn" onclick="showCustomAlert('🚧 Material Tier 8 belum ready bos, coming soon!')">Tier 8</div>
-                    
-                    <div class="tier-btn highlight" onclick="openTierContent('9')">Tier 9</div>
-                    
-                    <div class="tier-btn" onclick="showCustomAlert('🚧 Material Tier 10 belum ready bos, coming soon!')">Tier 10</div>
-                    <div class="tier-btn" onclick="showCustomAlert('🚧 Material Tier 11 belum ready bos, coming soon!')">Tier 11</div>
-                    <div class="tier-btn" onclick="showCustomAlert('🚧 Material Tier 12 belum ready bos, coming soon!')">Tier 12</div>
-                    <div class="tier-btn" onclick="showCustomAlert('🚧 Material Tier 13 belum ready bos, coming soon!')">Tier 13</div>
-                    <div class="tier-btn" onclick="showCustomAlert('🚧 Material Tier 14 belum ready bos, coming soon!')">Tier 14</div>
-                    <div class="tier-btn" onclick="showCustomAlert('🚧 Material Tier 15 belum ready bos, coming soon!')">Tier 15</div>
-                    <div class="tier-btn" onclick="showCustomAlert('🚧 Material Tier 16 belum ready bos, coming soon!')">Tier 16</div>
-                </div>
-            </div>
-
-            <div id="tier-content-9" style="display: none; margin-top: 10px;">
-                <button class="back-btn" onclick="closeTierContent('9')">⬅ Kembali ke List Tier</button>
-                <h2 style="color: #a855f7; border-bottom: 2px solid #a855f7; padding-bottom: 10px; margin-top: 0; text-shadow: 0 0 10px #a855f7;">VOID MATERIALS (TIER 9)</h2>
-                
-                <div class="grid-container">
-                    <div class="item-card theme-rare">
-                        <img src="icon_void_shard.jpg" class="item-icon" onclick="showLore('Void-Touched Shard', 'Rare', 'A shard altered by exposure to the void.', 'Dropped From:\n- Void / Abyss Nests')">
-                        <h3>Void-Touched Shard</h3>
-                        <div class="price">Rp 6.000 / Stack</div>
-                        <div class="stock">Ready: <span id="stok-void_shard">Loading...</span></div>
-                        <div class="input-group"><input type="number" id="qty-void_shard" value="1" min="1"></div>
-                        <button class="buy-btn" onclick="addToCart('void_shard', 'Void-Touched Shard', 6000)">+ Keranjang</button>
-                    </div>
-
-                    <div class="item-card theme-purple">
-                        <img src="icon_dark_dust.jpg" class="item-icon" onclick="showLore('Dark Matter Dust', 'Unique', 'Fine particles of matter beyond reality.', 'Dropped From:\n- Void / Abyss Nests')">
-                        <h3>Dark Matter Dust</h3>
-                        <div class="price">Rp 7.000 / Stack</div>
-                        <div class="stock">Ready: <span id="stok-dark_dust">Loading...</span></div>
-                        <div class="input-group"><input type="number" id="qty-dark_dust" value="1" min="1"></div>
-                        <button class="buy-btn" onclick="addToCart('dark_dust', 'Dark Matter Dust', 7000)">+ Keranjang</button>
-                    </div>
-
-                    <div class="item-card theme-blue">
-                        <img src="icon_void_seed.jpg" class="item-icon" onclick="showLore('Void Seed', 'Ancient', 'A seed capable of growing void energy.', 'Dropped From:\n- Void / Abyss Nests')">
-                        <h3>Void Seed</h3>
-                        <div class="price">Rp 7.000 / 7 Pcs</div>
-                        <div class="stock">Ready: <span id="stok-void_seed">Loading...</span> Pcs</div>
-                        <div class="input-group"><input type="number" id="qty-void_seed" value="1" min="1"></div>
-                        <button class="buy-btn" onclick="addToCart('void_seed', 'Void Seed (7 Pcs)', 7000)">+ Keranjang</button>
-                    </div>
-
-                    <div class="item-card theme-orange">
-                        <img src="icon_singularity.jpg" class="item-icon" onclick="showLore('Unstable Singularity', 'Epic', 'A volatile mass of condensed void energy.', 'Dropped From:\n- Void / Abyss Nests')">
-                        <h3>Unstable Singularity</h3>
-                        <div class="price">Rp 12.000 / Stack</div>
-                        <div class="stock">Ready: <span id="stok-singularity">Loading...</span></div>
-                        <div class="input-group"><input type="number" id="qty-singularity" value="1" min="1"></div>
-                        <button class="buy-btn" onclick="addToCart('singularity', 'Unstable Singularity', 12000)">+ Keranjang</button>
-                    </div>
-
-                    <div class="item-card theme-red">
-                        <img src="icon_rift.jpg" class="item-icon" onclick="showLore('Rift Residue', 'Legend', 'Energy remnants from dimensional rifts.', 'Dropped From:\n- Void / Abyss Nests')">
-                        <h3>Rift Residue</h3>
-                        <div class="price">Rp 10.000 / 1000 Pcs</div>
-                        <div class="stock">Ready: <span id="stok-rift_residue">Loading...</span> Pcs</div>
-                        <div class="input-group"><input type="number" id="qty-rift_residue" value="1" min="1"></div>
-                        <button class="buy-btn" onclick="addToCart('rift_residue', 'Rift Residue (1000 Pcs)', 10000)">+ Keranjang</button>
-                    </div>
-                </div>
-            </div>
-        </div>
     </div>
 
     <div class="cart-fab" onclick="toggleCart()">
@@ -513,18 +414,26 @@
             btn.classList.add('active');
             
             if(pageId !== 'evolution') {
-                closeTierContent('9');
+                closeTierContent('9'); // Sengaja dibiarin logic-nya buat jaga-jaga ke depan
             }
         }
 
-        // NAVIGASI SUB-MENU TIER
+        // NAVIGASI SUB-MENU TIER (Sengaja dibiarin buat tabungan logic)
         window.openTierContent = function(tierId) {
-            document.getElementById('tier-menus').style.display = 'none';
-            document.getElementById('tier-content-' + tierId).style.display = 'block';
+            const tierMenus = document.getElementById('tier-menus');
+            const tierContent = document.getElementById('tier-content-' + tierId);
+            if(tierMenus && tierContent) {
+                tierMenus.style.display = 'none';
+                tierContent.style.display = 'block';
+            }
         }
         window.closeTierContent = function(tierId) {
-            document.getElementById('tier-menus').style.display = 'block';
-            document.getElementById('tier-content-' + tierId).style.display = 'none';
+            const tierMenus = document.getElementById('tier-menus');
+            const tierContent = document.getElementById('tier-content-' + tierId);
+            if(tierMenus && tierContent) {
+                tierMenus.style.display = 'block';
+                tierContent.style.display = 'none';
+            }
         }
 
         // KERANJANG BELANJA (CART)
@@ -683,5 +592,3 @@
     </script>
 </body>
 </html>
-
-
