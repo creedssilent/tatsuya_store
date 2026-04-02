@@ -7,13 +7,12 @@
     <title>Tatsuya Store - Insane DN</title>
     
     <style>
-        /* Desain Tema Tatsuya V7.7 (Perfect Item Rarity Colors) */
+        /* Tatsuya Theme V8.0 (Acc Materials Colors & Prices Update) */
         :root {
             --primary-gold: #fbbf24; --primary-cyan: #00f0ff; --dark-navy: #0b132b;
             --card-bg: rgba(11, 19, 43, 0.75); --glass-bg: rgba(2, 4, 15, 0.85);
         }
 
-        /* --- MENGHILANGKAN SCROLLBAR UTAMA --- */
         body::-webkit-scrollbar { display: none; }
         html { scrollbar-width: none; -ms-overflow-style: none; }
 
@@ -33,9 +32,6 @@
         .side-logo { width: 120px; height: 120px; object-fit: contain; filter: drop-shadow(0 0 10px rgba(0, 240, 255, 0.3)); transition: 0.3s; }
         .logo-link:hover .side-logo { transform: scale(1.15) rotate(5deg); filter: drop-shadow(0 0 20px var(--primary-cyan)); }
         
-        .logo-link::after { content: attr(data-tooltip); position: absolute; bottom: -30px; left: 50%; transform: translateX(-50%); background: rgba(0,0,0,0.8); color: var(--primary-cyan); padding: 5px 10px; border-radius: 5px; font-size: 0.8em; white-space: nowrap; opacity: 0; pointer-events: none; transition: 0.3s; border: 1px solid var(--primary-cyan); z-index: 100; }
-        .logo-link:hover::after { opacity: 1; bottom: -40px; }
-
         .main-logo-wrapper { position: relative; padding: 5px; border-radius: 50%; background: linear-gradient(45deg, var(--primary-cyan), var(--primary-gold)); box-shadow: 0 0 25px rgba(0, 240, 255, 0.6); animation: float 4s ease-in-out infinite; z-index: 2; }
         .main-logo { width: 180px; height: 180px; border-radius: 50%; object-fit: cover; border: 4px solid var(--dark-navy); display: block; }
         @keyframes float { 0%, 100% { transform: translateY(0px); box-shadow: 0 0 20px rgba(0, 240, 255, 0.5); } 50% { transform: translateY(-10px); box-shadow: 0 0 35px rgba(0, 240, 255, 0.8); } }
@@ -43,7 +39,6 @@
         .ign-badge { display: inline-block; background: linear-gradient(90deg, transparent, rgba(0, 240, 255, 0.2), transparent); border: 1px solid var(--primary-cyan); color: var(--primary-cyan); padding: 5px 25px; border-radius: 20px; font-size: 1.2em; font-weight: bold; letter-spacing: 2px; text-shadow: 0 0 8px var(--primary-cyan); margin-top: 15px; }
         .server-info { color: var(--primary-gold); font-size: 1em; letter-spacing: 2px; margin-top: 15px; text-shadow: 0 0 5px black; }
         
-        /* Promo Badge Text */
         .promo-text { color: #fbbf24; font-size: 0.95em; font-weight: bold; margin-top: 8px; text-shadow: 0 0 8px #f97316; }
         .referral-text { color: #10b981; font-size: 0.95em; margin-top: 5px; font-weight: bold; padding: 5px; background: rgba(0,0,0,0.3); border-radius: 5px; display: inline-block; }
 
@@ -61,7 +56,6 @@
 
         /* --- ITEM CARDS --- */
         .item-card { background: var(--card-bg); backdrop-filter: blur(10px); border: 1px solid transparent; border-radius: 15px; padding: 30px 20px; text-align: center; transition: all 0.3s ease; box-shadow: 0 4px 15px rgba(0,0,0,0.6); position: relative; overflow: hidden; }
-        .badge-hot { position: absolute; top: 15px; right: -35px; background: linear-gradient(45deg, #e11d48, #f43f5e); color: white; padding: 5px 40px; font-size: 0.8em; font-weight: bold; letter-spacing: 1px; transform: rotate(45deg); box-shadow: 0 2px 10px rgba(244, 63, 94, 0.5); z-index: 10; }
         .item-icon { width: 80px; height: 80px; object-fit: cover; border-radius: 12px; border: 2px solid transparent; margin-bottom: 15px; transition: 0.3s; cursor: pointer; }
         .item-icon:hover { transform: scale(1.1); }
         .item-card h3 { margin-top: 0; font-size: 1.25em; letter-spacing: 1px; min-height: 2.5em; display: flex; align-items: center; justify-content: center; line-height: 1.2; }
@@ -72,7 +66,8 @@
         input[type="number"] { width: 70px; padding: 8px; text-align: center; background: rgba(0,0,0,0.6); border-radius: 5px; font-weight: bold; outline: none; transition: 0.3s; color: white; border: 1px solid transparent; }
         .buy-btn { border: none; padding: 12px; font-size: 1.1em; font-weight: bold; border-radius: 6px; cursor: pointer; width: 100%; text-transform: uppercase; transition: 0.3s; color: white; }
 
-        /* --- THEMES WARNA ITEM --- */
+        /* --- ITEM COLOR THEMES --- */
+        .theme-green { border-color: rgba(16, 185, 129, 0.4); } .theme-green .item-icon { border-color: #10b981; box-shadow: 0 0 15px rgba(16, 185, 129, 0.5); } .theme-green h3 { color: #fff; text-shadow: 0 0 8px #10b981; } .theme-green .price { color: #6ee7b7; } .theme-green .stock span { color: #10b981; } .theme-green input { border-color: #10b981; } .theme-green .buy-btn { background: linear-gradient(45deg, #059669, #10b981); } .theme-green .buy-btn:hover { background: #10b981; box-shadow: 0 0 15px #10b981; transform: scale(1.02); }
         .theme-blue { border-color: rgba(0, 240, 255, 0.4); } .theme-blue .item-icon { border-color: #00f0ff; box-shadow: 0 0 15px rgba(0, 240, 255, 0.5); } .theme-blue h3 { color: #fff; text-shadow: 0 0 8px #00f0ff; } .theme-blue .price { color: #67e8f9; } .theme-blue .stock span { color: #00f0ff; } .theme-blue input { border-color: #00f0ff; } .theme-blue .buy-btn { background: linear-gradient(45deg, #0284c7, #0ea5e9); } .theme-blue .buy-btn:hover { background: #0ea5e9; box-shadow: 0 0 15px #00f0ff; transform: scale(1.02); }
         .theme-rare { border-color: rgba(59, 130, 246, 0.4); } .theme-rare .item-icon { border-color: #3b82f6; box-shadow: 0 0 15px rgba(59, 130, 246, 0.5); } .theme-rare h3 { color: #fff; text-shadow: 0 0 8px #3b82f6; } .theme-rare .price { color: #93c5fd; } .theme-rare .stock span { color: #3b82f6; } .theme-rare input { border-color: #3b82f6; } .theme-rare .buy-btn { background: linear-gradient(45deg, #1d4ed8, #3b82f6); } .theme-rare .buy-btn:hover { background: #3b82f6; box-shadow: 0 0 15px #3b82f6; transform: scale(1.02); }
         .theme-purple { border-color: rgba(168, 85, 247, 0.4); } .theme-purple .item-icon { border-color: #a855f7; box-shadow: 0 0 15px rgba(168, 85, 247, 0.5); } .theme-purple h3 { color: #fff; text-shadow: 0 0 8px #a855f7; } .theme-purple .price { color: #d8b4fe; } .theme-purple .stock span { color: #a855f7; } .theme-purple input { border-color: #a855f7; } .theme-purple .buy-btn { background: linear-gradient(45deg, #7e22ce, #a855f7); } .theme-purple .buy-btn:hover { background: #9333ea; box-shadow: 0 0 15px #a855f7; transform: scale(1.02); }
@@ -80,7 +75,7 @@
         .theme-red { border-color: rgba(244, 63, 94, 0.4); } .theme-red .item-icon { border-color: #f43f5e; box-shadow: 0 0 15px rgba(244, 63, 94, 0.5); } .theme-red h3 { color: #fff; text-shadow: 0 0 8px #f43f5e; } .theme-red .price { color: #fda4af; } .theme-red .stock span { color: #f43f5e; } .theme-red input { border-color: #f43f5e; } .theme-red .buy-btn { background: linear-gradient(45deg, #be123c, #e11d48); } .theme-red .buy-btn:hover { background: #e11d48; box-shadow: 0 0 15px #f43f5e; transform: scale(1.02); }
         .theme-gold { border-color: rgba(251, 191, 36, 0.4); } .theme-gold .item-icon { border-color: #fbbf24; box-shadow: 0 0 15px rgba(251, 191, 36, 0.5); } .theme-gold h3 { color: #fbbf24; text-shadow: 0 0 8px #fbbf24; } .theme-gold .price { color: #fff; } .theme-gold .stock span { color: #fbbf24; } .theme-gold input { border-color: #fbbf24; } .theme-gold .buy-btn { background: linear-gradient(45deg, #b45309, #d97706); } .theme-gold .buy-btn:hover { background: #d97706; box-shadow: 0 0 15px #fbbf24; transform: scale(1.02); }
 
-        /* --- FLOATING BUTTONS (CART KANAN, HISTORY KIRI) --- */
+        /* --- FLOATING BUTTONS & MODALS --- */
         .cart-fab { position: fixed; bottom: 30px; right: 30px; background: linear-gradient(45deg, var(--primary-cyan), #0ea5e9); color: var(--dark-navy); width: 60px; height: 60px; border-radius: 50%; display: flex; justify-content: center; align-items: center; font-size: 1.5em; cursor: pointer; box-shadow: 0 0 20px rgba(0, 240, 255, 0.5); z-index: 100; transition: 0.3s; border: 2px solid #fff; }
         .cart-fab:hover { transform: scale(1.1); box-shadow: 0 0 30px var(--primary-cyan); }
         .cart-badge { position: absolute; top: -5px; right: -5px; background: #e11d48; color: white; font-size: 0.6em; font-weight: bold; width: 24px; height: 24px; border-radius: 50%; display: flex; justify-content: center; align-items: center; border: 2px solid #fff; }
@@ -88,7 +83,6 @@
         .history-fab { position: fixed; bottom: 30px; left: 30px; background: linear-gradient(45deg, #f59e0b, #fbbf24); color: var(--dark-navy); width: 60px; height: 60px; border-radius: 50%; display: flex; justify-content: center; align-items: center; font-size: 1.5em; cursor: pointer; box-shadow: 0 0 20px rgba(251, 191, 36, 0.5); z-index: 100; transition: 0.3s; border: 2px solid #fff; }
         .history-fab:hover { transform: scale(1.1); box-shadow: 0 0 30px #fbbf24; }
 
-        /* --- MODALS --- */
         .modal-overlay { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.8); backdrop-filter: blur(5px); z-index: 200; justify-content: center; align-items: center; }
         .modal-content { background: var(--dark-navy); border: 2px solid var(--primary-cyan); border-radius: 15px; padding: 25px; width: 90%; max-width: 500px; box-shadow: 0 0 30px rgba(0, 240, 255, 0.3); position: relative; max-height: 80vh; overflow-y: auto; scrollbar-width: none; -ms-overflow-style: none; }
         .modal-content::-webkit-scrollbar { display: none; }
@@ -105,42 +99,17 @@
 
         .lore-title { color: var(--primary-gold); font-size: 1.5em; margin-bottom: 5px; text-shadow: 0 0 5px var(--primary-gold); }
         .lore-rarity { color: #a855f7; font-weight: bold; margin-bottom: 15px; }
-        .lore-desc { font-style: italic; color: #cbd5e1; line-height: 1.5; border-left: 3px solid var(--primary-cyan); padding-left: 10px; margin-bottom: 15px; }
-        .lore-drop { color: #94a3b8; font-size: 0.9em; }
+        .lore-desc { font-style: italic; color: #cbd5e1; line-height: 1.5; border-left: 3px solid var(--primary-cyan); padding-left: 10px; margin-bottom: 15px;white-space: pre-line; }
+        .lore-drop { color: #94a3b8; font-size: 0.9em; white-space: pre-line;}
 
         footer { background: rgba(2, 4, 15, 0.9); border-top: 1px solid var(--primary-cyan); text-align: center; padding: 20px; font-size: 0.9em; color: #94a3b8; margin-top: auto; }
         footer span { color: var(--primary-cyan); font-weight: bold; }
 
-        /* =========================================
-           SISTEM RESPONSIVE HP (MEDIA QUERIES)
-           ========================================= */
         @media (max-width: 768px) {
-            .header-logos { gap: 10px; margin-bottom: 10px; }
-            .side-logo { width: 65px; height: 65px; }
-            .main-logo { width: 110px; height: 110px; }
-            .main-logo-wrapper { padding: 3px; }
-            header { padding: 20px 10px 15px; }
-
-            .ign-badge { font-size: 1em; padding: 5px 15px; margin-top: 10px; }
-            .server-info { font-size: 0.85em; margin-top: 10px; }
-
-            .navbar { padding: 10px; gap: 8px; }
-            .nav-btn { padding: 8px 12px; font-size: 0.75em; border-radius: 15px; }
-
-            .grid-container { gap: 15px; }
-            .item-card { padding: 20px 15px; }
-            .item-icon { width: 65px; height: 65px; }
-            .item-card h3 { font-size: 1.1em; min-height: 2em; }
-            .price { font-size: 1.1em; }
-
-            .cart-fab, .history-fab { width: 50px; height: 50px; font-size: 1.2em; bottom: 20px; }
-            .cart-fab { right: 15px; }
-            .history-fab { left: 15px; }
-
-            .modal-content { padding: 20px 15px; width: 95%; }
-            .lore-title { font-size: 1.3em; }
-            .cart-item { flex-direction: column; align-items: flex-start; gap: 5px; }
-            .cart-item > button { align-self: flex-end; margin-top: -25px; } 
+            .header-logos { gap: 10px; margin-bottom: 10px; } .side-logo { width: 65px; height: 65px; } .main-logo { width: 110px; height: 110px; } header { padding: 20px 10px 15px; }
+            .navbar { padding: 10px; gap: 8px; } .nav-btn { padding: 8px 12px; font-size: 0.75em; border-radius: 15px; }
+            .grid-container { gap: 15px; } .item-card { padding: 20px 15px; } .item-icon { width: 65px; height: 65px; }
+            .cart-fab, .history-fab { width: 50px; height: 50px; font-size: 1.2em; bottom: 20px; } .cart-fab { right: 15px; } .history-fab { left: 15px; }
         }
     </style>
 </head>
@@ -169,6 +138,7 @@
 
     <nav class="navbar">
         <button class="nav-btn active" onclick="showPage('materials', this)">BASIC MATERIALS</button>
+        <button class="nav-btn" onclick="showPage('acc_materials', this)">ACC MATERIALS</button>
         <button class="nav-btn" onclick="showPage('coupons', this)">COUPONS</button>
         <button class="nav-btn" onclick="showPage('gold', this)">GOLD</button>
     </nav>
@@ -180,55 +150,94 @@
                     <img src="icon_refinement.jpg" class="item-icon" onclick="showLore('Refinement Dust', 'Unique', 'Material used for basic refining of equipment.', 'Dropped From:\n- Manticore Nest\n- Apocalypse Nest')">
                     <h3>Refinement Dust</h3>
                     <div class="price">Rp 3.000 / Stack</div>
-                    <div class="stock">Stock: <span id="stok-refinement">Loading...</span></div>
-                    <div class="input-group"><input type="number" id="qty-refinement" value="1" min="1"></div>
-                    <button class="buy-btn" onclick="addToCart('refinement', 'Refinement Dust', 3000)">+ ADD TO CART</button>
+                    <div class="stock">Stock: <span id="stok-Refinement Dust">Loading...</span></div>
+                    <div class="input-group"><input type="number" id="qty-Refinement Dust" value="1" min="1"></div>
+                    <button class="buy-btn" onclick="addToCart('Refinement Dust', 'Refinement Dust', 3000)">+ ADD TO CART</button>
                 </div>
 
                 <div class="item-card theme-orange">
                     <img src="icon_stone.jpg" class="item-icon" onclick="showLore('Enhancement Stone', 'Epic', 'A basic stone used to enhance equipment power. Cannot increase seal count.', 'Dropped From:\n- Manticore Nest Normal/Hard\n- Apocalypse Nest Normal/Hard')">
                     <h3>Enhancement Stone</h3>
                     <div class="price">Rp 1.000 / Stack</div>
-                    <div class="stock">Stock: <span id="stok-stone">Loading...</span></div>
-                    <div class="input-group"><input type="number" id="qty-stone" value="1" min="1"></div>
-                    <button class="buy-btn" onclick="addToCart('stone', 'Enhancement Stone', 1000)">+ ADD TO CART</button>
+                    <div class="stock">Stock: <span id="stok-Enhancement Stone">Loading...</span></div>
+                    <div class="input-group"><input type="number" id="qty-Enhancement Stone" value="1" min="1"></div>
+                    <button class="buy-btn" onclick="addToCart('Enhancement Stone', 'Enhancement Stone', 1000)">+ ADD TO CART</button>
                 </div>
 
                 <div class="item-card theme-red">
-                    <div class="badge-hot">HOT ITEM</div>
                     <img src="icon_energy.jpg" class="item-icon" onclick="showLore('Energy Catalyst', 'Legend', 'A rare catalyst brimming with mysterious energy. Crucial for high-tier crafting.', 'Dropped From:\n- Manticore Nest Hell')">
                     <h3>Energy Catalyst</h3>
                     <div class="price">Rp 5.000 / Stack</div>
-                    <div class="stock">Stock: <span id="stok-energy">Loading...</span></div>
-                    <div class="input-group"><input type="number" id="qty-energy" value="1" min="1"></div>
-                    <button class="buy-btn" onclick="addToCart('energy', 'Energy Catalyst', 5000)">+ ADD TO CART</button>
+                    <div class="stock">Stock: <span id="stok-Energy Catalyst">Loading...</span></div>
+                    <div class="input-group"><input type="number" id="qty-Energy Catalyst" value="1" min="1"></div>
+                    <button class="buy-btn" onclick="addToCart('Energy Catalyst', 'Energy Catalyst', 5000)">+ ADD TO CART</button>
                 </div>
 
                 <div class="item-card theme-blue">
                     <img src="icon_core.jpg" class="item-icon" alt="Stabilized Core" onclick="showLore('Stabilized Core', 'Ancient', 'A core that prevents equipment degradation when enhancing.', 'Dropped From:\n- Manticore/Apocalypse Nest')">
                     <h3>Stabilized Core</h3>
                     <div class="price">Rp 3.000 / Stack</div>
-                    <div class="stock">Stock: <span id="stok-core">Loading...</span></div>
-                    <div class="input-group"><input type="number" id="qty-core" value="1" min="1"></div>
-                    <button class="buy-btn" onclick="addToCart('core', 'Stabilized Core', 3000)">+ ADD TO CART</button>
+                    <div class="stock">Stock: <span id="stok-Stabilized Core">Loading...</span></div>
+                    <div class="input-group"><input type="number" id="qty-Stabilized Core" value="1" min="1"></div>
+                    <button class="buy-btn" onclick="addToCart('Stabilized Core', 'Stabilized Core', 3000)">+ ADD TO CART</button>
+                </div>
+            </div>
+        </div>
+
+        <div id="acc_materials" class="page-section">
+            <div class="grid-container">
+                <div class="item-card theme-green">
+                    <img src="icon_faint_dust.jpg" class="item-icon" alt="Faint Accessory Dust" onclick="showLore('Faint Accessory Dust', 'Magic', 'Material radiated by accessory energy.\nFor Tier 1-3.', 'Obtained from:\n- Various Lvl Activities')">
+                    <h3>Faint Accessory Dust</h3>
+                    <div class="price">Rp 4.000 / Stack</div>
+                    <div class="stock">Stock: <span id="stok-Faint Accessory Dust">Loading...</span></div>
+                    <div class="input-group"><input type="number" id="qty-Faint Accessory Dust" value="1" min="1"></div>
+                    <button class="buy-btn" onclick="addToCart('Faint Accessory Dust', 'Faint Accessory Dust', 4000)">+ ADD TO CART</button>
                 </div>
 
                 <div class="item-card theme-rare">
-                    <img src="icon_charm.jpg" class="item-icon" alt="Polished Charm Fragment" onclick="showLore('Polished Charm Fragment', 'Rare', 'Used to craft and polish high-grade charms.', 'Dropped From:\n- Various High-Level Nests')">
+                    <img src="icon_charm.jpg" class="item-icon" alt="Polished Charm Fragment" onclick="showLore('Polished Charm Fragment', 'Rare', 'Used to craft and polish high-grade charms.\nFor Tier 4-5.', 'Dropped From:\n- Various High-Level Nests')">
                     <h3>Polished Charm Fragment</h3>
                     <div class="price">Rp 10.000 / Stack</div>
-                    <div class="stock">Stock: <span id="stok-charm_frag">Loading...</span></div>
-                    <div class="input-group"><input type="number" id="qty-charm_frag" value="1" min="1"></div>
-                    <button class="buy-btn" onclick="addToCart('charm_frag', 'Polished Charm Fragment', 10000)">+ ADD TO CART</button>
+                    <div class="stock">Stock: <span id="stok-Polished Charm Fragment">Loading...</span></div>
+                    <div class="input-group"><input type="number" id="qty-Polished Charm Fragment" value="1" min="1"></div>
+                    <button class="buy-btn" onclick="addToCart('Polished Charm Fragment', 'Polished Charm Fragment', 10000)">+ ADD TO CART</button>
+                </div>
+
+                <div class="item-card theme-orange">
+                    <img src="icon_sigil.jpg" class="item-icon" alt="Resonant Sigil Piece" onclick="showLore('Resonant Sigil Piece', 'Epic', 'A piece of a sigil resonating with strong magic.\nFor Tier 6-7.', 'Dropped From:\n- Mid-Level Nests')">
+                    <h3>Resonant Sigil Piece</h3>
+                    <div class="price">Rp 8.000 / Stack</div>
+                    <div class="stock">Stock: <span id="stok-Resonant Sigil Piece">Loading...</span></div>
+                    <div class="input-group"><input type="number" id="qty-Resonant Sigil Piece" value="1" min="1"></div>
+                    <button class="buy-btn" onclick="addToCart('Resonant Sigil Piece', 'Resonant Sigil Piece', 8000)">+ ADD TO CART</button>
                 </div>
 
                 <div class="item-card theme-purple">
-                    <img src="icon_mystic.jpg" class="item-icon" alt="Mystic Accessory Core" onclick="showLore('Mystic Accessory Core', 'Epic', 'A core radiating mystic energy, used for upgrading accessories.', 'Dropped From:\n- Abyss & Nests')">
+                    <img src="icon_mystic.jpg" class="item-icon" alt="Mystic Accessory Core" onclick="showLore('Mystic Accessory Core', 'Epic', 'A core radiating mystic energy, used for upgrading accessories.\nFor Tier 8.', 'Dropped From:\n- Abyss & Nests')">
                     <h3>Mystic Accessory Core</h3>
                     <div class="price">Rp 6.000 / Stack</div>
-                    <div class="stock">Stock: <span id="stok-mystic_core">Loading...</span></div>
-                    <div class="input-group"><input type="number" id="qty-mystic_core" value="1" min="1"></div>
-                    <button class="buy-btn" onclick="addToCart('mystic_core', 'Mystic Accessory Core', 6000)">+ ADD TO CART</button>
+                    <div class="stock">Stock: <span id="stok-Mystic Accessory Core">Loading...</span></div>
+                    <div class="input-group"><input type="number" id="qty-Mystic Accessory Core" value="1" min="1"></div>
+                    <button class="buy-btn" onclick="addToCart('Mystic Accessory Core', 'Mystic Accessory Core', 6000)">+ ADD TO CART</button>
+                </div>
+
+                <div class="item-card theme-red">
+                    <img src="icon_relic.jpg" class="item-icon" alt="Refined Relic Shard" onclick="showLore('Refined Relic Shard', 'Legend', 'A highly refined shard from an ancient relic.\nFor Tier 9-10.', 'Dropped From:\n- High-Level Nests & Raids')">
+                    <h3>Refined Relic Shard</h3>
+                    <div class="price">Rp 9.000 / Stack</div>
+                    <div class="stock">Stock: <span id="stok-Refined Relic Shard">Loading...</span></div>
+                    <div class="input-group"><input type="number" id="qty-Refined Relic Shard" value="1" min="1"></div>
+                    <button class="buy-btn" onclick="addToCart('Refined Relic Shard', 'Refined Relic Shard', 9000)">+ ADD TO CART</button>
+                </div>
+
+                <div class="item-card theme-blue">
+                    <img src="icon_essence.jpg" class="item-icon" alt="Sovereign Accessory Essence" onclick="showLore('Sovereign Accessory Essence', 'Ancient', 'The ultimate essence for accessory perfection.\nFor Tier 11-12.', 'Dropped From:\n- Hardcore Raids & Hell Nests')">
+                    <h3>Sovereign Accessory Essence</h3>
+                    <div class="price">Rp 9.000 / Stack</div>
+                    <div class="stock">Stock: <span id="stok-Sovereign Accessory Essence">Loading...</span></div>
+                    <div class="input-group"><input type="number" id="qty-Sovereign Accessory Essence" value="1" min="1"></div>
+                    <button class="buy-btn" onclick="addToCart('Sovereign Accessory Essence', 'Sovereign Accessory Essence', 9000)">+ ADD TO CART</button>
                 </div>
             </div>
         </div>
@@ -239,25 +248,25 @@
                     <img src="icon_mount.jpg" class="item-icon" onclick="showLore('Mount Coupon', 'Ancient', 'Exchange this at the NPC for an exclusive Insane Mount.', 'Special Event / Cash Shop')">
                     <h3>Mount Coupon</h3>
                     <div class="price">Rp 5.000 / Pcs</div>
-                    <div class="stock">Stock: <span id="stok-mount">Loading...</span></div>
-                    <div class="input-group"><input type="number" id="qty-mount" value="1" min="1"></div>
-                    <button class="buy-btn" onclick="addToCart('mount', 'Mount Coupon', 5000)">+ ADD TO CART</button>
+                    <div class="stock">Stock: <span id="stok-Mount Coupon">Loading...</span></div>
+                    <div class="input-group"><input type="number" id="qty-Mount Coupon" value="1" min="1"></div>
+                    <button class="buy-btn" onclick="addToCart('Mount Coupon', 'Mount Coupon', 5000)">+ ADD TO CART</button>
                 </div>
                 <div class="item-card theme-blue">
                     <img src="icon_pet.jpg" class="item-icon" onclick="showLore('Pet Coupon', 'Ancient', 'Exchange this for a loyal companion.', 'Special Event')">
                     <h3>Pet Coupon</h3>
                     <div class="price">Rp 5.000 / Pcs</div>
-                    <div class="stock">Stock: <span id="stok-pet">Loading...</span></div>
-                    <div class="input-group"><input type="number" id="qty-pet" value="1" min="1"></div>
-                    <button class="buy-btn" onclick="addToCart('pet', 'Pet Coupon', 5000)">+ ADD TO CART</button>
+                    <div class="stock">Stock: <span id="stok-Pet Coupon">Loading...</span></div>
+                    <div class="input-group"><input type="number" id="qty-Pet Coupon" value="1" min="1"></div>
+                    <button class="buy-btn" onclick="addToCart('Pet Coupon', 'Pet Coupon', 5000)">+ ADD TO CART</button>
                 </div>
                 <div class="item-card theme-blue">
                     <img src="icon_spirit.jpg" class="item-icon">
                     <h3>Spirit Coupon</h3>
                     <div class="price">Rp 5.000 / Pcs</div>
-                    <div class="stock">Stock: <span id="stok-spirit">Loading...</span></div>
-                    <div class="input-group"><input type="number" id="qty-spirit" value="1" min="1"></div>
-                    <button class="buy-btn" onclick="addToCart('spirit', 'Spirit Coupon', 5000)">+ ADD TO CART</button>
+                    <div class="stock">Stock: <span id="stok-Spirit Coupon">Loading...</span></div>
+                    <div class="input-group"><input type="number" id="qty-Spirit Coupon" value="1" min="1"></div>
+                    <button class="buy-btn" onclick="addToCart('Spirit Coupon', 'Spirit Coupon', 5000)">+ ADD TO CART</button>
                 </div>
             </div>
         </div>
@@ -268,29 +277,23 @@
                     <img src="icon_gold.jpg" class="item-icon" style="width: 120px; height: 120px;">
                     <h3>Gold Currency</h3>
                     <div class="price" style="font-size: 1.5em; color: white;">Rp 6.000 / 1m</div>
-                    <div class="stock" style="margin-bottom: 20px;">Stock: <span id="stok-gold">Loading...</span>m</div>
-                    <div class="input-group"><input type="number" id="qty-gold" value="1" min="1"></div>
-                    <button class="buy-btn" style="padding: 15px; font-size: 1.2em;" onclick="addToCart('gold', 'Gold (1m)', 6000)">+ ADD TO CART</button>
+                    <div class="stock" style="margin-bottom: 20px;">Stock: <span id="stok-Gold (1m)">Loading...</span>m</div>
+                    <div class="input-group"><input type="number" id="qty-Gold (1m)" value="1" min="1"></div>
+                    <button class="buy-btn" style="padding: 15px; font-size: 1.2em;" onclick="addToCart('Gold (1m)', 'Gold (1m)', 6000)">+ ADD TO CART</button>
                 </div>
             </div>
         </div>
 
     </div>
 
-    <div class="cart-fab" onclick="toggleCart()">
-        🛒<div class="cart-badge" id="cart-count">0</div>
-    </div>
-
-    <div class="history-fab" onclick="toggleHistory()" title="Transaction History">
-        📜
-    </div>
+    <div class="cart-fab" onclick="toggleCart()">🛒<div class="cart-badge" id="cart-count">0</div></div>
+    <div class="history-fab" onclick="toggleHistory()" title="Transaction History">📜</div>
 
     <div class="modal-overlay" id="history-modal">
         <div class="modal-content" style="border-color: var(--primary-gold);">
             <span class="close-btn" onclick="toggleHistory()">&times;</span>
             <h2 style="color: var(--primary-gold); margin-top: 0; display: flex; align-items: center; gap: 10px;">📜 Live History</h2>
-            <div id="history-items-container">
-                </div>
+            <div id="history-items-container"></div>
         </div>
     </div>
 
@@ -343,31 +346,49 @@
 
         const aliasNames = ['Monogram', 'Bigram', 'Trigram', 'Tetragram', 'Pentagram', 'Hexagram', 'Heptagram', 'Octagram', 'Enneagram', 'Decagram'];
 
-        // 1. FIREBASE SYNC: STOK BARANG
+        // 1. FIREBASE SYNC: STOCK DATA 
         const stokRef = ref(db, 'stok_tatsuya');
         onValue(stokRef, (snapshot) => {
             const data = snapshot.val();
             if(data) {
                 stokRealtime = data;
                 
-                // Mencegah error stok undefined kalau baru di tambahin ke HTML
-                if(stokRealtime.core === undefined) stokRealtime.core = 480; 
-                if(stokRealtime.charm_frag === undefined) stokRealtime.charm_frag = 100;
-                if(stokRealtime.mystic_core === undefined) stokRealtime.mystic_core = 100;
-                if(stokRealtime.void_shard === undefined) stokRealtime.void_shard = 324;
-                if(stokRealtime.dark_dust === undefined) stokRealtime.dark_dust = 324;
-                if(stokRealtime.void_seed === undefined) stokRealtime.void_seed = 324;
-                if(stokRealtime.singularity === undefined) stokRealtime.singularity = 324;
-                if(stokRealtime.rift_residue === undefined) stokRealtime.rift_residue = 100;
+                // Pengecekan item (mencegah error loading)
+                if(stokRealtime['Refinement Dust'] === undefined) stokRealtime['Refinement Dust'] = 0; 
+                if(stokRealtime['Enhancement Stone'] === undefined) stokRealtime['Enhancement Stone'] = 0;
+                if(stokRealtime['Energy Catalyst'] === undefined) stokRealtime['Energy Catalyst'] = 0;
+                if(stokRealtime['Stabilized Core'] === undefined) stokRealtime['Stabilized Core'] = 0;
+                if(stokRealtime['Faint Accessory Dust'] === undefined) stokRealtime['Faint Accessory Dust'] = 0;
+                if(stokRealtime['Polished Charm Fragment'] === undefined) stokRealtime['Polished Charm Fragment'] = 0;
+                if(stokRealtime['Resonant Sigil Piece'] === undefined) stokRealtime['Resonant Sigil Piece'] = 0;
+                if(stokRealtime['Mystic Accessory Core'] === undefined) stokRealtime['Mystic Accessory Core'] = 0;
+                if(stokRealtime['Refined Relic Shard'] === undefined) stokRealtime['Refined Relic Shard'] = 0;
+                if(stokRealtime['Sovereign Accessory Essence'] === undefined) stokRealtime['Sovereign Accessory Essence'] = 0;
+                if(stokRealtime['Mount Coupon'] === undefined) stokRealtime['Mount Coupon'] = 0;
+                if(stokRealtime['Pet Coupon'] === undefined) stokRealtime['Pet Coupon'] = 0;
+                if(stokRealtime['Spirit Coupon'] === undefined) stokRealtime['Spirit Coupon'] = 0;
+                if(stokRealtime['Gold (1m)'] === undefined) stokRealtime['Gold (1m)'] = 0;
 
-                const elements = ['refinement', 'stone', 'energy', 'core', 'charm_frag', 'mystic_core', 'mount', 'pet', 'spirit', 'gold', 'singularity', 'void_shard', 'dark_dust', 'void_seed', 'rift_residue'];
-                elements.forEach(id => {
-                    if(document.getElementById(`stok-${id}`)) {
-                        document.getElementById(`stok-${id}`).innerText = stokRealtime[id];
+                const displayedItems = [
+                    'Refinement Dust', 'Enhancement Stone', 'Energy Catalyst', 'Stabilized Core',
+                    'Faint Accessory Dust', 'Polished Charm Fragment', 'Resonant Sigil Piece', 
+                    'Mystic Accessory Core', 'Refined Relic Shard', 'Sovereign Accessory Essence',
+                    'Mount Coupon', 'Pet Coupon', 'Spirit Coupon', 'Gold (1m)'
+                ];
+
+                displayedItems.forEach(itemName => {
+                    const stokElement = document.getElementById(`stok-${itemName}`);
+                    if(stokElement) {
+                        stokElement.innerText = stokRealtime[itemName];
                     }
                 });
             } else {
-                set(stokRef, { refinement: 172, stone: 255, core: 480, charm_frag: 100, mystic_core: 100, mount: 10, pet: 2, spirit: 1, energy: 49, gold: 40, singularity: 324, void_shard: 324, dark_dust: 324, void_seed: 324, rift_residue: 100 });
+                set(stokRef, { 
+                    'Refinement Dust': 100, 'Enhancement Stone': 100, 'Energy Catalyst': 50, 'Stabilized Core': 100,
+                    'Faint Accessory Dust': 80, 'Polished Charm Fragment': 23, 'Resonant Sigil Piece': 10,
+                    'Mystic Accessory Core': 51, 'Refined Relic Shard': 10, 'Sovereign Accessory Essence': 10,
+                    'Mount Coupon': 10, 'Pet Coupon': 2, 'Spirit Coupon': 1, 'Gold (1m)': 40
+                });
             }
         });
 
@@ -382,59 +403,28 @@
                     "💰 Player <span>Monogram</span> successfully secured <span>10m Gold</span>!",
                     "🔥 Player <span>Bigram</span> bought <span>20 Stack Energy Catalyst</span>!",
                     "✨ Player <span>Trigram</span> just withdrew <span>30 Stack Refinement Dust</span>!",
-                    "☠️ Player <span>Tetragram</span> obtained <span>3 Stack Unstable Singularity</span>!",
                     "💎 Player <span>Pentagram</span> snatched <span>40 Stack Refinement Dust</span>!",
                     "⚡ Player <span>Hexagram</span> successfully secured <span>30 Stack Enhancement Stone</span>!",
                     "🔮 Player <span>Heptagram</span> just withdrew <span>15 Stack Polished Charm Fragment</span>!"
                 ];
                 set(historyRef, historyData);
             }
-            
-            if(document.getElementById('history-modal').style.display === 'flex') {
-                renderHistory();
-            }
+            if(document.getElementById('history-modal').style.display === 'flex') renderHistory();
         });
 
-        // CUSTOM ALERT FUNCTION
         window.showCustomAlert = function(message) {
             document.getElementById('custom-alert-text').innerHTML = message;
             document.getElementById('custom-alert-modal').style.display = 'flex';
         }
-        window.closeCustomAlert = function() {
-            document.getElementById('custom-alert-modal').style.display = 'none';
-        }
+        window.closeCustomAlert = function() { document.getElementById('custom-alert-modal').style.display = 'none'; }
 
-        // NAVIGASI TABS
         window.showPage = function(pageId, btn) {
             document.querySelectorAll('.page-section').forEach(s => s.classList.remove('active'));
             document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
             document.getElementById(pageId).classList.add('active');
             btn.classList.add('active');
-            
-            if(pageId !== 'evolution') {
-                closeTierContent('9'); 
-            }
         }
 
-        // NAVIGASI SUB-MENU TIER
-        window.openTierContent = function(tierId) {
-            const tierMenus = document.getElementById('tier-menus');
-            const tierContent = document.getElementById('tier-content-' + tierId);
-            if(tierMenus && tierContent) {
-                tierMenus.style.display = 'none';
-                tierContent.style.display = 'block';
-            }
-        }
-        window.closeTierContent = function(tierId) {
-            const tierMenus = document.getElementById('tier-menus');
-            const tierContent = document.getElementById('tier-content-' + tierId);
-            if(tierMenus && tierContent) {
-                tierMenus.style.display = 'block';
-                tierContent.style.display = 'none';
-            }
-        }
-
-        // KERANJANG BELANJA (CART)
         window.addToCart = function(id, name, price) {
             const qtyInput = document.getElementById(`qty-${id}`).value;
             const qty = parseInt(qtyInput);
@@ -496,26 +486,17 @@
             modal.style.display = modal.style.display === 'flex' ? 'none' : 'flex';
         }
 
-        // RIWAYAT TRANSAKSI (HISTORY MODAL)
         window.toggleHistory = function() {
             const modal = document.getElementById('history-modal');
-            if(modal.style.display === 'flex') {
-                modal.style.display = 'none';
-            } else {
-                modal.style.display = 'flex';
-                renderHistory();
-            }
+            if(modal.style.display === 'flex') { modal.style.display = 'none'; } else { modal.style.display = 'flex'; renderHistory(); }
         }
 
         function renderHistory() {
             const container = document.getElementById('history-items-container');
             container.innerHTML = '';
-            for(let i = historyData.length - 1; i >= 0; i--) {
-                container.innerHTML += `<div class="history-item">${historyData[i]}</div>`;
-            }
+            for(let i = historyData.length - 1; i >= 0; i--) { container.innerHTML += `<div class="history-item">${historyData[i]}</div>`; }
         }
 
-        // CHECKOUT & UPDATE FIREBASE HISTORY
         window.checkoutOrder = function() {
             if(Object.keys(cart).length === 0) return showCustomAlert("Your cart is empty, add some items first!");
 
@@ -552,9 +533,7 @@
             const teleText = encodeURIComponent(`🚨 *NEW ORDER RECEIVED!* 🚨\n\n👤 IGN: ${ign}\n💰 Total: Rp ${grandTotal.toLocaleString('id-ID')}\n\nWake up and secure the bag! Check Discord now.`);
             const teleUrl = `https://api.telegram.org/bot${teleToken}/sendMessage?chat_id=${teleChatId}&text=${teleText}&parse_mode=Markdown`;
 
-            fetch(teleUrl)
-                .then(response => console.log("Telegram notification sent."))
-                .catch(err => console.error("System error:", err));
+            fetch(teleUrl).catch(err => console.error("System error:", err));
                 
                 let buyerAlias = aliasNames[historyData.length % 10]; 
                 let itemsString = boughtItemsArray.join(" & ");
@@ -568,7 +547,6 @@
             }).catch(() => showCustomAlert("Webhook notification failed, but stock is safe."));
         }
 
-        // MODAL LORE IN-GAME
         window.showLore = function(title, rarity, desc, drop) {
             document.getElementById('lore-title').innerText = title;
             document.getElementById('lore-rarity').innerText = `Rarity: ${rarity}`;
