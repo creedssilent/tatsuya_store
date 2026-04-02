@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="id">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -42,6 +42,10 @@
 
         .ign-badge { display: inline-block; background: linear-gradient(90deg, transparent, rgba(0, 240, 255, 0.2), transparent); border: 1px solid var(--primary-cyan); color: var(--primary-cyan); padding: 5px 25px; border-radius: 20px; font-size: 1.2em; font-weight: bold; letter-spacing: 2px; text-shadow: 0 0 8px var(--primary-cyan); margin-top: 15px; }
         .server-info { color: var(--primary-gold); font-size: 1em; letter-spacing: 2px; margin-top: 15px; text-shadow: 0 0 5px black; }
+        
+        /* Promo Badge Text */
+        .promo-text { color: #fbbf24; font-size: 0.95em; font-weight: bold; margin-top: 8px; text-shadow: 0 0 8px #f97316; }
+        .referral-text { color: #10b981; font-size: 0.95em; margin-top: 5px; font-weight: bold; padding: 5px; background: rgba(0,0,0,0.3); border-radius: 5px; display: inline-block; }
 
         /* --- NAVBAR --- */
         .navbar { display: flex; justify-content: center; background: rgba(11, 19, 43, 0.95); padding: 15px; border-top: 1px solid rgba(0, 240, 255, 0.3); border-bottom: 2px solid var(--primary-cyan); box-shadow: 0 5px 20px rgba(0, 240, 255, 0.2); flex-wrap: wrap; gap: 15px; margin-bottom: 30px; position: sticky; top: 0; z-index: 50; }
@@ -69,22 +73,11 @@
         .buy-btn { border: none; padding: 12px; font-size: 1.1em; font-weight: bold; border-radius: 6px; cursor: pointer; width: 100%; text-transform: uppercase; transition: 0.3s; color: white; }
 
         /* --- THEMES WARNA ITEM --- */
-        /* ANCIENT (Cyan/Biru Terang) */
         .theme-blue { border-color: rgba(0, 240, 255, 0.4); } .theme-blue .item-icon { border-color: #00f0ff; box-shadow: 0 0 15px rgba(0, 240, 255, 0.5); } .theme-blue h3 { color: #fff; text-shadow: 0 0 8px #00f0ff; } .theme-blue .price { color: #67e8f9; } .theme-blue .stock span { color: #00f0ff; } .theme-blue input { border-color: #00f0ff; } .theme-blue .buy-btn { background: linear-gradient(45deg, #0284c7, #0ea5e9); } .theme-blue .buy-btn:hover { background: #0ea5e9; box-shadow: 0 0 15px #00f0ff; transform: scale(1.02); }
-        
-        /* RARE (Biru Tua/Deep Blue) */
         .theme-rare { border-color: rgba(59, 130, 246, 0.4); } .theme-rare .item-icon { border-color: #3b82f6; box-shadow: 0 0 15px rgba(59, 130, 246, 0.5); } .theme-rare h3 { color: #fff; text-shadow: 0 0 8px #3b82f6; } .theme-rare .price { color: #93c5fd; } .theme-rare .stock span { color: #3b82f6; } .theme-rare input { border-color: #3b82f6; } .theme-rare .buy-btn { background: linear-gradient(45deg, #1d4ed8, #3b82f6); } .theme-rare .buy-btn:hover { background: #3b82f6; box-shadow: 0 0 15px #3b82f6; transform: scale(1.02); }
-
-        /* UNIQUE (Ungu/Pinkish) */
         .theme-purple { border-color: rgba(168, 85, 247, 0.4); } .theme-purple .item-icon { border-color: #a855f7; box-shadow: 0 0 15px rgba(168, 85, 247, 0.5); } .theme-purple h3 { color: #fff; text-shadow: 0 0 8px #a855f7; } .theme-purple .price { color: #d8b4fe; } .theme-purple .stock span { color: #a855f7; } .theme-purple input { border-color: #a855f7; } .theme-purple .buy-btn { background: linear-gradient(45deg, #7e22ce, #a855f7); } .theme-purple .buy-btn:hover { background: #9333ea; box-shadow: 0 0 15px #a855f7; transform: scale(1.02); }
-        
-        /* EPIC (Orange/Emas) */
         .theme-orange { border-color: rgba(249, 115, 22, 0.4); } .theme-orange .item-icon { border-color: #f97316; box-shadow: 0 0 15px rgba(249, 115, 22, 0.5); } .theme-orange h3 { color: #fff; text-shadow: 0 0 8px #f97316; } .theme-orange .price { color: #fdba74; } .theme-orange .stock span { color: #f97316; } .theme-orange input { border-color: #f97316; } .theme-orange .buy-btn { background: linear-gradient(45deg, #c2410c, #ea580c); } .theme-orange .buy-btn:hover { background: #ea580c; box-shadow: 0 0 15px #f97316; transform: scale(1.02); }
-        
-        /* LEGEND (Merah) */
         .theme-red { border-color: rgba(244, 63, 94, 0.4); } .theme-red .item-icon { border-color: #f43f5e; box-shadow: 0 0 15px rgba(244, 63, 94, 0.5); } .theme-red h3 { color: #fff; text-shadow: 0 0 8px #f43f5e; } .theme-red .price { color: #fda4af; } .theme-red .stock span { color: #f43f5e; } .theme-red input { border-color: #f43f5e; } .theme-red .buy-btn { background: linear-gradient(45deg, #be123c, #e11d48); } .theme-red .buy-btn:hover { background: #e11d48; box-shadow: 0 0 15px #f43f5e; transform: scale(1.02); }
-        
-        /* GOLD ITEM */
         .theme-gold { border-color: rgba(251, 191, 36, 0.4); } .theme-gold .item-icon { border-color: #fbbf24; box-shadow: 0 0 15px rgba(251, 191, 36, 0.5); } .theme-gold h3 { color: #fbbf24; text-shadow: 0 0 8px #fbbf24; } .theme-gold .price { color: #fff; } .theme-gold .stock span { color: #fbbf24; } .theme-gold input { border-color: #fbbf24; } .theme-gold .buy-btn { background: linear-gradient(45deg, #b45309, #d97706); } .theme-gold .buy-btn:hover { background: #d97706; box-shadow: 0 0 15px #fbbf24; transform: scale(1.02); }
 
         /* --- FLOATING BUTTONS (CART KANAN, HISTORY KIRI) --- */
@@ -167,7 +160,11 @@
         </div>
         <div class="ign-badge">IGN : TATSUYA</div>
         <div class="server-info">INSANE DRAGON NEST - TRUSTED SELLER</div>
-        <div style="color: #cbd5e1; font-size: 0.9em; margin-top: 5px;">Payment: DANA</div>
+        <div style="color: #cbd5e1; font-size: 0.9em; margin-top: 5px;">Payment: DANA / QRIS</div>
+        <div class="promo-text">🔥 SPECIAL PROMO: April 2 - April 16, 2026 (While Stocks Last) 🔥</div>
+        <div class="referral-text">
+            Top up at <a href="https://insanedn.com/" target="_blank" style="color: var(--primary-cyan); text-decoration: none;">insanedn.com</a> using Referral Code: <span style="background: rgba(0,0,0,0.5); padding: 2px 6px; border-radius: 4px; border: 1px dashed #10b981;">TATSUYA</span> to get 10% BONUS!
+        </div>
     </header>
 
     <nav class="navbar">
@@ -182,56 +179,56 @@
                 <div class="item-card theme-purple">
                     <img src="icon_refinement.jpg" class="item-icon" onclick="showLore('Refinement Dust', 'Unique', 'Material used for basic refining of equipment.', 'Dropped From:\n- Manticore Nest\n- Apocalypse Nest')">
                     <h3>Refinement Dust</h3>
-                    <div class="price">Rp 5.000 / Stack</div>
-                    <div class="stock">Ready: <span id="stok-refinement">Loading...</span></div>
+                    <div class="price">Rp 3.000 / Stack</div>
+                    <div class="stock">Stock: <span id="stok-refinement">Loading...</span></div>
                     <div class="input-group"><input type="number" id="qty-refinement" value="1" min="1"></div>
-                    <button class="buy-btn" onclick="addToCart('refinement', 'Refinement Dust', 5000)">+ Keranjang</button>
+                    <button class="buy-btn" onclick="addToCart('refinement', 'Refinement Dust', 3000)">+ ADD TO CART</button>
                 </div>
 
                 <div class="item-card theme-orange">
                     <img src="icon_stone.jpg" class="item-icon" onclick="showLore('Enhancement Stone', 'Epic', 'A basic stone used to enhance equipment power. Cannot increase seal count.', 'Dropped From:\n- Manticore Nest Normal/Hard\n- Apocalypse Nest Normal/Hard')">
                     <h3>Enhancement Stone</h3>
-                    <div class="price">Rp 5.000 / 2 Stack</div>
-                    <div class="stock">Ready: <span id="stok-stone">Loading...</span> Pkt</div>
+                    <div class="price">Rp 1.000 / Stack</div>
+                    <div class="stock">Stock: <span id="stok-stone">Loading...</span></div>
                     <div class="input-group"><input type="number" id="qty-stone" value="1" min="1"></div>
-                    <button class="buy-btn" onclick="addToCart('stone', 'Enhancement Stone Pkt', 5000)">+ Keranjang</button>
+                    <button class="buy-btn" onclick="addToCart('stone', 'Enhancement Stone', 1000)">+ ADD TO CART</button>
                 </div>
 
                 <div class="item-card theme-red">
                     <div class="badge-hot">HOT ITEM</div>
                     <img src="icon_energy.jpg" class="item-icon" onclick="showLore('Energy Catalyst', 'Legend', 'A rare catalyst brimming with mysterious energy. Crucial for high-tier crafting.', 'Dropped From:\n- Manticore Nest Hell')">
                     <h3>Energy Catalyst</h3>
-                    <div class="price">Rp 11.000 / Stack</div>
-                    <div class="stock">Ready: <span id="stok-energy">Loading...</span></div>
+                    <div class="price">Rp 5.000 / Stack</div>
+                    <div class="stock">Stock: <span id="stok-energy">Loading...</span></div>
                     <div class="input-group"><input type="number" id="qty-energy" value="1" min="1"></div>
-                    <button class="buy-btn" onclick="addToCart('energy', 'Energy Catalyst', 11000)">+ Keranjang</button>
+                    <button class="buy-btn" onclick="addToCart('energy', 'Energy Catalyst', 5000)">+ ADD TO CART</button>
                 </div>
 
                 <div class="item-card theme-blue">
                     <img src="icon_core.jpg" class="item-icon" alt="Stabilized Core" onclick="showLore('Stabilized Core', 'Ancient', 'A core that prevents equipment degradation when enhancing.', 'Dropped From:\n- Manticore/Apocalypse Nest')">
                     <h3>Stabilized Core</h3>
-                    <div class="price">Rp 7.000 / Stack</div>
-                    <div class="stock">Ready: <span id="stok-core">Loading...</span></div>
+                    <div class="price">Rp 3.000 / Stack</div>
+                    <div class="stock">Stock: <span id="stok-core">Loading...</span></div>
                     <div class="input-group"><input type="number" id="qty-core" value="1" min="1"></div>
-                    <button class="buy-btn" onclick="addToCart('core', 'Stabilized Core', 7000)">+ Keranjang</button>
+                    <button class="buy-btn" onclick="addToCart('core', 'Stabilized Core', 3000)">+ ADD TO CART</button>
                 </div>
 
                 <div class="item-card theme-rare">
                     <img src="icon_charm.jpg" class="item-icon" alt="Polished Charm Fragment" onclick="showLore('Polished Charm Fragment', 'Rare', 'Used to craft and polish high-grade charms.', 'Dropped From:\n- Various High-Level Nests')">
                     <h3>Polished Charm Fragment</h3>
-                    <div class="price">Rp 12.000 / Stack</div>
-                    <div class="stock">Ready: <span id="stok-charm_frag">Loading...</span></div>
+                    <div class="price">Rp 10.000 / Stack</div>
+                    <div class="stock">Stock: <span id="stok-charm_frag">Loading...</span></div>
                     <div class="input-group"><input type="number" id="qty-charm_frag" value="1" min="1"></div>
-                    <button class="buy-btn" onclick="addToCart('charm_frag', 'Polished Charm Fragment', 12000)">+ Keranjang</button>
+                    <button class="buy-btn" onclick="addToCart('charm_frag', 'Polished Charm Fragment', 10000)">+ ADD TO CART</button>
                 </div>
 
                 <div class="item-card theme-purple">
                     <img src="icon_mystic.jpg" class="item-icon" alt="Mystic Accessory Core" onclick="showLore('Mystic Accessory Core', 'Epic', 'A core radiating mystic energy, used for upgrading accessories.', 'Dropped From:\n- Abyss & Nests')">
                     <h3>Mystic Accessory Core</h3>
-                    <div class="price">Rp 11.000 / Stack</div>
-                    <div class="stock">Ready: <span id="stok-mystic_core">Loading...</span></div>
+                    <div class="price">Rp 6.000 / Stack</div>
+                    <div class="stock">Stock: <span id="stok-mystic_core">Loading...</span></div>
                     <div class="input-group"><input type="number" id="qty-mystic_core" value="1" min="1"></div>
-                    <button class="buy-btn" onclick="addToCart('mystic_core', 'Mystic Accessory Core', 11000)">+ Keranjang</button>
+                    <button class="buy-btn" onclick="addToCart('mystic_core', 'Mystic Accessory Core', 6000)">+ ADD TO CART</button>
                 </div>
             </div>
         </div>
@@ -241,26 +238,26 @@
                 <div class="item-card theme-blue">
                     <img src="icon_mount.jpg" class="item-icon" onclick="showLore('Mount Coupon', 'Ancient', 'Exchange this at the NPC for an exclusive Insane Mount.', 'Special Event / Cash Shop')">
                     <h3>Mount Coupon</h3>
-                    <div class="price">Rp 15.000</div>
-                    <div class="stock">Ready: <span id="stok-mount">Loading...</span></div>
+                    <div class="price">Rp 5.000 / Pcs</div>
+                    <div class="stock">Stock: <span id="stok-mount">Loading...</span></div>
                     <div class="input-group"><input type="number" id="qty-mount" value="1" min="1"></div>
-                    <button class="buy-btn" onclick="addToCart('mount', 'Mount Coupon', 15000)">+ Keranjang</button>
+                    <button class="buy-btn" onclick="addToCart('mount', 'Mount Coupon', 5000)">+ ADD TO CART</button>
                 </div>
                 <div class="item-card theme-blue">
                     <img src="icon_pet.jpg" class="item-icon" onclick="showLore('Pet Coupon', 'Ancient', 'Exchange this for a loyal companion.', 'Special Event')">
                     <h3>Pet Coupon</h3>
-                    <div class="price">Rp 15.000</div>
-                    <div class="stock">Ready: <span id="stok-pet">Loading...</span></div>
+                    <div class="price">Rp 5.000 / Pcs</div>
+                    <div class="stock">Stock: <span id="stok-pet">Loading...</span></div>
                     <div class="input-group"><input type="number" id="qty-pet" value="1" min="1"></div>
-                    <button class="buy-btn" onclick="addToCart('pet', 'Pet Coupon', 15000)">+ Keranjang</button>
+                    <button class="buy-btn" onclick="addToCart('pet', 'Pet Coupon', 5000)">+ ADD TO CART</button>
                 </div>
                 <div class="item-card theme-blue">
                     <img src="icon_spirit.jpg" class="item-icon">
                     <h3>Spirit Coupon</h3>
-                    <div class="price">Rp 15.000</div>
-                    <div class="stock">Ready: <span id="stok-spirit">Loading...</span></div>
+                    <div class="price">Rp 5.000 / Pcs</div>
+                    <div class="stock">Stock: <span id="stok-spirit">Loading...</span></div>
                     <div class="input-group"><input type="number" id="qty-spirit" value="1" min="1"></div>
-                    <button class="buy-btn" onclick="addToCart('spirit', 'Spirit Coupon', 15000)">+ Keranjang</button>
+                    <button class="buy-btn" onclick="addToCart('spirit', 'Spirit Coupon', 5000)">+ ADD TO CART</button>
                 </div>
             </div>
         </div>
@@ -270,9 +267,10 @@
                 <div class="item-card theme-gold" style="width: 100%; max-width: 400px;">
                     <img src="icon_gold.jpg" class="item-icon" style="width: 120px; height: 120px;">
                     <h3>Gold Currency</h3>
-                    <div class="price" style="font-size: 1.5em; color: white;">PM Price / Offer</div>
-                    <div class="stock" style="margin-bottom: 20px;">Ready: <span id="stok-gold">Loading...</span> Juta</div>
-                    <button class="buy-btn" style="padding: 15px; font-size: 1.2em;" onclick="tanyaGold()">NEGO VIA PM</button>
+                    <div class="price" style="font-size: 1.5em; color: white;">Rp 6.000 / 1m</div>
+                    <div class="stock" style="margin-bottom: 20px;">Stock: <span id="stok-gold">Loading...</span>m</div>
+                    <div class="input-group"><input type="number" id="qty-gold" value="1" min="1"></div>
+                    <button class="buy-btn" style="padding: 15px; font-size: 1.2em;" onclick="addToCart('gold', 'Gold (1m)', 6000)">+ ADD TO CART</button>
                 </div>
             </div>
         </div>
@@ -283,7 +281,7 @@
         🛒<div class="cart-badge" id="cart-count">0</div>
     </div>
 
-    <div class="history-fab" onclick="toggleHistory()" title="Riwayat Transaksi">
+    <div class="history-fab" onclick="toggleHistory()" title="Transaction History">
         📜
     </div>
 
@@ -299,12 +297,12 @@
     <div class="modal-overlay" id="cart-modal">
         <div class="modal-content">
             <span class="close-btn" onclick="toggleCart()">&times;</span>
-            <h2 style="color: var(--primary-cyan); margin-top: 0;">🛒 Keranjang Lu</h2>
+            <h2 style="color: var(--primary-cyan); margin-top: 0;">🛒 Your Cart</h2>
             <div id="cart-items-container">
-                <p style="color: #94a3b8; text-align: center;">Keranjang masih kosong bro.</p>
+                <p style="color: #94a3b8; text-align: center;">Your cart is empty.</p>
             </div>
             <div class="cart-total" id="cart-total-price">Total: Rp 0</div>
-            <button class="checkout-btn" onclick="checkoutOrder()">CHECKOUT SEKARANG</button>
+            <button class="checkout-btn" onclick="checkoutOrder()">CHECKOUT NOW</button>
         </div>
     </div>
 
@@ -381,13 +379,13 @@
                 historyData = data;
             } else {
                 historyData = [
-                    "💰 Player <span>Monogram</span> sukses mengamankan <span>10 Juta Gold</span>!",
-                    "🔥 Player <span>Bigram</span> telah memborong <span>20 Stack Energy Catalyst</span>!",
-                    "✨ Player <span>Trigram</span> baru saja menarik <span>30 Stack Refinement Dust</span>!",
-                    "☠️ Player <span>Tetragram</span> berhasil mendapatkan <span>3 Stack Unstable Singularity</span>!",
-                    "💎 Player <span>Pentagram</span> telah menyikat <span>40 Stack Refinement Dust</span>!",
-                    "⚡ Player <span>Hexagram</span> sukses mengamankan <span>30 Paket Enhancement Stone</span>!",
-                    "🔮 Player <span>Heptagram</span> baru saja menarik <span>15 Stack Polished Charm Fragment</span>!"
+                    "💰 Player <span>Monogram</span> successfully secured <span>10m Gold</span>!",
+                    "🔥 Player <span>Bigram</span> bought <span>20 Stack Energy Catalyst</span>!",
+                    "✨ Player <span>Trigram</span> just withdrew <span>30 Stack Refinement Dust</span>!",
+                    "☠️ Player <span>Tetragram</span> obtained <span>3 Stack Unstable Singularity</span>!",
+                    "💎 Player <span>Pentagram</span> snatched <span>40 Stack Refinement Dust</span>!",
+                    "⚡ Player <span>Hexagram</span> successfully secured <span>30 Stack Enhancement Stone</span>!",
+                    "🔮 Player <span>Heptagram</span> just withdrew <span>15 Stack Polished Charm Fragment</span>!"
                 ];
                 set(historyRef, historyData);
             }
@@ -414,11 +412,11 @@
             btn.classList.add('active');
             
             if(pageId !== 'evolution') {
-                closeTierContent('9'); // Sengaja dibiarin logic-nya buat jaga-jaga ke depan
+                closeTierContent('9'); 
             }
         }
 
-        // NAVIGASI SUB-MENU TIER (Sengaja dibiarin buat tabungan logic)
+        // NAVIGASI SUB-MENU TIER
         window.openTierContent = function(tierId) {
             const tierMenus = document.getElementById('tier-menus');
             const tierContent = document.getElementById('tier-content-' + tierId);
@@ -441,11 +439,11 @@
             const qtyInput = document.getElementById(`qty-${id}`).value;
             const qty = parseInt(qtyInput);
 
-            if(qty <= 0 || isNaN(qty)) return showCustomAlert("Isi jumlah yang bener bos!");
+            if(qty <= 0 || isNaN(qty)) return showCustomAlert("Please enter a valid quantity!");
             
             const currentCartQty = cart[id] ? cart[id].qty : 0;
             if((qty + currentCartQty) > stokRealtime[id]) {
-                return showCustomAlert(`Stok sisa ${stokRealtime[id]}, nggak cukup buat ditambah ke keranjang lagi.`);
+                return showCustomAlert(`Only ${stokRealtime[id]} left in stock. Not enough to add to cart.`);
             }
 
             if(cart[id]) cart[id].qty += qty;
@@ -454,7 +452,7 @@
             updateCartUI();
             
             let toast = document.createElement("div");
-            toast.innerText = `🛒 ${qty}x ${name} masuk keranjang!`;
+            toast.innerText = `🛒 ${qty}x ${name} added to cart!`;
             toast.style.cssText = "position:fixed; bottom:100px; right:30px; background:#0ea5e9; color:#fff; padding:10px 20px; border-radius:5px; box-shadow:0 0 10px rgba(0,240,255,0.5); z-index:999; animation:fadeIn 0.3s;";
             document.body.appendChild(toast);
             setTimeout(() => { toast.remove(); }, 2000);
@@ -487,7 +485,7 @@
                 `;
             }
 
-            if(totalItem === 0) container.innerHTML = '<p style="color: #94a3b8; text-align: center;">Keranjang masih kosong bro.</p>';
+            if(totalItem === 0) container.innerHTML = '<p style="color: #94a3b8; text-align: center;">Your cart is empty.</p>';
             countBadge.innerText = totalItem;
             totalText.innerText = `Total: Rp ${totalPrice.toLocaleString('id-ID')}`;
         }
@@ -519,13 +517,13 @@
 
         // CHECKOUT & UPDATE FIREBASE HISTORY
         window.checkoutOrder = function() {
-            if(Object.keys(cart).length === 0) return showCustomAlert("Keranjang lu kosong, belanja dulu ngab!");
+            if(Object.keys(cart).length === 0) return showCustomAlert("Your cart is empty, add some items first!");
 
-            const ign = prompt("🔥 Masukkan IGN Karakter Lu (PENTING!):");
+            const ign = prompt("🔥 Enter your In-Game Name / IGN (IMPORTANT!):");
             if(!ign) return;
-            const discordUser = prompt("👾 Masukkan Username Discord Lu (Optional):");
+            const discordUser = prompt("👾 Enter your Discord Username (Optional):");
 
-            let invoiceText = `🛒 **INVOICE TATSUYA STORE** 🛒\n👤 **IGN:** \`${ign}\`\n👾 **Discord:** ${discordUser ? discordUser : "-"}\n\n**Rincian Pesanan:**\n`;
+            let invoiceText = `🛒 **INVOICE TATSUYA STORE** 🛒\n👤 **IGN:** \`${ign}\`\n👾 **Discord:** ${discordUser ? discordUser : "-"}\n\n**Order Details:**\n`;
             let grandTotal = 0;
             let boughtItemsArray = []; 
 
@@ -538,36 +536,36 @@
                 invoiceText += `📦 ${item.qty}x ${item.name} = Rp ${subtotal.toLocaleString('id-ID')}\n`;
                 boughtItemsArray.push(`${item.qty} ${item.name}`); 
             }
-            invoiceText += `\n💰 **TOTAL TAGIHAN: Rp ${grandTotal.toLocaleString('id-ID')}**\n💳 **Metode:** DANA`;
+            invoiceText += `\n💰 **GRAND TOTAL: Rp ${grandTotal.toLocaleString('id-ID')}**\n💳 **Payment Method:** DANA / QRIS\n\n**Copy this to reply the buyer:**\n\`\`\`Thank you for purchasing in Tatsuya Store\`\`\``;
 
             set(stokRef, stokRealtime);
 
             fetch(discordWebhookURL, {
                 method: 'POST', headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ content: `@everyone 🚨 **ORDER CHECKOUT MASUK BOS!** 🚨\n\n${invoiceText}` })
+                body: JSON.stringify({ content: `@everyone 🚨 **NEW ORDER RECEIVED!** 🚨\n\n${invoiceText}` })
             }).then(() => {
-                showCustomAlert("✅ Checkout Sukses!<br>Segera PM Tatsuya untuk pembayaran.");
+                showCustomAlert("✅ Checkout Successful!<br>Please PM Tatsuya for payment.");
 
-            const teleToken = "7457880426:AAEgJvDhHjta1ihIhSXBIFP-aeO545fVewA"; // Ganti pakai token lu
-            const teleChatId = "1600454088"; // Ganti pakai angka ID lu
+            const teleToken = "7457880426:AAEgJvDhHjta1ihIhSXBIFP-aeO545fVewA"; 
+            const teleChatId = "1600454088"; 
             
-            const teleText = encodeURIComponent(`🚨 *ORDER CHECKOUT MASUK BOS!* 🚨\n\n👤 IGN: ${ign}\n💰 Total: Rp ${grandTotal.toLocaleString('id-ID')}\n\nBangun dan amankan cuan! Cek Discord sekarang.`);
+            const teleText = encodeURIComponent(`🚨 *NEW ORDER RECEIVED!* 🚨\n\n👤 IGN: ${ign}\n💰 Total: Rp ${grandTotal.toLocaleString('id-ID')}\n\nWake up and secure the bag! Check Discord now.`);
             const teleUrl = `https://api.telegram.org/bot${teleToken}/sendMessage?chat_id=${teleChatId}&text=${teleText}&parse_mode=Markdown`;
 
             fetch(teleUrl)
-                .then(response => console.log("Notif Telegram sukses dieksekusi."))
-                .catch(err => console.error("Sistem gagal:", err));
+                .then(response => console.log("Telegram notification sent."))
+                .catch(err => console.error("System error:", err));
                 
                 let buyerAlias = aliasNames[historyData.length % 10]; 
                 let itemsString = boughtItemsArray.join(" & ");
-                historyData.push(`🔔 Player <span>${buyerAlias}</span> baru saja menarik <span>${itemsString}</span>!`);
+                historyData.push(`🔔 Player <span>${buyerAlias}</span> just bought <span>${itemsString}</span>!`);
                 if(historyData.length > 20) { historyData.shift(); }
                 set(historyRef, historyData); 
 
                 cart = {}; 
                 updateCartUI();
                 toggleCart();
-            }).catch(() => showCustomAlert("Notif webhook gagal, tapi stok aman."));
+            }).catch(() => showCustomAlert("Webhook notification failed, but stock is safe."));
         }
 
         // MODAL LORE IN-GAME
@@ -579,16 +577,6 @@
             document.getElementById('lore-modal').style.display = 'flex';
         }
         window.closeLore = function() { document.getElementById('lore-modal').style.display = 'none'; }
-
-        // GOLD PM 
-        window.tanyaGold = function() {
-            const ign = prompt("Masukkan IGN Lu buat nego Gold:");
-            if(!ign) return;
-            fetch(discordWebhookURL, {
-                method: 'POST', headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ content: `@everyone 💰 **NEGO GOLD** 💰\n👤 **IGN:** \`${ign}\`\n💬 PM In-game bro.` })
-            }).then(() => showCustomAlert("✅ Info terkirim, mohon tunggu sebentar!"));
-        }
     </script>
 </body>
 </html>
