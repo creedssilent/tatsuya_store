@@ -7,7 +7,7 @@
     <title>Tatsuya Store - Insane DN</title>
     
     <style>
-        /* Tatsuya Theme V8.6 (Conversion Update & Spirit Coupon Fixed, No Discount) */
+        /* Tatsuya Theme V8.7 (Conversion PM Me Update, No Discount) */
         :root {
             --primary-gold: #fbbf24; 
             --primary-cyan: #00f0ff; 
@@ -260,26 +260,26 @@
                 <div class="item-card theme-blue">
                     <img src="icon_adaptive.jpg" class="item-icon" alt="Adaptive Essence" onclick="showLore('Adaptive Essence', 'Ancient', 'Bahan langka untuk konversi material tingkat tinggi.', 'Dungeons')">
                     <h3>Adaptive Essence</h3>
-                    <div class="price">Rp 4.000 / Stack</div>
+                    <div class="price">PM Me</div>
                     <div class="stock">Stock: <span id="stok-Adaptive Essence">Loading...</span></div>
                     <div class="input-group"><input type="number" id="qty-Adaptive Essence" value="1" min="1"></div>
-                    <button class="buy-btn" onclick="addToCart('Adaptive Essence', 'Adaptive Essence', 4000)">+ ADD TO CART</button>
+                    <button class="buy-btn" onclick="addToCart('Adaptive Essence', 'Adaptive Essence', 0)">+ ADD TO CART</button>
                 </div>
                 <div class="item-card theme-purple">
                     <img src="icon_transmutation.jpg" class="item-icon" alt="Transmutation Shard" onclick="showLore('Transmutation Shard', 'Unique', 'Pecahan energi yang digunakan untuk transmutasi material.', 'Dungeons')">
                     <h3>Transmutation Shard</h3>
-                    <div class="price">Rp 3.000 / Stack</div>
+                    <div class="price">PM Me</div>
                     <div class="stock">Stock: <span id="stok-Transmutation Shard">Loading...</span></div>
                     <div class="input-group"><input type="number" id="qty-Transmutation Shard" value="1" min="1"></div>
-                    <button class="buy-btn" onclick="addToCart('Transmutation Shard', 'Transmutation Shard', 3000)">+ ADD TO CART</button>
+                    <button class="buy-btn" onclick="addToCart('Transmutation Shard', 'Transmutation Shard', 0)">+ ADD TO CART</button>
                 </div>
                 <div class="item-card theme-orange">
                     <img src="icon_conversion.jpg" class="item-icon" alt="Conversion Fragment" onclick="showLore('Conversion Fragment', 'Epic', 'Fragmen dasar yang dibutuhkan dalam jumlah banyak untuk konversi.', 'Dungeons')">
                     <h3>Conversion Fragment</h3>
-                    <div class="price">Rp 2.000 / Stack</div>
+                    <div class="price">PM Me</div>
                     <div class="stock">Stock: <span id="stok-Conversion Fragment">Loading...</span></div>
                     <div class="input-group"><input type="number" id="qty-Conversion Fragment" value="1" min="1"></div>
-                    <button class="buy-btn" onclick="addToCart('Conversion Fragment', 'Conversion Fragment', 2000)">+ ADD TO CART</button>
+                    <button class="buy-btn" onclick="addToCart('Conversion Fragment', 'Conversion Fragment', 0)">+ ADD TO CART</button>
                 </div>
             </div>
         </div>
@@ -442,7 +442,12 @@
                 const item = cart[id]; 
                 totalItem += item.qty; 
                 subTotal += (item.qty * item.price);
-                container.innerHTML += `<div class="cart-item"><div><b>${item.name}</b><br><small>${item.qty}x @ Rp ${item.price.toLocaleString('id-ID')}</small></div><b>Rp ${(item.qty * item.price).toLocaleString('id-ID')}</b><button onclick="removeFromCart('${id}')" style="background:red; color:white; border:none; padding: 2px 8px; cursor:pointer;">X</button></div>`;
+                
+                // Jika item harganya 0, tampilkan "PM for Price" di keranjang
+                let itemPriceDisplay = item.price === 0 ? "PM for Price" : `Rp ${item.price.toLocaleString('id-ID')}`;
+                let itemTotalDisplay = item.price === 0 ? "Rp 0" : `Rp ${(item.qty * item.price).toLocaleString('id-ID')}`;
+                
+                container.innerHTML += `<div class="cart-item"><div><b>${item.name}</b><br><small>${item.qty}x @ ${itemPriceDisplay}</small></div><b>${itemTotalDisplay}</b><button onclick="removeFromCart('${id}')" style="background:red; color:white; border:none; padding: 2px 8px; cursor:pointer;">X</button></div>`;
             }
             
             if(totalItem === 0) {
@@ -466,16 +471,26 @@
 
             let invoice = `🛒 **INVOICE TATSUYA STORE** 🛒\n👤 **IGN:** \`${ign}\`\n👾 **Discord:** ${discordUser || "-"}\n\n**Order Details:**\n`;
             let subTotal = 0, itemsArr = [];
+            let hasPmItem = false;
             
             for(let id in cart) {
                 const item = cart[id]; 
                 stokRealtime[id] -= item.qty; 
                 subTotal += (item.qty * item.price);
-                invoice += `📦 ${item.qty}x ${item.name} = Rp ${(item.qty * item.price).toLocaleString('id-ID')}\n`;
+                
+                if (item.price === 0) {
+                    invoice += `📦 ${item.qty}x ${item.name} = [PM ME FOR PRICE]\n`;
+                    hasPmItem = true;
+                } else {
+                    invoice += `📦 ${item.qty}x ${item.name} = Rp ${(item.qty * item.price).toLocaleString('id-ID')}\n`;
+                }
+                
                 itemsArr.push(`${item.qty} ${item.name}`);
             }
 
-            invoice += `\n💰 **GRAND TOTAL: Rp ${subTotal.toLocaleString('id-ID')}**\n💳 **Payment:** DANA / QRIS\n\n**Reply text:**\n\`\`\`Thank you for purchasing in Tatsuya Store\`\`\``;
+            let finalTotalDisplay = hasPmItem ? `Rp ${subTotal.toLocaleString('id-ID')} + PM items` : `Rp ${subTotal.toLocaleString('id-ID')}`;
+            
+            invoice += `\n💰 **GRAND TOTAL: ${finalTotalDisplay}**\n💳 **Payment:** DANA / QRIS\n\n**Reply text:**\n\`\`\`Thank you for purchasing in Tatsuya Store\`\`\``;
 
             set(stokRef, stokRealtime).then(() => {
                 let alias = aliasNames[historyData.length % 10];
@@ -486,7 +501,7 @@
                     showCustomAlert("✅ Checkout Successful!");
                     const teleToken = "7457880426:AAEgJvDhHjta1ihIhSXBIFP-aeO545fVewA"; 
                     const teleChatId = "1600454088"; 
-                    const teleText = encodeURIComponent(`🚨 NEW ORDER! 👤 IGN: ${ign} 💰 Total: Rp ${subTotal.toLocaleString('id-ID')}`);
+                    const teleText = encodeURIComponent(`🚨 NEW ORDER! 👤 IGN: ${ign} 💰 Total: ${finalTotalDisplay}`);
                     fetch(`https://api.telegram.org/bot${teleToken}/sendMessage?chat_id=${teleChatId}&text=${teleText}`).catch(e => console.log(e));
                     cart = {}; updateCartUI(); toggleCart();
                 });
