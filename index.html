@@ -7,7 +7,7 @@
     <title>Tatsuya Store - Insane DN</title>
     
     <style>
-        /* Tatsuya Theme V9.6 (Jade Rarity Colors Fixed) */
+        /* Tatsuya Theme V9.7 (QRIS Zoom Feature Added) */
         :root {
             --primary-gold: #fbbf24; 
             --primary-cyan: #00f0ff; 
@@ -72,7 +72,6 @@
         input[type="number"] { width: 70px; padding: 8px; text-align: center; background: rgba(0,0,0,0.6); border-radius: 5px; font-weight: bold; outline: none; transition: 0.3s; color: white; border: 1px solid transparent; }
         .buy-btn { border: none; padding: 12px; font-size: 1.1em; font-weight: bold; border-radius: 6px; cursor: pointer; width: 100%; text-transform: uppercase; transition: 0.3s; color: white; }
 
-        /* FITUR AUTO OUT OF STOCK */
         .item-card.out-of-stock { filter: grayscale(100%); opacity: 0.6; pointer-events: none; }
         .item-card.out-of-stock::after {
             content: "OUT OF STOCK"; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%) rotate(-15deg);
@@ -81,7 +80,6 @@
             letter-spacing: 2px; white-space: nowrap; pointer-events: none;
         }
 
-        /* THEMES */
         .theme-green { border-color: rgba(16, 185, 129, 0.4); } .theme-green .item-icon { border-color: #10b981; box-shadow: 0 0 15px rgba(16, 185, 129, 0.5); } .theme-green h3 { color: #fff; text-shadow: 0 0 8px #10b981; } .theme-green .price { color: #6ee7b7; } .theme-green .stock span { color: #10b981; } .theme-green input { border-color: #10b981; } .theme-green .buy-btn { background: linear-gradient(45deg, #059669, #10b981); } .theme-green .buy-btn:hover { background: #10b981; box-shadow: 0 0 15px #10b981; transform: scale(1.02); }
         .theme-blue { border-color: rgba(0, 240, 255, 0.4); } .theme-blue .item-icon { border-color: #00f0ff; box-shadow: 0 0 15px rgba(0, 240, 255, 0.5); } .theme-blue h3 { color: #fff; text-shadow: 0 0 8px #00f0ff; } .theme-blue .price { color: #67e8f9; } .theme-blue .stock span { color: #00f0ff; } .theme-blue input { border-color: #00f0ff; } .theme-blue .buy-btn { background: linear-gradient(45deg, #0284c7, #0ea5e9); } .theme-blue .buy-btn:hover { background: #0ea5e9; box-shadow: 0 0 15px #00f0ff; transform: scale(1.02); }
         .theme-rare { border-color: rgba(59, 130, 246, 0.4); } .theme-rare .item-icon { border-color: #3b82f6; box-shadow: 0 0 15px rgba(59, 130, 246, 0.5); } .theme-rare h3 { color: #fff; text-shadow: 0 0 8px #3b82f6; } .theme-rare .price { color: #93c5fd; } .theme-rare .stock span { color: #3b82f6; } .theme-rare input { border-color: #3b82f6; } .theme-rare .buy-btn { background: linear-gradient(45deg, #1d4ed8, #3b82f6); } .theme-rare .buy-btn:hover { background: #3b82f6; box-shadow: 0 0 15px #3b82f6; transform: scale(1.02); }
@@ -90,7 +88,6 @@
         .theme-red { border-color: rgba(244, 63, 94, 0.4); } .theme-red .item-icon { border-color: #f43f5e; box-shadow: 0 0 15px rgba(244, 63, 94, 0.5); } .theme-red h3 { color: #fff; text-shadow: 0 0 8px #f43f5e; } .theme-red .price { color: #fda4af; } .theme-red .stock span { color: #f43f5e; } .theme-red input { border-color: #f43f5e; } .theme-red .buy-btn { background: linear-gradient(45deg, #be123c, #e11d48); } .theme-red .buy-btn:hover { background: #e11d48; box-shadow: 0 0 15px #f43f5e; transform: scale(1.02); }
         .theme-gold { border-color: rgba(251, 191, 36, 0.4); } .theme-gold .item-icon { border-color: #fbbf24; box-shadow: 0 0 15px rgba(251, 191, 36, 0.5); } .theme-gold h3 { color: #fbbf24; text-shadow: 0 0 8px #fbbf24; } .theme-gold .price { color: #fff; } .theme-gold .stock span { color: #fbbf24; } .theme-gold input { border-color: #fbbf24; } .theme-gold .buy-btn { background: linear-gradient(45deg, #b45309, #d97706); } .theme-gold .buy-btn:hover { background: #d97706; box-shadow: 0 0 15px #fbbf24; transform: scale(1.02); }
 
-        /* FLOATING UI & MODALS */
         .cart-fab { position: fixed; bottom: 30px; right: 30px; background: linear-gradient(45deg, var(--primary-cyan), #0ea5e9); color: var(--dark-navy); width: 60px; height: 60px; border-radius: 50%; display: flex; justify-content: center; align-items: center; font-size: 1.5em; cursor: pointer; box-shadow: 0 0 20px rgba(0, 240, 255, 0.5); z-index: 100; transition: 0.3s; border: 2px solid #fff; }
         .cart-fab:hover { transform: scale(1.1); box-shadow: 0 0 30px var(--primary-cyan); }
         .cart-badge { position: absolute; top: -5px; right: -5px; background: #e11d48; color: white; font-size: 0.6em; font-weight: bold; width: 24px; height: 24px; border-radius: 50%; display: flex; justify-content: center; align-items: center; border: 2px solid #fff; }
@@ -101,7 +98,7 @@
         .modal-overlay { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.85); backdrop-filter: blur(8px); z-index: 200; justify-content: center; align-items: center; }
         .modal-content { background: var(--dark-navy); border: 2px solid var(--primary-cyan); border-radius: 15px; padding: 25px; width: 90%; max-width: 500px; box-shadow: 0 0 30px rgba(0, 240, 255, 0.3); position: relative; max-height: 80vh; overflow-y: auto; scrollbar-width: none; -ms-overflow-style: none; }
         .modal-content::-webkit-scrollbar { display: none; }
-        .close-btn { position: absolute; top: 15px; right: 20px; font-size: 1.5em; color: var(--primary-cyan); cursor: pointer; transition: 0.3s; }
+        .close-btn { position: absolute; top: 15px; right: 20px; font-size: 1.5em; color: var(--primary-cyan); cursor: pointer; transition: 0.3s; z-index: 10; }
         .close-btn:hover { color: #fff; transform: scale(1.1); }
         
         .cart-item { display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid rgba(255,255,255,0.1); padding: 10px 0; }
@@ -116,6 +113,40 @@
         .lore-desc { font-style: italic; color: #cbd5e1; line-height: 1.5; border-left: 3px solid var(--primary-cyan); padding-left: 10px; margin-bottom: 15px; white-space: pre-line; }
         .lore-drop { color: #94a3b8; font-size: 0.9em; white-space: pre-line; }
 
+        /* FITUR ZOOM QRIS */
+        .qris-img { width: 100%; max-width: 250px; border-radius: 10px; border: 3px solid #fff; margin-bottom: 5px; background: white; cursor: pointer; transition: transform 0.3s ease; }
+        .qris-img:hover { transform: scale(1.05); box-shadow: 0 0 20px rgba(0, 240, 255, 0.5); }
+        
+        .qris-img.zoomed {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: auto;
+            max-width: 90vw;
+            height: 85vh;
+            max-height: none;
+            z-index: 9999;
+            border: 5px solid var(--primary-cyan);
+            box-shadow: 0 0 50px rgba(0,0,0,0.9);
+            cursor: zoom-out;
+            background: white;
+            object-fit: contain;
+        }
+
+        /* Overlay gelap saat gambar di-zoom */
+        #zoom-overlay {
+            display: none;
+            position: fixed;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: rgba(0,0,0,0.9);
+            z-index: 9998;
+            cursor: zoom-out;
+        }
+
+        .blink-text { font-size: 0.8em; color: #67e8f9; margin-bottom: 15px; font-style: italic; animation: blinker 2s linear infinite; }
+        @keyframes blinker { 50% { opacity: 0.3; } }
+
         footer { background: rgba(2, 4, 15, 0.9); border-top: 1px solid var(--primary-cyan); text-align: center; padding: 20px; font-size: 0.9em; color: #94a3b8; margin-top: auto; }
         footer span { color: var(--primary-cyan); font-weight: bold; }
 
@@ -128,6 +159,7 @@
             .item-card { padding: 20px 15px; } 
             .item-icon { width: 65px; height: 65px; }
             .cart-fab, .history-fab { width: 50px; height: 50px; font-size: 1.2em; bottom: 20px; }
+            .qris-img.zoomed { width: 95vw; height: auto; max-height: 85vh; }
         }
     </style>
 </head>
@@ -306,7 +338,7 @@
         <div id="conversion" class="page-section">
             <div class="grid-container">
                 <div class="item-card theme-blue" id="card-Adaptive Essence">
-                    <img src="icon_adaptive.jpg" class="item-icon" alt="Adaptive Essence" onclick="showLore('Adaptive Essence', 'Ancient', 'Bahan langka untuk konversi material tingkat tinggi.', 'Dungeons')">
+                    <img src="icon_adaptive.jpg" class="item-icon">
                     <h3>Adaptive Essence</h3>
                     <div class="price">PM Me</div>
                     <div class="stock">Stock: <span id="stok-Adaptive Essence">Loading...</span></div>
@@ -314,7 +346,7 @@
                     <button class="buy-btn" onclick="addToCart('Adaptive Essence', 'Adaptive Essence', 0)">+ ADD TO CART</button>
                 </div>
                 <div class="item-card theme-purple" id="card-Transmutation Shard">
-                    <img src="icon_transmutation.jpg" class="item-icon" alt="Transmutation Shard" onclick="showLore('Transmutation Shard', 'Unique', 'Pecahan energi yang digunakan untuk transmutasi material.', 'Dungeons')">
+                    <img src="icon_transmutation.jpg" class="item-icon">
                     <h3>Transmutation Shard</h3>
                     <div class="price">PM Me</div>
                     <div class="stock">Stock: <span id="stok-Transmutation Shard">Loading...</span></div>
@@ -322,7 +354,7 @@
                     <button class="buy-btn" onclick="addToCart('Transmutation Shard', 'Transmutation Shard', 0)">+ ADD TO CART</button>
                 </div>
                 <div class="item-card theme-orange" id="card-Conversion Fragment">
-                    <img src="icon_conversion.jpg" class="item-icon" alt="Conversion Fragment" onclick="showLore('Conversion Fragment', 'Epic', 'Fragmen dasar yang dibutuhkan dalam jumlah banyak untuk konversi.', 'Dungeons')">
+                    <img src="icon_conversion.jpg" class="item-icon">
                     <h3>Conversion Fragment</h3>
                     <div class="price">PM Me</div>
                     <div class="stock">Stock: <span id="stok-Conversion Fragment">Loading...</span></div>
@@ -379,6 +411,8 @@
     <div class="cart-fab" onclick="toggleCart()">🛒<div class="cart-badge" id="cart-count">0</div></div>
     <div class="history-fab" onclick="toggleHistory()">📜</div>
 
+    <div id="zoom-overlay" onclick="toggleZoom()"></div>
+
     <div class="modal-overlay" id="history-modal">
         <div class="modal-content" style="border-color: var(--primary-gold);">
             <span class="close-btn" onclick="toggleHistory()">&times;</span>
@@ -398,7 +432,7 @@
     </div>
 
     <div class="modal-overlay" id="qris-modal">
-        <div class="modal-content" style="text-align: center; border-color: var(--primary-cyan); max-width: 400px;">
+        <div class="modal-content" style="text-align: center; border-color: var(--primary-cyan); max-width: 400px; z-index: 9997;">
             <span class="close-btn" onclick="closeQrisModal()">&times;</span>
             <h2 style="color: var(--primary-cyan); margin-top: 5px;">SCAN TO PAY</h2>
             <div style="background: rgba(0,0,0,0.5); padding: 15px; border-radius: 10px; margin-bottom: 20px;">
@@ -406,7 +440,8 @@
                 <div id="qris-total-display" style="font-size: 1.5em; color: var(--primary-gold); font-weight: bold;"></div>
             </div>
             
-            <img src="qris_tatsuya.jpg" alt="QRIS Tatsuya Store" onerror="this.src='logo_tatsuya.png'" style="width: 100%; max-width: 250px; border-radius: 10px; border: 3px solid #fff; margin-bottom: 15px; background: white;">
+            <img src="qris_tatsuya.jpg" alt="QRIS Tatsuya Store" id="qrisImage" class="qris-img" onclick="toggleZoom()" onerror="this.src='logo_tatsuya.png'">
+            <div class="blink-text">(Click image to enlarge)</div>
             
             <p style="color: #cbd5e1; font-size: 0.9em;">Accepting DANA / All E-Wallets & Banks</p>
             <div style="margin-top: 20px; padding: 10px; border-left: 4px solid #10b981; background: rgba(16, 185, 129, 0.1); text-align: left;">
@@ -468,11 +503,9 @@
                 itemsToCheck.forEach(name => {
                     if(stokRealtime[name] === undefined) stokRealtime[name] = 0;
                     
-                    // Update Text Stok
                     const el = document.getElementById(`stok-${name}`);
                     if(el) el.innerText = stokRealtime[name];
 
-                    // FITUR LOGIC OUT OF STOCK
                     const cardElement = document.getElementById(`card-${name}`);
                     if(cardElement) {
                         if(stokRealtime[name] <= 0) {
@@ -491,6 +524,19 @@
             if(data) historyData = data;
             if(document.getElementById('history-modal').style.display === 'flex') renderHistory();
         });
+
+        // LOGIC ZOOM QRIS
+        window.toggleZoom = function() {
+            const img = document.getElementById('qrisImage');
+            const overlay = document.getElementById('zoom-overlay');
+            if (img.classList.contains('zoomed')) {
+                img.classList.remove('zoomed');
+                overlay.style.display = 'none';
+            } else {
+                img.classList.add('zoomed');
+                overlay.style.display = 'block';
+            }
+        }
 
         window.showCustomAlert = function(msg) { document.getElementById('custom-alert-text').innerHTML = msg; document.getElementById('custom-alert-modal').style.display = 'flex'; }
         window.closeCustomAlert = function() { document.getElementById('custom-alert-modal').style.display = 'none'; }
@@ -545,7 +591,12 @@
         window.toggleHistory = function() { const m = document.getElementById('history-modal'); if(m.style.display==='flex') m.style.display='none'; else { m.style.display='flex'; renderHistory(); } }
         function renderHistory() { const c = document.getElementById('history-items-container'); c.innerHTML = ''; for(let i=historyData.length-1; i>=0; i--) c.innerHTML += `<div class="history-item">${historyData[i]}</div>`; }
 
-        window.closeQrisModal = function() { document.getElementById('qris-modal').style.display = 'none'; }
+        window.closeQrisModal = function() { 
+            document.getElementById('qris-modal').style.display = 'none'; 
+            // Reset zoom saat modal ditutup
+            document.getElementById('qrisImage').classList.remove('zoomed');
+            document.getElementById('zoom-overlay').style.display = 'none';
+        }
 
         window.checkoutOrder = function() {
             if(Object.keys(cart).length === 0) return showCustomAlert("Empty!");
@@ -582,7 +633,6 @@
                 set(historyRef, historyData); 
                 
                 fetch(discordWebhookURL, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ content: `@everyone 🚨 **NEW ORDER!** 🚨\n\n${invoice}` }) }).then(() => {
-                    // SETELAH SUKSES CHECKOUT, MUNCULIN QRIS
                     document.getElementById('qris-total-display').innerText = finalTotalDisplay;
                     document.getElementById('cart-modal').style.display = 'none';
                     document.getElementById('qris-modal').style.display = 'flex';
