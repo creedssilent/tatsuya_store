@@ -7,7 +7,7 @@
     <title>Tatsuya Store - Insane DN</title>
     
     <style>
-        /* Tatsuya Theme V8.7 (Conversion PM Me Update, No Discount) */
+        /* Tatsuya Theme V9.6 (Jade Rarity Colors Fixed) */
         :root {
             --primary-gold: #fbbf24; 
             --primary-cyan: #00f0ff; 
@@ -28,7 +28,7 @@
             overflow-y: scroll; 
         }
 
-        header { text-align: center; padding: 30px 20px 20px; background: linear-gradient(to bottom, rgba(11, 19, 43, 0.95), transparent); }
+        header { text-align: center; padding: 30px 20px 10px; background: linear-gradient(to bottom, rgba(11, 19, 43, 0.95), transparent); }
         .header-logos { display: flex; justify-content: center; align-items: center; gap: 30px; margin-bottom: 15px; }
         .logo-link { transition: 0.3s; position: relative; display: inline-block; }
         .side-logo { width: 120px; height: 120px; object-fit: contain; filter: drop-shadow(0 0 10px rgba(0, 240, 255, 0.3)); transition: 0.3s; }
@@ -40,15 +40,16 @@
 
         .ign-badge { display: inline-block; background: linear-gradient(90deg, transparent, rgba(0, 240, 255, 0.2), transparent); border: 1px solid var(--primary-cyan); color: var(--primary-cyan); padding: 5px 25px; border-radius: 20px; font-size: 1.2em; font-weight: bold; letter-spacing: 2px; text-shadow: 0 0 8px var(--primary-cyan); margin-top: 15px; }
         .server-info { color: var(--primary-gold); font-size: 1em; letter-spacing: 2px; margin-top: 15px; text-shadow: 0 0 5px black; }
-        .promo-text { color: #fbbf24; font-size: 0.95em; font-weight: bold; margin-top: 8px; text-shadow: 0 0 8px #f97316; }
-        .referral-text { color: #10b981; font-size: 0.95em; margin-top: 5px; font-weight: bold; padding: 5px; background: rgba(0,0,0,0.3); border-radius: 5px; display: inline-block; }
+        .referral-text { color: #10b981; font-size: 0.95em; margin-top: 15px; font-weight: bold; padding: 5px; background: rgba(0,0,0,0.3); border-radius: 5px; display: inline-block; }
 
-        /* --- NAVBAR --- */
-        .navbar { display: flex; justify-content: center; background: rgba(11, 19, 43, 0.95); padding: 15px; border-top: 1px solid rgba(0, 240, 255, 0.3); border-bottom: 2px solid var(--primary-cyan); box-shadow: 0 5px 20px rgba(0, 240, 255, 0.2); flex-wrap: wrap; gap: 15px; margin-bottom: 30px; position: sticky; top: 0; z-index: 50; }
-        .nav-btn { background: rgba(0, 0, 0, 0.5); border: 1px solid var(--primary-cyan); color: var(--primary-cyan); padding: 10px 25px; border-radius: 25px; cursor: pointer; font-weight: bold; transition: 0.3s; text-transform: uppercase; font-size: 0.9em; letter-spacing: 1px; }
+        .trust-banner { background: rgba(0, 240, 255, 0.1); border-top: 1px solid var(--primary-cyan); border-bottom: 1px solid var(--primary-cyan); padding: 8px 0; margin-top: 20px; font-weight: bold; color: #fff; text-transform: uppercase; font-size: 0.9em; letter-spacing: 1px; white-space: nowrap; overflow: hidden; position: relative; }
+        .trust-banner span { display: inline-block; padding-left: 100%; animation: scrollText 15s linear infinite; text-shadow: 0 0 5px var(--primary-cyan); }
+        @keyframes scrollText { 0% { transform: translateX(0); } 100% { transform: translateX(-100%); } }
+
+        .navbar { display: flex; justify-content: center; background: rgba(11, 19, 43, 0.95); padding: 15px; border-bottom: 2px solid var(--primary-cyan); box-shadow: 0 5px 20px rgba(0, 240, 255, 0.2); flex-wrap: wrap; gap: 15px; margin-bottom: 30px; position: sticky; top: 0; z-index: 50; }
+        .nav-btn { background: rgba(0, 0, 0, 0.5); border: 1px solid var(--primary-cyan); color: var(--primary-cyan); padding: 10px 20px; border-radius: 25px; cursor: pointer; font-weight: bold; transition: 0.3s; text-transform: uppercase; font-size: 0.85em; letter-spacing: 1px; }
         .nav-btn:hover, .nav-btn.active { background: var(--primary-cyan); color: var(--dark-navy); box-shadow: 0 0 15px var(--primary-cyan); transform: scale(1.05); }
 
-        /* --- GRID & CARDS --- */
         .main-content { flex: 1; }
         .page-section { display: none; animation: fadeIn 0.5s; max-width: 1100px; margin: 0 auto; padding: 0 20px 40px; }
         .page-section.active { display: block; }
@@ -61,6 +62,8 @@
         .item-card h3 { margin-top: 0; font-size: 1.25em; letter-spacing: 1px; min-height: 2em; display: flex; align-items: center; justify-content: center; line-height: 1.2; margin-bottom: 8px;}
         
         .tier-text { font-size: 0.9em; font-weight: bold; color: var(--primary-cyan); margin-top: -5px; margin-bottom: 10px; text-transform: uppercase; letter-spacing: 1px; text-shadow: 0 0 5px rgba(0,240,255,0.5); }
+        .hot-badge { position: absolute; top: 10px; right: -25px; background: #e11d48; color: white; padding: 5px 30px; transform: rotate(45deg); font-weight: bold; font-size: 0.8em; box-shadow: 0 0 10px #e11d48; animation: pulseHot 1.5s infinite; }
+        @keyframes pulseHot { 0%, 100% { opacity: 1; } 50% { opacity: 0.8; box-shadow: 0 0 20px #e11d48; } }
 
         .price { font-size: 1.2em; font-weight: bold; margin: 10px 0; }
         .stock { font-size: 0.95em; color: #94a3b8; margin-bottom: 15px; }
@@ -69,7 +72,16 @@
         input[type="number"] { width: 70px; padding: 8px; text-align: center; background: rgba(0,0,0,0.6); border-radius: 5px; font-weight: bold; outline: none; transition: 0.3s; color: white; border: 1px solid transparent; }
         .buy-btn { border: none; padding: 12px; font-size: 1.1em; font-weight: bold; border-radius: 6px; cursor: pointer; width: 100%; text-transform: uppercase; transition: 0.3s; color: white; }
 
-        /* --- THEMES --- */
+        /* FITUR AUTO OUT OF STOCK */
+        .item-card.out-of-stock { filter: grayscale(100%); opacity: 0.6; pointer-events: none; }
+        .item-card.out-of-stock::after {
+            content: "OUT OF STOCK"; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%) rotate(-15deg);
+            background: rgba(225, 29, 72, 0.95); color: white; padding: 10px 25px; font-weight: bold; font-size: 1.5em;
+            border-radius: 8px; z-index: 10; border: 2px solid #fff; box-shadow: 0 0 20px rgba(225, 29, 72, 0.8);
+            letter-spacing: 2px; white-space: nowrap; pointer-events: none;
+        }
+
+        /* THEMES */
         .theme-green { border-color: rgba(16, 185, 129, 0.4); } .theme-green .item-icon { border-color: #10b981; box-shadow: 0 0 15px rgba(16, 185, 129, 0.5); } .theme-green h3 { color: #fff; text-shadow: 0 0 8px #10b981; } .theme-green .price { color: #6ee7b7; } .theme-green .stock span { color: #10b981; } .theme-green input { border-color: #10b981; } .theme-green .buy-btn { background: linear-gradient(45deg, #059669, #10b981); } .theme-green .buy-btn:hover { background: #10b981; box-shadow: 0 0 15px #10b981; transform: scale(1.02); }
         .theme-blue { border-color: rgba(0, 240, 255, 0.4); } .theme-blue .item-icon { border-color: #00f0ff; box-shadow: 0 0 15px rgba(0, 240, 255, 0.5); } .theme-blue h3 { color: #fff; text-shadow: 0 0 8px #00f0ff; } .theme-blue .price { color: #67e8f9; } .theme-blue .stock span { color: #00f0ff; } .theme-blue input { border-color: #00f0ff; } .theme-blue .buy-btn { background: linear-gradient(45deg, #0284c7, #0ea5e9); } .theme-blue .buy-btn:hover { background: #0ea5e9; box-shadow: 0 0 15px #00f0ff; transform: scale(1.02); }
         .theme-rare { border-color: rgba(59, 130, 246, 0.4); } .theme-rare .item-icon { border-color: #3b82f6; box-shadow: 0 0 15px rgba(59, 130, 246, 0.5); } .theme-rare h3 { color: #fff; text-shadow: 0 0 8px #3b82f6; } .theme-rare .price { color: #93c5fd; } .theme-rare .stock span { color: #3b82f6; } .theme-rare input { border-color: #3b82f6; } .theme-rare .buy-btn { background: linear-gradient(45deg, #1d4ed8, #3b82f6); } .theme-rare .buy-btn:hover { background: #3b82f6; box-shadow: 0 0 15px #3b82f6; transform: scale(1.02); }
@@ -78,7 +90,7 @@
         .theme-red { border-color: rgba(244, 63, 94, 0.4); } .theme-red .item-icon { border-color: #f43f5e; box-shadow: 0 0 15px rgba(244, 63, 94, 0.5); } .theme-red h3 { color: #fff; text-shadow: 0 0 8px #f43f5e; } .theme-red .price { color: #fda4af; } .theme-red .stock span { color: #f43f5e; } .theme-red input { border-color: #f43f5e; } .theme-red .buy-btn { background: linear-gradient(45deg, #be123c, #e11d48); } .theme-red .buy-btn:hover { background: #e11d48; box-shadow: 0 0 15px #f43f5e; transform: scale(1.02); }
         .theme-gold { border-color: rgba(251, 191, 36, 0.4); } .theme-gold .item-icon { border-color: #fbbf24; box-shadow: 0 0 15px rgba(251, 191, 36, 0.5); } .theme-gold h3 { color: #fbbf24; text-shadow: 0 0 8px #fbbf24; } .theme-gold .price { color: #fff; } .theme-gold .stock span { color: #fbbf24; } .theme-gold input { border-color: #fbbf24; } .theme-gold .buy-btn { background: linear-gradient(45deg, #b45309, #d97706); } .theme-gold .buy-btn:hover { background: #d97706; box-shadow: 0 0 15px #fbbf24; transform: scale(1.02); }
 
-        /* --- FLOATING UI & MODALS --- */
+        /* FLOATING UI & MODALS */
         .cart-fab { position: fixed; bottom: 30px; right: 30px; background: linear-gradient(45deg, var(--primary-cyan), #0ea5e9); color: var(--dark-navy); width: 60px; height: 60px; border-radius: 50%; display: flex; justify-content: center; align-items: center; font-size: 1.5em; cursor: pointer; box-shadow: 0 0 20px rgba(0, 240, 255, 0.5); z-index: 100; transition: 0.3s; border: 2px solid #fff; }
         .cart-fab:hover { transform: scale(1.1); box-shadow: 0 0 30px var(--primary-cyan); }
         .cart-badge { position: absolute; top: -5px; right: -5px; background: #e11d48; color: white; font-size: 0.6em; font-weight: bold; width: 24px; height: 24px; border-radius: 50%; display: flex; justify-content: center; align-items: center; border: 2px solid #fff; }
@@ -86,7 +98,7 @@
         .history-fab { position: fixed; bottom: 30px; left: 30px; background: linear-gradient(45deg, #f59e0b, #fbbf24); color: var(--dark-navy); width: 60px; height: 60px; border-radius: 50%; display: flex; justify-content: center; align-items: center; font-size: 1.5em; cursor: pointer; box-shadow: 0 0 20px rgba(251, 191, 36, 0.5); z-index: 100; transition: 0.3s; border: 2px solid #fff; }
         .history-fab:hover { transform: scale(1.1); box-shadow: 0 0 30px #fbbf24; }
 
-        .modal-overlay { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.8); backdrop-filter: blur(5px); z-index: 200; justify-content: center; align-items: center; }
+        .modal-overlay { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.85); backdrop-filter: blur(8px); z-index: 200; justify-content: center; align-items: center; }
         .modal-content { background: var(--dark-navy); border: 2px solid var(--primary-cyan); border-radius: 15px; padding: 25px; width: 90%; max-width: 500px; box-shadow: 0 0 30px rgba(0, 240, 255, 0.3); position: relative; max-height: 80vh; overflow-y: auto; scrollbar-width: none; -ms-overflow-style: none; }
         .modal-content::-webkit-scrollbar { display: none; }
         .close-btn { position: absolute; top: 15px; right: 20px; font-size: 1.5em; color: var(--primary-cyan); cursor: pointer; transition: 0.3s; }
@@ -112,7 +124,7 @@
             .side-logo { width: 65px; height: 65px; } 
             .main-logo { width: 110px; height: 110px; }
             .navbar { padding: 10px; gap: 8px; } 
-            .nav-btn { padding: 8px 12px; font-size: 0.7em; border-radius: 15px; }
+            .nav-btn { padding: 8px 10px; font-size: 0.65em; border-radius: 15px; }
             .item-card { padding: 20px 15px; } 
             .item-icon { width: 65px; height: 65px; }
             .cart-fab, .history-fab { width: 50px; height: 50px; font-size: 1.2em; bottom: 20px; }
@@ -135,70 +147,74 @@
         </div>
         <div class="ign-badge">IGN : TATSUYA</div>
         <div class="server-info">INSANE DRAGON NEST - TRUSTED SELLER</div>
-        <div style="color: #cbd5e1; font-size: 0.9em; margin-top: 5px;">Payment: DANA / QRIS</div>
-        <div class="promo-text">🔥 SPECIAL PROMO: April 2 - April 16, 2026 (While Stocks Last) 🔥</div>
         <div class="referral-text">
             Top up at <a href="https://insanedn.com/" target="_blank" style="color: var(--primary-cyan); text-decoration: none;">insanedn.com</a> using Referral Code: <span style="background: rgba(0,0,0,0.5); padding: 2px 6px; border-radius: 4px; border: 1px dashed #10b981;">TATSUYA</span> to get 10% BONUS!
         </div>
     </header>
 
+    <div class="trust-banner">
+        <span>🛡️ 100% SAFE HAND-FARMED MATERIALS • 💎 TRUSTED BY 100+ PLAYERS • 📩 PM TATSUYA FOR BULK ORDERS & NEGOTIATION 🛡️</span>
+    </div>
+
     <nav class="navbar">
         <button class="nav-btn active" onclick="showPage('materials', this)">BASIC MATERIALS</button>
         <button class="nav-btn" onclick="showPage('acc_materials', this)">ACC MATERIALS</button>
-        <button class="nav-btn" onclick="showPage('conversion', this)">CONVERSION MATERIALS</button>
+        <button class="nav-btn" onclick="showPage('jade', this)">JADE MATERIALS</button>
+        <button class="nav-btn" onclick="showPage('conversion', this)">CONVERSION</button>
         <button class="nav-btn" onclick="showPage('coupons', this)">COUPONS</button>
         <button class="nav-btn" onclick="showPage('gold', this)">GOLD</button>
     </nav>
 
     <div class="main-content">
+        
         <div id="materials" class="page-section active">
             <div class="grid-container">
-                <div class="item-card theme-purple">
+                <div class="item-card theme-purple" id="card-Refinement Dust">
                     <img src="icon_refinement.jpg" class="item-icon" onclick="showLore('Refinement Dust', 'Unique', 'Material used for basic refining.', 'Nests')">
                     <h3>Refinement Dust</h3>
-                    <div class="price">Rp 3.000 / Stack</div>
+                    <div class="price">Rp 2.000 / Stack</div>
                     <div class="stock">Stock: <span id="stok-Refinement Dust">Loading...</span></div>
                     <div class="input-group"><input type="number" id="qty-Refinement Dust" value="1" min="1"></div>
-                    <button class="buy-btn" onclick="addToCart('Refinement Dust', 'Refinement Dust', 3000)">+ ADD TO CART</button>
+                    <button class="buy-btn" onclick="addToCart('Refinement Dust', 'Refinement Dust', 2000)">+ ADD TO CART</button>
                 </div>
-                <div class="item-card theme-orange">
+                <div class="item-card theme-orange" id="card-Enhancement Stone">
                     <img src="icon_stone.jpg" class="item-icon">
                     <h3>Enhancement Stone</h3>
-                    <div class="price">Rp 1.000 / Stack</div>
-                    <div class="stock">Stock: <span id="stok-Enhancement Stone">Loading...</span></div>
-                    <div class="input-group"><input type="number" id="qty-Enhancement Stone" value="1" min="1"></div>
-                    <button class="buy-btn" onclick="addToCart('Enhancement Stone', 'Enhancement Stone', 1000)">+ ADD TO CART</button>
+                    <div class="price">Rp 1.000 / 2 Stacks</div>
+                    <div class="stock">Stock: <span id="stok-Enhancement Stone">Loading...</span> (Packs)</div>
+                    <div class="input-group"><input type="number" id="qty-Enhancement Stone" value="1" min="1" title="1 qty = 2 Stacks"></div>
+                    <button class="buy-btn" onclick="addToCart('Enhancement Stone', 'Enhancement Stone (2 Stacks)', 1000)">+ ADD TO CART</button>
                 </div>
-                <div class="item-card theme-red">
+                <div class="item-card theme-red" id="card-Energy Catalyst">
                     <img src="icon_energy.jpg" class="item-icon">
                     <h3>Energy Catalyst</h3>
-                    <div class="price">Rp 5.000 / Stack</div>
+                    <div class="price">Rp 3.000 / Stack</div>
                     <div class="stock">Stock: <span id="stok-Energy Catalyst">Loading...</span></div>
                     <div class="input-group"><input type="number" id="qty-Energy Catalyst" value="1" min="1"></div>
-                    <button class="buy-btn" onclick="addToCart('Energy Catalyst', 'Energy Catalyst', 5000)">+ ADD TO CART</button>
+                    <button class="buy-btn" onclick="addToCart('Energy Catalyst', 'Energy Catalyst', 3000)">+ ADD TO CART</button>
                 </div>
-                <div class="item-card theme-blue">
+                <div class="item-card theme-blue" id="card-Stabilized Core">
                     <img src="icon_core.jpg" class="item-icon">
                     <h3>Stabilized Core</h3>
-                    <div class="price">Rp 3.000 / Stack</div>
+                    <div class="price">Rp 2.000 / Stack</div>
                     <div class="stock">Stock: <span id="stok-Stabilized Core">Loading...</span></div>
                     <div class="input-group"><input type="number" id="qty-Stabilized Core" value="1" min="1"></div>
-                    <button class="buy-btn" onclick="addToCart('Stabilized Core', 'Stabilized Core', 3000)">+ ADD TO CART</button>
+                    <button class="buy-btn" onclick="addToCart('Stabilized Core', 'Stabilized Core', 2000)">+ ADD TO CART</button>
                 </div>
-                <div class="item-card theme-red">
+                <div class="item-card theme-red" id="card-Balkov Pouch">
                     <img src="icon_balkov.jpg" class="item-icon">
                     <h3>Balkov Pouch</h3>
-                    <div class="price">Rp 3.000 / Pcs</div>
+                    <div class="price">Rp 2.000 / Pcs</div>
                     <div class="stock">Stock: <span id="stok-Balkov Pouch">Loading...</span></div>
                     <div class="input-group"><input type="number" id="qty-Balkov Pouch" value="1" min="1"></div>
-                    <button class="buy-btn" onclick="addToCart('Balkov Pouch', 'Balkov Pouch', 3000)">+ ADD TO CART</button>
+                    <button class="buy-btn" onclick="addToCart('Balkov Pouch', 'Balkov Pouch', 2000)">+ ADD TO CART</button>
                 </div>
             </div>
         </div>
 
         <div id="acc_materials" class="page-section">
             <div class="grid-container">
-                <div class="item-card theme-green">
+                <div class="item-card theme-green" id="card-Faint Accessory Dust">
                     <img src="icon_faint_dust.jpg" class="item-icon">
                     <h3>Faint Accessory Dust</h3>
                     <div class="tier-text">Tier 1-3</div>
@@ -207,16 +223,16 @@
                     <div class="input-group"><input type="number" id="qty-Faint Accessory Dust" value="1" min="1"></div>
                     <button class="buy-btn" onclick="addToCart('Faint Accessory Dust', 'Faint Accessory Dust', 4000)">+ ADD TO CART</button>
                 </div>
-                <div class="item-card theme-rare">
+                <div class="item-card theme-rare" id="card-Polished Charm Fragment">
                     <img src="icon_charm.jpg" class="item-icon">
                     <h3>Polished Charm Fragment</h3>
                     <div class="tier-text">Tier 4-5</div>
-                    <div class="price">Rp 10.000 / Stack</div>
+                    <div class="price">Rp 9.000 / Stack</div>
                     <div class="stock">Stock: <span id="stok-Polished Charm Fragment">Loading...</span></div>
                     <div class="input-group"><input type="number" id="qty-Polished Charm Fragment" value="1" min="1"></div>
-                    <button class="buy-btn" onclick="addToCart('Polished Charm Fragment', 'Polished Charm Fragment', 10000)">+ ADD TO CART</button>
+                    <button class="buy-btn" onclick="addToCart('Polished Charm Fragment', 'Polished Charm Fragment', 9000)">+ ADD TO CART</button>
                 </div>
-                <div class="item-card theme-orange">
+                <div class="item-card theme-orange" id="card-Resonant Sigil Piece">
                     <img src="icon_sigil.jpg" class="item-icon">
                     <h3>Resonant Sigil Piece</h3>
                     <div class="tier-text">Tier 6-7</div>
@@ -225,7 +241,7 @@
                     <div class="input-group"><input type="number" id="qty-Resonant Sigil Piece" value="1" min="1"></div>
                     <button class="buy-btn" onclick="addToCart('Resonant Sigil Piece', 'Resonant Sigil Piece', 8000)">+ ADD TO CART</button>
                 </div>
-                <div class="item-card theme-purple">
+                <div class="item-card theme-purple" id="card-Mystic Accessory Core">
                     <img src="icon_mystic.jpg" class="item-icon">
                     <h3>Mystic Accessory Core</h3>
                     <div class="tier-text">Tier 8</div>
@@ -234,30 +250,62 @@
                     <div class="input-group"><input type="number" id="qty-Mystic Accessory Core" value="1" min="1"></div>
                     <button class="buy-btn" onclick="addToCart('Mystic Accessory Core', 'Mystic Accessory Core', 6000)">+ ADD TO CART</button>
                 </div>
-                <div class="item-card theme-red">
+                <div class="item-card theme-red" id="card-Refined Relic Shard">
                     <img src="icon_relic.jpg" class="item-icon">
                     <h3>Refined Relic Shard</h3>
                     <div class="tier-text">Tier 9-10</div>
-                    <div class="price">Rp 9.000 / Stack</div>
+                    <div class="price">Rp 8.000 / Stack</div>
                     <div class="stock">Stock: <span id="stok-Refined Relic Shard">Loading...</span></div>
                     <div class="input-group"><input type="number" id="qty-Refined Relic Shard" value="1" min="1"></div>
-                    <button class="buy-btn" onclick="addToCart('Refined Relic Shard', 'Refined Relic Shard', 9000)">+ ADD TO CART</button>
+                    <button class="buy-btn" onclick="addToCart('Refined Relic Shard', 'Refined Relic Shard', 8000)">+ ADD TO CART</button>
                 </div>
-                <div class="item-card theme-blue">
+                <div class="item-card theme-blue" id="card-Sovereign Accessory Essence">
                     <img src="icon_essence.jpg" class="item-icon">
                     <h3>Sovereign Accessory Essence</h3>
                     <div class="tier-text">Tier 11-12</div>
-                    <div class="price">Rp 9.000 / Stack</div>
+                    <div class="price">Rp 8.000 / Stack</div>
                     <div class="stock">Stock: <span id="stok-Sovereign Accessory Essence">Loading...</span></div>
                     <div class="input-group"><input type="number" id="qty-Sovereign Accessory Essence" value="1" min="1"></div>
-                    <button class="buy-btn" onclick="addToCart('Sovereign Accessory Essence', 'Sovereign Accessory Essence', 9000)">+ ADD TO CART</button>
+                    <button class="buy-btn" onclick="addToCart('Sovereign Accessory Essence', 'Sovereign Accessory Essence', 8000)">+ ADD TO CART</button>
+                </div>
+            </div>
+        </div>
+
+        <div id="jade" class="page-section">
+            <div class="grid-container">
+                <div class="item-card theme-orange" id="card-Jade Polisher">
+                    <div class="hot-badge">HOT!</div>
+                    <img src="icon_jade_polisher.jpg" class="item-icon" onerror="this.src='logo_tatsuya.png'">
+                    <h3>Jade Polisher</h3>
+                    <div class="price">PM Me</div>
+                    <div class="stock">Stock: <span id="stok-Jade Polisher">Loading...</span></div>
+                    <div class="input-group"><input type="number" id="qty-Jade Polisher" value="1" min="1"></div>
+                    <button class="buy-btn" onclick="addToCart('Jade Polisher', 'Jade Polisher', 0)">+ ADD TO CART</button>
+                </div>
+                <div class="item-card theme-purple" id="card-Jade Dust">
+                    <div class="hot-badge">HOT!</div>
+                    <img src="icon_jade_dust.jpg" class="item-icon" onerror="this.src='logo_tatsuya.png'">
+                    <h3>Jade Dust</h3>
+                    <div class="price">PM Me</div>
+                    <div class="stock">Stock: <span id="stok-Jade Dust">Loading...</span></div>
+                    <div class="input-group"><input type="number" id="qty-Jade Dust" value="1" min="1"></div>
+                    <button class="buy-btn" onclick="addToCart('Jade Dust', 'Jade Dust', 0)">+ ADD TO CART</button>
+                </div>
+                <div class="item-card theme-blue" id="card-Jade Binding Core">
+                    <div class="hot-badge">HOT!</div>
+                    <img src="icon_jade_core.jpg" class="item-icon" onerror="this.src='logo_tatsuya.png'">
+                    <h3>Jade Binding Core</h3>
+                    <div class="price">PM Me</div>
+                    <div class="stock">Stock: <span id="stok-Jade Binding Core">Loading...</span></div>
+                    <div class="input-group"><input type="number" id="qty-Jade Binding Core" value="1" min="1"></div>
+                    <button class="buy-btn" onclick="addToCart('Jade Binding Core', 'Jade Binding Core', 0)">+ ADD TO CART</button>
                 </div>
             </div>
         </div>
 
         <div id="conversion" class="page-section">
             <div class="grid-container">
-                <div class="item-card theme-blue">
+                <div class="item-card theme-blue" id="card-Adaptive Essence">
                     <img src="icon_adaptive.jpg" class="item-icon" alt="Adaptive Essence" onclick="showLore('Adaptive Essence', 'Ancient', 'Bahan langka untuk konversi material tingkat tinggi.', 'Dungeons')">
                     <h3>Adaptive Essence</h3>
                     <div class="price">PM Me</div>
@@ -265,7 +313,7 @@
                     <div class="input-group"><input type="number" id="qty-Adaptive Essence" value="1" min="1"></div>
                     <button class="buy-btn" onclick="addToCart('Adaptive Essence', 'Adaptive Essence', 0)">+ ADD TO CART</button>
                 </div>
-                <div class="item-card theme-purple">
+                <div class="item-card theme-purple" id="card-Transmutation Shard">
                     <img src="icon_transmutation.jpg" class="item-icon" alt="Transmutation Shard" onclick="showLore('Transmutation Shard', 'Unique', 'Pecahan energi yang digunakan untuk transmutasi material.', 'Dungeons')">
                     <h3>Transmutation Shard</h3>
                     <div class="price">PM Me</div>
@@ -273,7 +321,7 @@
                     <div class="input-group"><input type="number" id="qty-Transmutation Shard" value="1" min="1"></div>
                     <button class="buy-btn" onclick="addToCart('Transmutation Shard', 'Transmutation Shard', 0)">+ ADD TO CART</button>
                 </div>
-                <div class="item-card theme-orange">
+                <div class="item-card theme-orange" id="card-Conversion Fragment">
                     <img src="icon_conversion.jpg" class="item-icon" alt="Conversion Fragment" onclick="showLore('Conversion Fragment', 'Epic', 'Fragmen dasar yang dibutuhkan dalam jumlah banyak untuk konversi.', 'Dungeons')">
                     <h3>Conversion Fragment</h3>
                     <div class="price">PM Me</div>
@@ -286,7 +334,7 @@
 
         <div id="coupons" class="page-section">
             <div class="grid-container">
-                <div class="item-card theme-blue">
+                <div class="item-card theme-blue" id="card-Mount Coupon">
                     <img src="icon_mount.jpg" class="item-icon">
                     <h3>Mount Coupon</h3>
                     <div class="price">Rp 5.000 / Pcs</div>
@@ -294,7 +342,7 @@
                     <div class="input-group"><input type="number" id="qty-Mount Coupon" value="1" min="1"></div>
                     <button class="buy-btn" onclick="addToCart('Mount Coupon', 'Mount Coupon', 5000)">+ ADD TO CART</button>
                 </div>
-                <div class="item-card theme-blue">
+                <div class="item-card theme-blue" id="card-Pet Coupon">
                     <img src="icon_pet.jpg" class="item-icon">
                     <h3>Pet Coupon</h3>
                     <div class="price">Rp 5.000 / Pcs</div>
@@ -302,7 +350,7 @@
                     <div class="input-group"><input type="number" id="qty-Pet Coupon" value="1" min="1"></div>
                     <button class="buy-btn" onclick="addToCart('Pet Coupon', 'Pet Coupon', 5000)">+ ADD TO CART</button>
                 </div>
-                <div class="item-card theme-blue">
+                <div class="item-card theme-blue" id="card-Spirit Coupon">
                     <img src="icon_spirit.jpg" class="item-icon">
                     <h3>Spirit Coupon</h3>
                     <div class="price">Rp 5.000 / Pcs</div>
@@ -315,13 +363,13 @@
 
         <div id="gold" class="page-section">
             <div class="grid-container" style="justify-content: center; display: flex;">
-                <div class="item-card theme-gold" style="width: 100%; max-width: 400px;">
+                <div class="item-card theme-gold" id="card-Gold (1m)" style="width: 100%; max-width: 400px;">
                     <img src="icon_gold.jpg" class="item-icon" style="width: 120px; height: 120px;">
                     <h3>Gold Currency</h3>
-                    <div class="price" style="font-size: 1.5em;">Rp 3.000 / 1m</div>
+                    <div class="price" style="font-size: 1.5em;">PM Me</div>
                     <div class="stock">Stock: <span id="stok-Gold (1m)">Loading...</span>m</div>
                     <div class="input-group"><input type="number" id="qty-Gold (1m)" value="1" min="1"></div>
-                    <button class="buy-btn" onclick="addToCart('Gold (1m)', 'Gold (1m)', 3000)">+ ADD TO CART</button>
+                    <button class="buy-btn" onclick="addToCart('Gold (1m)', 'Gold (1m)', 0)">+ ADD TO CART</button>
                 </div>
             </div>
         </div>
@@ -349,6 +397,26 @@
         </div>
     </div>
 
+    <div class="modal-overlay" id="qris-modal">
+        <div class="modal-content" style="text-align: center; border-color: var(--primary-cyan); max-width: 400px;">
+            <span class="close-btn" onclick="closeQrisModal()">&times;</span>
+            <h2 style="color: var(--primary-cyan); margin-top: 5px;">SCAN TO PAY</h2>
+            <div style="background: rgba(0,0,0,0.5); padding: 15px; border-radius: 10px; margin-bottom: 20px;">
+                <p style="margin: 0; color: #cbd5e1; font-size: 0.9em;">Total Payment:</p>
+                <div id="qris-total-display" style="font-size: 1.5em; color: var(--primary-gold); font-weight: bold;"></div>
+            </div>
+            
+            <img src="qris_tatsuya.jpg" alt="QRIS Tatsuya Store" onerror="this.src='logo_tatsuya.png'" style="width: 100%; max-width: 250px; border-radius: 10px; border: 3px solid #fff; margin-bottom: 15px; background: white;">
+            
+            <p style="color: #cbd5e1; font-size: 0.9em;">Accepting DANA / All E-Wallets & Banks</p>
+            <div style="margin-top: 20px; padding: 10px; border-left: 4px solid #10b981; background: rgba(16, 185, 129, 0.1); text-align: left;">
+                <p style="color: #10b981; font-weight: bold; margin: 0;">✅ Order Sent Successfully!</p>
+                <p style="color: #fff; font-size: 0.85em; margin: 5px 0 0;">Please scan the QR code above and send the payment proof directly to Tatsuya via Discord DM.</p>
+            </div>
+            <button class="checkout-btn" style="background: linear-gradient(45deg, var(--primary-cyan), #0ea5e9);" onclick="closeQrisModal()">DONE</button>
+        </div>
+    </div>
+
     <div class="modal-overlay" id="lore-modal">
         <div class="modal-content" style="border-color: var(--primary-gold);">
             <span class="close-btn" onclick="closeLore()">&times;</span>
@@ -367,7 +435,7 @@
         </div>
     </div>
 
-    <footer><p>&copy; 2026 <span>Tatsuya Store</span>. Fastest & Trusted Seller in Insane DN</p></footer>
+    <footer><p>&copy; 2026 <span>Tatsuya Store</span>. Trusted Seller in Insane DN</p></footer>
 
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-app.js";
@@ -389,16 +457,30 @@
             if(data) {
                 stokRealtime = data;
                 const itemsToCheck = [
+                    'Jade Polisher', 'Jade Dust', 'Jade Binding Core', 
                     'Refinement Dust', 'Enhancement Stone', 'Energy Catalyst', 'Stabilized Core', 'Balkov Pouch',
                     'Faint Accessory Dust', 'Polished Charm Fragment', 'Resonant Sigil Piece', 
                     'Mystic Accessory Core', 'Refined Relic Shard', 'Sovereign Accessory Essence',
                     'Adaptive Essence', 'Transmutation Shard', 'Conversion Fragment',
                     'Mount Coupon', 'Pet Coupon', 'Spirit Coupon', 'Gold (1m)'
                 ];
+                
                 itemsToCheck.forEach(name => {
                     if(stokRealtime[name] === undefined) stokRealtime[name] = 0;
+                    
+                    // Update Text Stok
                     const el = document.getElementById(`stok-${name}`);
                     if(el) el.innerText = stokRealtime[name];
+
+                    // FITUR LOGIC OUT OF STOCK
+                    const cardElement = document.getElementById(`card-${name}`);
+                    if(cardElement) {
+                        if(stokRealtime[name] <= 0) {
+                            cardElement.classList.add('out-of-stock');
+                        } else {
+                            cardElement.classList.remove('out-of-stock');
+                        }
+                    }
                 });
             }
         });
@@ -443,7 +525,6 @@
                 totalItem += item.qty; 
                 subTotal += (item.qty * item.price);
                 
-                // Jika item harganya 0, tampilkan "PM for Price" di keranjang
                 let itemPriceDisplay = item.price === 0 ? "PM for Price" : `Rp ${item.price.toLocaleString('id-ID')}`;
                 let itemTotalDisplay = item.price === 0 ? "Rp 0" : `Rp ${(item.qty * item.price).toLocaleString('id-ID')}`;
                 
@@ -463,6 +544,8 @@
         window.toggleCart = function() { const m = document.getElementById('cart-modal'); m.style.display = m.style.display === 'flex' ? 'none' : 'flex'; }
         window.toggleHistory = function() { const m = document.getElementById('history-modal'); if(m.style.display==='flex') m.style.display='none'; else { m.style.display='flex'; renderHistory(); } }
         function renderHistory() { const c = document.getElementById('history-items-container'); c.innerHTML = ''; for(let i=historyData.length-1; i>=0; i--) c.innerHTML += `<div class="history-item">${historyData[i]}</div>`; }
+
+        window.closeQrisModal = function() { document.getElementById('qris-modal').style.display = 'none'; }
 
         window.checkoutOrder = function() {
             if(Object.keys(cart).length === 0) return showCustomAlert("Empty!");
@@ -490,20 +573,26 @@
 
             let finalTotalDisplay = hasPmItem ? `Rp ${subTotal.toLocaleString('id-ID')} + PM items` : `Rp ${subTotal.toLocaleString('id-ID')}`;
             
-            invoice += `\n💰 **GRAND TOTAL: ${finalTotalDisplay}**\n💳 **Payment:** DANA / QRIS\n\n**Reply text:**\n\`\`\`Thank you for purchasing in Tatsuya Store\`\`\``;
+            invoice += `\n💰 **GRAND TOTAL: ${finalTotalDisplay}**\n💳 **Payment:** DANA / QRIS\n\n**Reply text:**\n\`\`\`Thank you for purchasing in Tatsuya Store. Please send the payment proof.\`\`\``;
 
             set(stokRef, stokRealtime).then(() => {
                 let alias = aliasNames[historyData.length % 10];
                 historyData.push(`🔔 Player <span>${alias}</span> just bought <span>${itemsArr.join(" & ")}</span>!`);
                 if(historyData.length > 20) historyData.shift();
                 set(historyRef, historyData); 
+                
                 fetch(discordWebhookURL, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ content: `@everyone 🚨 **NEW ORDER!** 🚨\n\n${invoice}` }) }).then(() => {
-                    showCustomAlert("✅ Checkout Successful!");
+                    // SETELAH SUKSES CHECKOUT, MUNCULIN QRIS
+                    document.getElementById('qris-total-display').innerText = finalTotalDisplay;
+                    document.getElementById('cart-modal').style.display = 'none';
+                    document.getElementById('qris-modal').style.display = 'flex';
+                    
                     const teleToken = "7457880426:AAEgJvDhHjta1ihIhSXBIFP-aeO545fVewA"; 
                     const teleChatId = "1600454088"; 
                     const teleText = encodeURIComponent(`🚨 NEW ORDER! 👤 IGN: ${ign} 💰 Total: ${finalTotalDisplay}`);
                     fetch(`https://api.telegram.org/bot${teleToken}/sendMessage?chat_id=${teleChatId}&text=${teleText}`).catch(e => console.log(e));
-                    cart = {}; updateCartUI(); toggleCart();
+                    
+                    cart = {}; updateCartUI(); 
                 });
             });
         }
