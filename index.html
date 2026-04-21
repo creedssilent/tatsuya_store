@@ -7,7 +7,7 @@
     <title>Tatsuya Store - Insane DN</title>
     
     <style>
-        /* Tatsuya Theme V9.7 (QRIS Zoom Feature Added) */
+        /* Tatsuya Theme V9.8 (Fixed QRIS Zoom Dark Overlay Issue) */
         :root {
             --primary-gold: #fbbf24; 
             --primary-cyan: #00f0ff; 
@@ -113,39 +113,34 @@
         .lore-desc { font-style: italic; color: #cbd5e1; line-height: 1.5; border-left: 3px solid var(--primary-cyan); padding-left: 10px; margin-bottom: 15px; white-space: pre-line; }
         .lore-drop { color: #94a3b8; font-size: 0.9em; white-space: pre-line; }
 
-        /* FITUR ZOOM QRIS */
+        /* PENGATURAN GAMBAR QRIS DI DALAM MODAL */
         .qris-img { width: 100%; max-width: 250px; border-radius: 10px; border: 3px solid #fff; margin-bottom: 5px; background: white; cursor: pointer; transition: transform 0.3s ease; }
         .qris-img:hover { transform: scale(1.05); box-shadow: 0 0 20px rgba(0, 240, 255, 0.5); }
-        
-        .qris-img.zoomed {
-            position: fixed;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            width: auto;
-            max-width: 90vw;
-            height: 85vh;
-            max-height: none;
-            z-index: 9999;
-            border: 5px solid var(--primary-cyan);
-            box-shadow: 0 0 50px rgba(0,0,0,0.9);
-            cursor: zoom-out;
-            background: white;
-            object-fit: contain;
-        }
+        .blink-text { font-size: 0.8em; color: #67e8f9; margin-bottom: 15px; font-style: italic; animation: blinker 2s linear infinite; }
+        @keyframes blinker { 50% { opacity: 0.3; } }
 
-        /* Overlay gelap saat gambar di-zoom */
+        /* OVERLAY ZOOM FULL SCREEN BARU (Solusi Layar Gelap) */
         #zoom-overlay {
             display: none;
             position: fixed;
             top: 0; left: 0; right: 0; bottom: 0;
-            background: rgba(0,0,0,0.9);
-            z-index: 9998;
+            background: rgba(0,0,0,0.95);
+            z-index: 10000; /* Paling atas dari segalanya */
+            justify-content: center;
+            align-items: center;
             cursor: zoom-out;
+            backdrop-filter: blur(5px);
         }
-
-        .blink-text { font-size: 0.8em; color: #67e8f9; margin-bottom: 15px; font-style: italic; animation: blinker 2s linear infinite; }
-        @keyframes blinker { 50% { opacity: 0.3; } }
+        
+        #zoom-overlay img {
+            max-width: 90vw;
+            max-height: 85vh;
+            border: 5px solid var(--primary-cyan);
+            border-radius: 10px;
+            box-shadow: 0 0 50px rgba(0,0,0,0.9);
+            background: white;
+            object-fit: contain;
+        }
 
         footer { background: rgba(2, 4, 15, 0.9); border-top: 1px solid var(--primary-cyan); text-align: center; padding: 20px; font-size: 0.9em; color: #94a3b8; margin-top: auto; }
         footer span { color: var(--primary-cyan); font-weight: bold; }
@@ -159,7 +154,6 @@
             .item-card { padding: 20px 15px; } 
             .item-icon { width: 65px; height: 65px; }
             .cart-fab, .history-fab { width: 50px; height: 50px; font-size: 1.2em; bottom: 20px; }
-            .qris-img.zoomed { width: 95vw; height: auto; max-height: 85vh; }
         }
     </style>
 </head>
@@ -411,7 +405,9 @@
     <div class="cart-fab" onclick="toggleCart()">🛒<div class="cart-badge" id="cart-count">0</div></div>
     <div class="history-fab" onclick="toggleHistory()">📜</div>
 
-    <div id="zoom-overlay" onclick="toggleZoom()"></div>
+    <div id="zoom-overlay" onclick="toggleZoom()">
+        <img src="qris_tatsuya.jpg" alt="QRIS Zoomed" onerror="this.src='logo_tatsuya.png'">
+    </div>
 
     <div class="modal-overlay" id="history-modal">
         <div class="modal-content" style="border-color: var(--primary-gold);">
@@ -432,7 +428,7 @@
     </div>
 
     <div class="modal-overlay" id="qris-modal">
-        <div class="modal-content" style="text-align: center; border-color: var(--primary-cyan); max-width: 400px; z-index: 9997;">
+        <div class="modal-content" style="text-align: center; border-color: var(--primary-cyan); max-width: 400px;">
             <span class="close-btn" onclick="closeQrisModal()">&times;</span>
             <h2 style="color: var(--primary-cyan); margin-top: 5px;">SCAN TO PAY</h2>
             <div style="background: rgba(0,0,0,0.5); padding: 15px; border-radius: 10px; margin-bottom: 20px;">
@@ -440,7 +436,7 @@
                 <div id="qris-total-display" style="font-size: 1.5em; color: var(--primary-gold); font-weight: bold;"></div>
             </div>
             
-            <img src="qris_tatsuya.jpg" alt="QRIS Tatsuya Store" id="qrisImage" class="qris-img" onclick="toggleZoom()" onerror="this.src='logo_tatsuya.png'">
+            <img src="qris_tatsuya.jpg" alt="QRIS Tatsuya Store" class="qris-img" onclick="toggleZoom()" onerror="this.src='logo_tatsuya.png'">
             <div class="blink-text">(Click image to enlarge)</div>
             
             <p style="color: #cbd5e1; font-size: 0.9em;">Accepting DANA / All E-Wallets & Banks</p>
@@ -525,16 +521,13 @@
             if(document.getElementById('history-modal').style.display === 'flex') renderHistory();
         });
 
-        // LOGIC ZOOM QRIS
+        // LOGIC ZOOM QRIS BARU (Pakai Overlay Terpisah)
         window.toggleZoom = function() {
-            const img = document.getElementById('qrisImage');
             const overlay = document.getElementById('zoom-overlay');
-            if (img.classList.contains('zoomed')) {
-                img.classList.remove('zoomed');
+            if (overlay.style.display === 'flex') {
                 overlay.style.display = 'none';
             } else {
-                img.classList.add('zoomed');
-                overlay.style.display = 'block';
+                overlay.style.display = 'flex';
             }
         }
 
@@ -591,10 +584,9 @@
         window.toggleHistory = function() { const m = document.getElementById('history-modal'); if(m.style.display==='flex') m.style.display='none'; else { m.style.display='flex'; renderHistory(); } }
         function renderHistory() { const c = document.getElementById('history-items-container'); c.innerHTML = ''; for(let i=historyData.length-1; i>=0; i--) c.innerHTML += `<div class="history-item">${historyData[i]}</div>`; }
 
+        // Pastikan zoom overlay ikut mati pas modal ditutup
         window.closeQrisModal = function() { 
             document.getElementById('qris-modal').style.display = 'none'; 
-            // Reset zoom saat modal ditutup
-            document.getElementById('qrisImage').classList.remove('zoomed');
             document.getElementById('zoom-overlay').style.display = 'none';
         }
 
