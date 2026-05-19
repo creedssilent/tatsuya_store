@@ -188,6 +188,7 @@
         <button class="nav-btn" onclick="showPage('jade', this)">JADE MATERIALS</button>
         <button class="nav-btn" onclick="showPage('conversion', this)">CONVERSION</button>
         <button class="nav-btn" onclick="showPage('coupons', this)">COUPONS</button>
+        <button class="nav-btn" onclick="showPage('dnp', this)">DNP</button>
         <button class="nav-btn" onclick="showPage('gold', this)">GOLD</button>
     </nav>
 
@@ -387,10 +388,27 @@
             </div>
         </div>
 
+        <div id="dnp" class="page-section">
+            <div class="grid-container" style="justify-content: center; display: flex;">
+                <div class="item-card theme-gold" id="card-DNP" style="width: 100%; max-width: 400px;">
+                    <div class="hot-badge">NEW!</div>
+                    <img src="icon_dnp.jpg" class="item-icon" style="width: 120px; height: 120px;" onerror="this.src='logo_tatsuya.png'">
+                    <h3>DNP</h3>
+                    <div class="price" style="font-size: 1.5em; color: var(--primary-gold);">Rp 100.000 / 2m DNP</div>
+                    <p style="color: #cbd5e1; font-size: 0.85em; margin-top: -5px; margin-bottom: 15px; font-style: italic; line-height: 1.4;">
+                        (Price is negotiable, just DM Discord <b style="color: var(--primary-cyan);">madara_6666</b> or IGN: <b style="color: var(--primary-cyan);">Arthemies</b>)
+                    </p>
+                    <div class="stock">Stock: <span id="stok-DNP">Loading...</span></div>
+                    <div class="input-group"><input type="number" id="qty-DNP" value="1" min="1"></div>
+                    <button class="buy-btn" onclick="addToCart('DNP', 'DNP (2m)', 100000)">+ ADD TO CART</button>
+                </div>
+            </div>
+        </div>
+
         <div id="gold" class="page-section">
             <div class="grid-container" style="justify-content: center; display: flex;">
                 <div class="item-card theme-gold" id="card-Gold (1m)" style="width: 100%; max-width: 400px;">
-                    <img src="icon_gold.jpg" class="item-icon" style="width: 120px; height: 120px;">
+                    <img src="icon_gold.jpg" class="item-icon" style="width: 120px; height: 120px;" onerror="this.src='logo_tatsuya.png'">
                     <h3>Gold Currency</h3>
                     <div class="price" style="font-size: 1.5em;">PM Me</div>
                     <div class="stock">Stock: <span id="stok-Gold (1m)">Loading...</span>m</div>
@@ -442,7 +460,7 @@
             <p style="color: #cbd5e1; font-size: 0.9em;">Accepting DANA / All E-Wallets & Banks</p>
             <div style="margin-top: 20px; padding: 10px; border-left: 4px solid #10b981; background: rgba(16, 185, 129, 0.1); text-align: left;">
                 <p style="color: #10b981; font-weight: bold; margin: 0;">✅ Order Sent Successfully!</p>
-                <p style="color: #fff; font-size: 0.85em; margin: 5px 0 0;">Please scan the QR code above and send the payment proof directly to Tatsuya via Discord DM.</p>
+                <p style="color: #fff; font-size: 0.85em; margin: 5px 0 0;">Please scan the QR code above and send the payment proof directly to Tatsuya (or Arthemies if ordering DNP) via Discord DM.</p>
             </div>
             <button class="checkout-btn" style="background: linear-gradient(45deg, var(--primary-cyan), #0ea5e9);" onclick="closeQrisModal()">DONE</button>
         </div>
@@ -493,7 +511,7 @@
                     'Faint Accessory Dust', 'Polished Charm Fragment', 'Resonant Sigil Piece', 
                     'Mystic Accessory Core', 'Refined Relic Shard', 'Sovereign Accessory Essence',
                     'Adaptive Essence', 'Transmutation Shard', 'Conversion Fragment',
-                    'Mount Coupon', 'Pet Coupon', 'Spirit Coupon', 'Gold (1m)'
+                    'Mount Coupon', 'Pet Coupon', 'Spirit Coupon', 'Gold (1m)', 'DNP'
                 ];
                 
                 itemsToCheck.forEach(name => {
