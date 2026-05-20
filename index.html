@@ -66,27 +66,27 @@
         @keyframes pulseHot { 0%, 100% { opacity: 1; } 50% { opacity: 0.8; box-shadow: 0 0 20px #e11d48; } }
 
         .price { font-size: 1.2em; font-weight: bold; margin: 10px 0; }
-        .stock { font-size: 0.95em; color: #94a3b8; margin-bottom: 15px; }
-        .stock span { font-weight: bold; font-size: 1.1em; }
+        .Stack { font-size: 0.95em; color: #94a3b8; margin-bottom: 15px; }
+        .Stack span { font-weight: bold; font-size: 1.1em; }
         .input-group { margin-bottom: 15px; }
         input[type="number"] { width: 70px; padding: 8px; text-align: center; background: rgba(0,0,0,0.6); border-radius: 5px; font-weight: bold; outline: none; transition: 0.3s; color: white; border: 1px solid transparent; }
         .buy-btn { border: none; padding: 12px; font-size: 1.1em; font-weight: bold; border-radius: 6px; cursor: pointer; width: 100%; text-transform: uppercase; transition: 0.3s; color: white; }
 
-        .item-card.out-of-stock { filter: grayscale(100%); opacity: 0.6; pointer-events: none; }
-        .item-card.out-of-stock::after {
-            content: "OUT OF STOCK"; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%) rotate(-15deg);
+        .item-card.out-of-Stack { filter: grayscale(100%); opacity: 0.6; pointer-events: none; }
+        .item-card.out-of-Stack::after {
+            content: "OUT OF Stack"; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%) rotate(-15deg);
             background: rgba(225, 29, 72, 0.95); color: white; padding: 10px 25px; font-weight: bold; font-size: 1.5em;
             border-radius: 8px; z-index: 10; border: 2px solid #fff; box-shadow: 0 0 20px rgba(225, 29, 72, 0.8);
             letter-spacing: 2px; white-space: nowrap; pointer-events: none;
         }
 
-        .theme-green { border-color: rgba(16, 185, 129, 0.4); } .theme-green .item-icon { border-color: #10b981; box-shadow: 0 0 15px rgba(16, 185, 129, 0.5); } .theme-green h3 { color: #fff; text-shadow: 0 0 8px #10b981; } .theme-green .price { color: #6ee7b7; } .theme-green .stock span { color: #10b981; } .theme-green input { border-color: #10b981; } .theme-green .buy-btn { background: linear-gradient(45deg, #059669, #10b981); } .theme-green .buy-btn:hover { background: #10b981; box-shadow: 0 0 15px #10b981; transform: scale(1.02); }
-        .theme-blue { border-color: rgba(0, 240, 255, 0.4); } .theme-blue .item-icon { border-color: #00f0ff; box-shadow: 0 0 15px rgba(0, 240, 255, 0.5); } .theme-blue h3 { color: #fff; text-shadow: 0 0 8px #00f0ff; } .theme-blue .price { color: #67e8f9; } .theme-blue .stock span { color: #00f0ff; } .theme-blue input { border-color: #00f0ff; } .theme-blue .buy-btn { background: linear-gradient(45deg, #0284c7, #0ea5e9); } .theme-blue .buy-btn:hover { background: #0ea5e9; box-shadow: 0 0 15px #00f0ff; transform: scale(1.02); }
-        .theme-rare { border-color: rgba(59, 130, 246, 0.4); } .theme-rare .item-icon { border-color: #3b82f6; box-shadow: 0 0 15px rgba(59, 130, 246, 0.5); } .theme-rare h3 { color: #fff; text-shadow: 0 0 8px #3b82f6; } .theme-rare .price { color: #93c5fd; } .theme-rare .stock span { color: #3b82f6; } .theme-rare input { border-color: #3b82f6; } .theme-rare .buy-btn { background: linear-gradient(45deg, #1d4ed8, #3b82f6); } .theme-rare .buy-btn:hover { background: #3b82f6; box-shadow: 0 0 15px #3b82f6; transform: scale(1.02); }
-        .theme-purple { border-color: rgba(168, 85, 247, 0.4); } .theme-purple .item-icon { border-color: #a855f7; box-shadow: 0 0 15px rgba(168, 85, 247, 0.5); } .theme-purple h3 { color: #fff; text-shadow: 0 0 8px #a855f7; } .theme-purple .price { color: #d8b4fe; } .theme-purple .stock span { color: #a855f7; } .theme-purple input { border-color: #a855f7; } .theme-purple .buy-btn { background: linear-gradient(45deg, #7e22ce, #a855f7); } .theme-purple .buy-btn:hover { background: #9333ea; box-shadow: 0 0 15px #a855f7; transform: scale(1.02); }
-        .theme-orange { border-color: rgba(249, 115, 22, 0.4); } .theme-orange .item-icon { border-color: #f97316; box-shadow: 0 0 15px rgba(249, 115, 22, 0.5); } .theme-orange h3 { color: #fff; text-shadow: 0 0 8px #f97316; } .theme-orange .price { color: #fdba74; } .theme-orange .stock span { color: #f97316; } .theme-orange input { border-color: #f97316; } .theme-orange .buy-btn { background: linear-gradient(45deg, #c2410c, #ea580c); } .theme-orange .buy-btn:hover { background: #ea580c; box-shadow: 0 0 15px #f97316; transform: scale(1.02); }
-        .theme-red { border-color: rgba(244, 63, 94, 0.4); } .theme-red .item-icon { border-color: #f43f5e; box-shadow: 0 0 15px rgba(244, 63, 94, 0.5); } .theme-red h3 { color: #fff; text-shadow: 0 0 8px #f43f5e; } .theme-red .price { color: #fda4af; } .theme-red .stock span { color: #f43f5e; } .theme-red input { border-color: #f43f5e; } .theme-red .buy-btn { background: linear-gradient(45deg, #be123c, #e11d48); } .theme-red .buy-btn:hover { background: #e11d48; box-shadow: 0 0 15px #f43f5e; transform: scale(1.02); }
-        .theme-gold { border-color: rgba(251, 191, 36, 0.4); } .theme-gold .item-icon { border-color: #fbbf24; box-shadow: 0 0 15px rgba(251, 191, 36, 0.5); } .theme-gold h3 { color: #fbbf24; text-shadow: 0 0 8px #fbbf24; } .theme-gold .price { color: #fff; } .theme-gold .stock span { color: #fbbf24; } .theme-gold input { border-color: #fbbf24; } .theme-gold .buy-btn { background: linear-gradient(45deg, #b45309, #d97706); } .theme-gold .buy-btn:hover { background: #d97706; box-shadow: 0 0 15px #fbbf24; transform: scale(1.02); }
+        .theme-green { border-color: rgba(16, 185, 129, 0.4); } .theme-green .item-icon { border-color: #10b981; box-shadow: 0 0 15px rgba(16, 185, 129, 0.5); } .theme-green h3 { color: #fff; text-shadow: 0 0 8px #10b981; } .theme-green .price { color: #6ee7b7; } .theme-green .Stack span { color: #10b981; } .theme-green input { border-color: #10b981; } .theme-green .buy-btn { background: linear-gradient(45deg, #059669, #10b981); } .theme-green .buy-btn:hover { background: #10b981; box-shadow: 0 0 15px #10b981; transform: scale(1.02); }
+        .theme-blue { border-color: rgba(0, 240, 255, 0.4); } .theme-blue .item-icon { border-color: #00f0ff; box-shadow: 0 0 15px rgba(0, 240, 255, 0.5); } .theme-blue h3 { color: #fff; text-shadow: 0 0 8px #00f0ff; } .theme-blue .price { color: #67e8f9; } .theme-blue .Stack span { color: #00f0ff; } .theme-blue input { border-color: #00f0ff; } .theme-blue .buy-btn { background: linear-gradient(45deg, #0284c7, #0ea5e9); } .theme-blue .buy-btn:hover { background: #0ea5e9; box-shadow: 0 0 15px #00f0ff; transform: scale(1.02); }
+        .theme-rare { border-color: rgba(59, 130, 246, 0.4); } .theme-rare .item-icon { border-color: #3b82f6; box-shadow: 0 0 15px rgba(59, 130, 246, 0.5); } .theme-rare h3 { color: #fff; text-shadow: 0 0 8px #3b82f6; } .theme-rare .price { color: #93c5fd; } .theme-rare .Stack span { color: #3b82f6; } .theme-rare input { border-color: #3b82f6; } .theme-rare .buy-btn { background: linear-gradient(45deg, #1d4ed8, #3b82f6); } .theme-rare .buy-btn:hover { background: #3b82f6; box-shadow: 0 0 15px #3b82f6; transform: scale(1.02); }
+        .theme-purple { border-color: rgba(168, 85, 247, 0.4); } .theme-purple .item-icon { border-color: #a855f7; box-shadow: 0 0 15px rgba(168, 85, 247, 0.5); } .theme-purple h3 { color: #fff; text-shadow: 0 0 8px #a855f7; } .theme-purple .price { color: #d8b4fe; } .theme-purple .Stack span { color: #a855f7; } .theme-purple input { border-color: #a855f7; } .theme-purple .buy-btn { background: linear-gradient(45deg, #7e22ce, #a855f7); } .theme-purple .buy-btn:hover { background: #9333ea; box-shadow: 0 0 15px #a855f7; transform: scale(1.02); }
+        .theme-orange { border-color: rgba(249, 115, 22, 0.4); } .theme-orange .item-icon { border-color: #f97316; box-shadow: 0 0 15px rgba(249, 115, 22, 0.5); } .theme-orange h3 { color: #fff; text-shadow: 0 0 8px #f97316; } .theme-orange .price { color: #fdba74; } .theme-orange .Stack span { color: #f97316; } .theme-orange input { border-color: #f97316; } .theme-orange .buy-btn { background: linear-gradient(45deg, #c2410c, #ea580c); } .theme-orange .buy-btn:hover { background: #ea580c; box-shadow: 0 0 15px #f97316; transform: scale(1.02); }
+        .theme-red { border-color: rgba(244, 63, 94, 0.4); } .theme-red .item-icon { border-color: #f43f5e; box-shadow: 0 0 15px rgba(244, 63, 94, 0.5); } .theme-red h3 { color: #fff; text-shadow: 0 0 8px #f43f5e; } .theme-red .price { color: #fda4af; } .theme-red .Stack span { color: #f43f5e; } .theme-red input { border-color: #f43f5e; } .theme-red .buy-btn { background: linear-gradient(45deg, #be123c, #e11d48); } .theme-red .buy-btn:hover { background: #e11d48; box-shadow: 0 0 15px #f43f5e; transform: scale(1.02); }
+        .theme-gold { border-color: rgba(251, 191, 36, 0.4); } .theme-gold .item-icon { border-color: #fbbf24; box-shadow: 0 0 15px rgba(251, 191, 36, 0.5); } .theme-gold h3 { color: #fbbf24; text-shadow: 0 0 8px #fbbf24; } .theme-gold .price { color: #fff; } .theme-gold .Stack span { color: #fbbf24; } .theme-gold input { border-color: #fbbf24; } .theme-gold .buy-btn { background: linear-gradient(45deg, #b45309, #d97706); } .theme-gold .buy-btn:hover { background: #d97706; box-shadow: 0 0 15px #fbbf24; transform: scale(1.02); }
 
         .cart-fab { position: fixed; bottom: 30px; right: 30px; background: linear-gradient(45deg, var(--primary-cyan), #0ea5e9); color: var(--dark-navy); width: 60px; height: 60px; border-radius: 50%; display: flex; justify-content: center; align-items: center; font-size: 1.5em; cursor: pointer; box-shadow: 0 0 20px rgba(0, 240, 255, 0.5); z-index: 100; transition: 0.3s; border: 2px solid #fff; }
         .cart-fab:hover { transform: scale(1.1); box-shadow: 0 0 30px var(--primary-cyan); }
@@ -200,7 +200,7 @@
                     <img src="icon_refinement.jpg" class="item-icon" onclick="showLore('Refinement Dust', 'Unique', 'Material used for basic refining.', 'Nests')">
                     <h3>Refinement Dust</h3>
                     <div class="price">Rp 2.000 / Stack</div>
-                    <div class="stock">Stock: <span id="stok-Refinement Dust">Loading...</span></div>
+                    <div class="Stack">Stack: <span id="stok-Refinement Dust">Loading...</span></div>
                     <div class="input-group"><input type="number" id="qty-Refinement Dust" value="1" min="1"></div>
                     <button class="buy-btn" onclick="addToCart('Refinement Dust', 'Refinement Dust', 2000)">+ ADD TO CART</button>
                 </div>
@@ -208,7 +208,7 @@
                     <img src="icon_stone.jpg" class="item-icon">
                     <h3>Enhancement Stone</h3>
                     <div class="price">Rp 1.000 / 2 Stacks</div>
-                    <div class="stock">Stock: <span id="stok-Enhancement Stone">Loading...</span> (Packs)</div>
+                    <div class="Stack">Stack: <span id="stok-Enhancement Stone">Loading...</span> (Packs)</div>
                     <div class="input-group"><input type="number" id="qty-Enhancement Stone" value="1" min="1" title="1 qty = 2 Stacks"></div>
                     <button class="buy-btn" onclick="addToCart('Enhancement Stone', 'Enhancement Stone (2 Stacks)', 1000)">+ ADD TO CART</button>
                 </div>
@@ -216,7 +216,7 @@
                     <img src="icon_energy.jpg" class="item-icon">
                     <h3>Energy Catalyst</h3>
                     <div class="price">Rp 3.000 / Stack</div>
-                    <div class="stock">Stock: <span id="stok-Energy Catalyst">Loading...</span></div>
+                    <div class="Stack">Stack: <span id="stok-Energy Catalyst">Loading...</span></div>
                     <div class="input-group"><input type="number" id="qty-Energy Catalyst" value="1" min="1"></div>
                     <button class="buy-btn" onclick="addToCart('Energy Catalyst', 'Energy Catalyst', 3000)">+ ADD TO CART</button>
                 </div>
@@ -224,7 +224,7 @@
                     <img src="icon_core.jpg" class="item-icon">
                     <h3>Stabilized Core</h3>
                     <div class="price">Rp 2.000 / Stack</div>
-                    <div class="stock">Stock: <span id="stok-Stabilized Core">Loading...</span></div>
+                    <div class="Stack">Stack: <span id="stok-Stabilized Core">Loading...</span></div>
                     <div class="input-group"><input type="number" id="qty-Stabilized Core" value="1" min="1"></div>
                     <button class="buy-btn" onclick="addToCart('Stabilized Core', 'Stabilized Core', 2000)">+ ADD TO CART</button>
                 </div>
@@ -232,7 +232,7 @@
                     <img src="icon_balkov.jpg" class="item-icon">
                     <h3>Balkov Pouch</h3>
                     <div class="price">Rp 2.000 / Pcs</div>
-                    <div class="stock">Stock: <span id="stok-Balkov Pouch">Loading...</span></div>
+                    <div class="Stack">Stack: <span id="stok-Balkov Pouch">Loading...</span></div>
                     <div class="input-group"><input type="number" id="qty-Balkov Pouch" value="1" min="1"></div>
                     <button class="buy-btn" onclick="addToCart('Balkov Pouch', 'Balkov Pouch', 2000)">+ ADD TO CART</button>
                 </div>
@@ -246,7 +246,7 @@
                     <h3>Faint Accessory Dust</h3>
                     <div class="tier-text">Tier 1-3</div>
                     <div class="price">Rp 2.000 / Stack</div>
-                    <div class="stock">Stock: <span id="stok-Faint Accessory Dust">Loading...</span></div>
+                    <div class="Stack">Stack: <span id="stok-Faint Accessory Dust">Loading...</span></div>
                     <div class="input-group"><input type="number" id="qty-Faint Accessory Dust" value="1" min="1"></div>
                     <button class="buy-btn" onclick="addToCart('Faint Accessory Dust', 'Faint Accessory Dust', 2000)">+ ADD TO CART</button>
                 </div>
@@ -255,7 +255,7 @@
                     <h3>Polished Charm Fragment</h3>
                     <div class="tier-text">Tier 4-5</div>
                     <div class="price">Rp 9.000 / Stack</div>
-                    <div class="stock">Stock: <span id="stok-Polished Charm Fragment">Loading...</span></div>
+                    <div class="Stack">Stack: <span id="stok-Polished Charm Fragment">Loading...</span></div>
                     <div class="input-group"><input type="number" id="qty-Polished Charm Fragment" value="1" min="1"></div>
                     <button class="buy-btn" onclick="addToCart('Polished Charm Fragment', 'Polished Charm Fragment', 9000)">+ ADD TO CART</button>
                 </div>
@@ -264,7 +264,7 @@
                     <h3>Resonant Sigil Piece</h3>
                     <div class="tier-text">Tier 6-7</div>
                     <div class="price">Rp 8.000 / Stack</div>
-                    <div class="stock">Stock: <span id="stok-Resonant Sigil Piece">Loading...</span></div>
+                    <div class="Stack">Stack: <span id="stok-Resonant Sigil Piece">Loading...</span></div>
                     <div class="input-group"><input type="number" id="qty-Resonant Sigil Piece" value="1" min="1"></div>
                     <button class="buy-btn" onclick="addToCart('Resonant Sigil Piece', 'Resonant Sigil Piece', 8000)">+ ADD TO CART</button>
                 </div>
@@ -273,7 +273,7 @@
                     <h3>Mystic Accessory Core</h3>
                     <div class="tier-text">Tier 8</div>
                     <div class="price">Rp 6.000 / Stack</div>
-                    <div class="stock">Stock: <span id="stok-Mystic Accessory Core">Loading...</span></div>
+                    <div class="Stack">Stack: <span id="stok-Mystic Accessory Core">Loading...</span></div>
                     <div class="input-group"><input type="number" id="qty-Mystic Accessory Core" value="1" min="1"></div>
                     <button class="buy-btn" onclick="addToCart('Mystic Accessory Core', 'Mystic Accessory Core', 6000)">+ ADD TO CART</button>
                 </div>
@@ -282,7 +282,7 @@
                     <h3>Refined Relic Shard</h3>
                     <div class="tier-text">Tier 9-10</div>
                     <div class="price">Rp 8.000 / Stack</div>
-                    <div class="stock">Stock: <span id="stok-Refined Relic Shard">Loading...</span></div>
+                    <div class="Stack">Stack: <span id="stok-Refined Relic Shard">Loading...</span></div>
                     <div class="input-group"><input type="number" id="qty-Refined Relic Shard" value="1" min="1"></div>
                     <button class="buy-btn" onclick="addToCart('Refined Relic Shard', 'Refined Relic Shard', 8000)">+ ADD TO CART</button>
                 </div>
@@ -291,7 +291,7 @@
                     <h3>Sovereign Accessory Essence</h3>
                     <div class="tier-text">Tier 11-12</div>
                     <div class="price">Rp 8.000 / Stack</div>
-                    <div class="stock">Stock: <span id="stok-Sovereign Accessory Essence">Loading...</span></div>
+                    <div class="Stack">Stack: <span id="stok-Sovereign Accessory Essence">Loading...</span></div>
                     <div class="input-group"><input type="number" id="qty-Sovereign Accessory Essence" value="1" min="1"></div>
                     <button class="buy-btn" onclick="addToCart('Sovereign Accessory Essence', 'Sovereign Accessory Essence', 8000)">+ ADD TO CART</button>
                 </div>
@@ -305,7 +305,7 @@
                     <img src="icon_jade_polisher.jpg" class="item-icon" onerror="this.src='logo_tatsuya.png'">
                     <h3>Jade Polisher</h3>
                     <div class="price">PM Me</div>
-                    <div class="stock">Stock: <span id="stok-Jade Polisher">Loading...</span></div>
+                    <div class="Stack">Stack: <span id="stok-Jade Polisher">Loading...</span></div>
                     <div class="input-group"><input type="number" id="qty-Jade Polisher" value="1" min="1"></div>
                     <button class="buy-btn" onclick="addToCart('Jade Polisher', 'Jade Polisher', 0)">+ ADD TO CART</button>
                 </div>
@@ -314,7 +314,7 @@
                     <img src="icon_jade_dust.jpg" class="item-icon" onerror="this.src='logo_tatsuya.png'">
                     <h3>Jade Dust</h3>
                     <div class="price">PM Me</div>
-                    <div class="stock">Stock: <span id="stok-Jade Dust">Loading...</span></div>
+                    <div class="Stack">Stack: <span id="stok-Jade Dust">Loading...</span></div>
                     <div class="input-group"><input type="number" id="qty-Jade Dust" value="1" min="1"></div>
                     <button class="buy-btn" onclick="addToCart('Jade Dust', 'Jade Dust', 0)">+ ADD TO CART</button>
                 </div>
@@ -323,7 +323,7 @@
                     <img src="icon_jade_core.jpg" class="item-icon" onerror="this.src='logo_tatsuya.png'">
                     <h3>Jade Binding Core</h3>
                     <div class="price">PM Me</div>
-                    <div class="stock">Stock: <span id="stok-Jade Binding Core">Loading...</span></div>
+                    <div class="Stack">Stack: <span id="stok-Jade Binding Core">Loading...</span></div>
                     <div class="input-group"><input type="number" id="qty-Jade Binding Core" value="1" min="1"></div>
                     <button class="buy-btn" onclick="addToCart('Jade Binding Core', 'Jade Binding Core', 0)">+ ADD TO CART</button>
                 </div>
@@ -336,7 +336,7 @@
                     <img src="icon_adaptive.jpg" class="item-icon">
                     <h3>Adaptive Essence</h3>
                     <div class="price">PM Me</div>
-                    <div class="stock">Stock: <span id="stok-Adaptive Essence">Loading...</span></div>
+                    <div class="Stack">Stack: <span id="stok-Adaptive Essence">Loading...</span></div>
                     <div class="input-group"><input type="number" id="qty-Adaptive Essence" value="1" min="1"></div>
                     <button class="buy-btn" onclick="addToCart('Adaptive Essence', 'Adaptive Essence', 0)">+ ADD TO CART</button>
                 </div>
@@ -344,7 +344,7 @@
                     <img src="icon_transmutation.jpg" class="item-icon">
                     <h3>Transmutation Shard</h3>
                     <div class="price">PM Me</div>
-                    <div class="stock">Stock: <span id="stok-Transmutation Shard">Loading...</span></div>
+                    <div class="Stack">Stack: <span id="stok-Transmutation Shard">Loading...</span></div>
                     <div class="input-group"><input type="number" id="qty-Transmutation Shard" value="1" min="1"></div>
                     <button class="buy-btn" onclick="addToCart('Transmutation Shard', 'Transmutation Shard', 0)">+ ADD TO CART</button>
                 </div>
@@ -352,7 +352,7 @@
                     <img src="icon_conversion.jpg" class="item-icon">
                     <h3>Conversion Fragment</h3>
                     <div class="price">PM Me</div>
-                    <div class="stock">Stock: <span id="stok-Conversion Fragment">Loading...</span></div>
+                    <div class="Stack">Stack: <span id="stok-Conversion Fragment">Loading...</span></div>
                     <div class="input-group"><input type="number" id="qty-Conversion Fragment" value="1" min="1"></div>
                     <button class="buy-btn" onclick="addToCart('Conversion Fragment', 'Conversion Fragment', 0)">+ ADD TO CART</button>
                 </div>
@@ -365,7 +365,7 @@
                     <img src="icon_mount.jpg" class="item-icon">
                     <h3>Mount Coupon</h3>
                     <div class="price">Rp 5.000 / Pcs</div>
-                    <div class="stock">Stock: <span id="stok-Mount Coupon">Loading...</span></div>
+                    <div class="Stack">Stack: <span id="stok-Mount Coupon">Loading...</span></div>
                     <div class="input-group"><input type="number" id="qty-Mount Coupon" value="1" min="1"></div>
                     <button class="buy-btn" onclick="addToCart('Mount Coupon', 'Mount Coupon', 5000)">+ ADD TO CART</button>
                 </div>
@@ -373,7 +373,7 @@
                     <img src="icon_pet.jpg" class="item-icon">
                     <h3>Pet Coupon</h3>
                     <div class="price">Rp 5.000 / Pcs</div>
-                    <div class="stock">Stock: <span id="stok-Pet Coupon">Loading...</span></div>
+                    <div class="Stack">Stack: <span id="stok-Pet Coupon">Loading...</span></div>
                     <div class="input-group"><input type="number" id="qty-Pet Coupon" value="1" min="1"></div>
                     <button class="buy-btn" onclick="addToCart('Pet Coupon', 'Pet Coupon', 5000)">+ ADD TO CART</button>
                 </div>
@@ -381,7 +381,7 @@
                     <img src="icon_spirit.jpg" class="item-icon">
                     <h3>Spirit Coupon</h3>
                     <div class="price">Rp 5.000 / Pcs</div>
-                    <div class="stock">Stock: <span id="stok-Spirit Coupon">Loading...</span></div>
+                    <div class="Stack">Stack: <span id="stok-Spirit Coupon">Loading...</span></div>
                     <div class="input-group"><input type="number" id="qty-Spirit Coupon" value="1" min="1"></div>
                     <button class="buy-btn" onclick="addToCart('Spirit Coupon', 'Spirit Coupon', 5000)">+ ADD TO CART</button>
                 </div>
@@ -398,7 +398,7 @@
                     <p style="color: #cbd5e1; font-size: 0.85em; margin-top: -5px; margin-bottom: 15px; font-style: italic; line-height: 1.4;">
                         (Price is negotiable, just DM Discord <b style="color: var(--primary-cyan);">madara_6666</b> or IGN: <b style="color: var(--primary-cyan);">Arthemies</b>)
                     </p>
-                    <div class="stock">Stock: <span id="stok-DNP">Loading...</span></div>
+                    <div class="Stack">Stack: <span id="stok-DNP">Loading...</span></div>
                     <div class="input-group"><input type="number" id="qty-DNP" value="1" min="1"></div>
                     <button class="buy-btn" onclick="addToCart('DNP', 'DNP (2m)', 100000)">+ ADD TO CART</button>
                 </div>
@@ -411,7 +411,7 @@
                     <img src="icon_gold.jpg" class="item-icon" style="width: 120px; height: 120px;" onerror="this.src='logo_tatsuya.png'">
                     <h3>Gold Currency</h3>
                     <div class="price" style="font-size: 1.5em;">PM Me</div>
-                    <div class="stock">Stock: <span id="stok-Gold (1m)">Loading...</span>m</div>
+                    <div class="Stack">Stack: <span id="stok-Gold (1m)">Loading...</span>m</div>
                     <div class="input-group"><input type="number" id="qty-Gold (1m)" value="1" min="1"></div>
                     <button class="buy-btn" onclick="addToCart('Gold (1m)', 'Gold (1m)', 0)">+ ADD TO CART</button>
                 </div>
@@ -523,9 +523,9 @@
                     const cardElement = document.getElementById(`card-${name}`);
                     if(cardElement) {
                         if(stokRealtime[name] <= 0) {
-                            cardElement.classList.add('out-of-stock');
+                            cardElement.classList.add('out-of-Stack');
                         } else {
-                            cardElement.classList.remove('out-of-stock');
+                            cardElement.classList.remove('out-of-Stack');
                         }
                     }
                 });
