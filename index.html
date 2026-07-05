@@ -410,10 +410,12 @@
                 <div class="item-card theme-gold" id="card-Gold (1m)" style="width: 100%; max-width: 400px;">
                     <img src="icon_gold.jpg" class="item-icon" style="width: 120px; height: 120px;" onerror="this.src='logo_tatsuya.png'">
                     <h3>Gold Currency</h3>
-                    <div class="price" style="font-size: 1.5em;">PM Me</div>
+                    <!-- Harga diubah menjadi Rp 3.000 dengan tambahan warna gold -->
+                    <div class="price" style="font-size: 1.5em; color: var(--primary-gold);">Rp 3.000 / 1m</div>
                     <div class="Stack">Stock: <span id="stok-Gold (1m)">Loading...</span>m</div>
                     <div class="input-group"><input type="number" id="qty-Gold (1m)" value="1" min="1"></div>
-                    <button class="buy-btn" onclick="addToCart('Gold (1m)', 'Gold (1m)', 0)">+ ADD TO CART</button>
+                    <!-- Value harga di fungsi addToCart diubah dari 0 menjadi 3000 -->
+                    <button class="buy-btn" onclick="addToCart('Gold (1m)', 'Gold (1m)', 3000)">+ ADD TO CART</button>
                 </div>
             </div>
         </div>
