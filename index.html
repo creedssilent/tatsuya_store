@@ -7,7 +7,7 @@
     <title>Tatsuya Store - Insane DN</title>
     
     <style>
-        /* Tatsuya Theme V9.8 (Fixed QRIS Zoom Dark Overlay Issue) */
+        /* Tatsuya Theme V10.0 (Ultimate UI/UX Upgrade) */
         :root {
             --primary-gold: #fbbf24; 
             --primary-cyan: #00f0ff; 
@@ -101,9 +101,15 @@
         .close-btn { position: absolute; top: 15px; right: 20px; font-size: 1.5em; color: var(--primary-cyan); cursor: pointer; transition: 0.3s; z-index: 10; }
         .close-btn:hover { color: #fff; transform: scale(1.1); }
         
+        /* CSS Khusus Form Input Modal */
+        .form-label { color: #cbd5e1; font-size: 0.9em; margin-bottom: 8px; display: block; font-weight: bold; }
+        .form-input { width: 100%; padding: 12px; border-radius: 8px; background: rgba(0,0,0,0.4); border: 1px solid var(--primary-cyan); color: white; font-size: 1em; box-sizing: border-box; outline: none; transition: 0.3s; }
+        .form-input:focus { border-color: #10b981; box-shadow: 0 0 10px rgba(16, 185, 129, 0.3); background: rgba(0,0,0,0.6); }
+
         .cart-item { display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid rgba(255,255,255,0.1); padding: 10px 0; }
         .cart-total { font-size: 1.3em; font-weight: bold; color: var(--primary-gold); text-align: right; margin-top: 20px; line-height: 1.4; }
         .checkout-btn { background: linear-gradient(45deg, #10b981, #34d399); width: 100%; padding: 15px; border: none; border-radius: 8px; color: #000; font-size: 1.2em; font-weight: bold; margin-top: 20px; cursor: pointer; transition: 0.3s; }
+        .checkout-btn:hover { transform: scale(1.02); box-shadow: 0 0 20px rgba(16, 185, 129, 0.4); }
         
         .history-item { background: rgba(255,255,255,0.05); padding: 15px; border-left: 4px solid var(--primary-gold); border-radius: 5px; margin-bottom: 10px; font-size: 0.95em; color: #cbd5e1; }
         .history-item span { color: var(--primary-gold); font-weight: bold; }
@@ -119,27 +125,20 @@
         .blink-text { font-size: 0.8em; color: #67e8f9; margin-bottom: 15px; font-style: italic; animation: blinker 2s linear infinite; }
         @keyframes blinker { 50% { opacity: 0.3; } }
 
-        /* OVERLAY ZOOM FULL SCREEN BARU (Solusi Layar Gelap) */
+        /* OVERLAY ZOOM FULL SCREEN */
         #zoom-overlay {
             display: none;
             position: fixed;
             top: 0; left: 0; right: 0; bottom: 0;
             background: rgba(0,0,0,0.95);
-            z-index: 10000; /* Paling atas dari segalanya */
+            z-index: 10000;
             justify-content: center;
             align-items: center;
             cursor: zoom-out;
             backdrop-filter: blur(5px);
         }
-        
         #zoom-overlay img {
-            max-width: 90vw;
-            max-height: 85vh;
-            border: 5px solid var(--primary-cyan);
-            border-radius: 10px;
-            box-shadow: 0 0 50px rgba(0,0,0,0.9);
-            background: white;
-            object-fit: contain;
+            max-width: 90vw; max-height: 85vh; border: 5px solid var(--primary-cyan); border-radius: 10px; box-shadow: 0 0 50px rgba(0,0,0,0.9); background: white; object-fit: contain;
         }
 
         footer { background: rgba(2, 4, 15, 0.9); border-top: 1px solid var(--primary-cyan); text-align: center; padding: 20px; font-size: 0.9em; color: #94a3b8; margin-top: auto; }
@@ -193,198 +192,49 @@
     </nav>
 
     <div class="main-content">
-        
+        <!-- ALL ITEM CARDS (Keep exact same HTML structure as before) -->
         <div id="materials" class="page-section active">
             <div class="grid-container">
-                <div class="item-card theme-purple" id="card-BS Refinement Dust">
-                    <img src="icon_refinement.jpg" class="item-icon" onclick="showLore('Refinement Dust', 'Unique', 'Material used for basic refining.', 'Nests')">
-                    <h3>Refinement Dust</h3>
-                    <div class="price">Rp 1.000 / Stack</div>
-                    <div class="Stack">Stack: <span id="stok-BS Refinement Dust">Loading...</span></div>
-                    <div class="input-group"><input type="number" id="qty-BS Refinement Dust" value="1" min="1"></div>
-                    <button class="buy-btn" onclick="addToCart('BS Refinement Dust', 'Refinement Dust', 1000)">+ ADD TO CART</button>
-                </div>
-                <div class="item-card theme-orange" id="card-BS Enhancement Stone">
-                    <img src="icon_stone.jpg" class="item-icon">
-                    <h3>Enhancement Stone</h3>
-                    <div class="price">Rp 1.000 / 2 Stacks</div>
-                    <div class="Stack">Packs: <span id="stok-BS Enhancement Stone">Loading...</span> (Packs)</div>
-                    <div class="input-group"><input type="number" id="qty-BS Enhancement Stone" value="1" min="1" title="1 qty = 2 Stacks"></div>
-                    <button class="buy-btn" onclick="addToCart('BS Enhancement Stone', 'Enhancement Stone (2 Stacks)', 1000)">+ ADD TO CART</button>
-                </div>
-                <div class="item-card theme-red" id="card-BS Energy Catalyst">
-                    <img src="icon_energy.jpg" class="item-icon">
-                    <h3>Energy Catalyst</h3>
-                    <div class="price">Rp 1.500 / Stack</div>
-                    <div class="Stack">Stack: <span id="stok-BS Energy Catalyst">Loading...</span></div>
-                    <div class="input-group"><input type="number" id="qty-BS Energy Catalyst" value="1" min="1"></div>
-                    <button class="buy-btn" onclick="addToCart('BS Energy Catalyst', 'Energy Catalyst', 1500)">+ ADD TO CART</button>
-                </div>
-                <div class="item-card theme-blue" id="card-BS Stabilized Core">
-                    <img src="icon_core.jpg" class="item-icon">
-                    <h3>Stabilized Core</h3>
-                    <div class="price">Rp 1.000 / Stack</div>
-                    <div class="Stack">Stack: <span id="stok-BS Stabilized Core">Loading...</span></div>
-                    <div class="input-group"><input type="number" id="qty-BS Stabilized Core" value="1" min="1"></div>
-                    <button class="buy-btn" onclick="addToCart('BS Stabilized Core', 'Stabilized Core', 1000)">+ ADD TO CART</button>
-                </div>
-                <div class="item-card theme-red" id="card-BS Balkov Pouch">
-                    <img src="icon_balkov.jpg" class="item-icon">
-                    <h3>Balkov Pouch</h3>
-                    <div class="price">Rp 1.000 / Pcs</div>
-                    <div class="Stack">Stack: <span id="stok-BS Balkov Pouch">Loading...</span></div>
-                    <div class="input-group"><input type="number" id="qty-BS Balkov Pouch" value="1" min="1"></div>
-                    <button class="buy-btn" onclick="addToCart('BS Balkov Pouch', 'Balkov Pouch', 1000)">+ ADD TO CART</button>
-                </div>
+                <div class="item-card theme-purple" id="card-BS Refinement Dust"><img src="icon_refinement.jpg" class="item-icon" onclick="showLore('Refinement Dust', 'Unique', 'Material used for basic refining.', 'Nests')"><h3>Refinement Dust</h3><div class="price">Rp 1.000 / Stack</div><div class="Stack">Stack: <span id="stok-BS Refinement Dust">Loading...</span></div><div class="input-group"><input type="number" id="qty-BS Refinement Dust" value="1" min="1"></div><button class="buy-btn" onclick="addToCart('BS Refinement Dust', 'Refinement Dust', 1000)">+ ADD TO CART</button></div>
+                <div class="item-card theme-orange" id="card-BS Enhancement Stone"><img src="icon_stone.jpg" class="item-icon"><h3>Enhancement Stone</h3><div class="price">Rp 1.000 / 2 Stacks</div><div class="Stack">Packs: <span id="stok-BS Enhancement Stone">Loading...</span> (Packs)</div><div class="input-group"><input type="number" id="qty-BS Enhancement Stone" value="1" min="1" title="1 qty = 2 Stacks"></div><button class="buy-btn" onclick="addToCart('BS Enhancement Stone', 'Enhancement Stone (2 Stacks)', 1000)">+ ADD TO CART</button></div>
+                <div class="item-card theme-red" id="card-BS Energy Catalyst"><img src="icon_energy.jpg" class="item-icon"><h3>Energy Catalyst</h3><div class="price">Rp 1.500 / Stack</div><div class="Stack">Stack: <span id="stok-BS Energy Catalyst">Loading...</span></div><div class="input-group"><input type="number" id="qty-BS Energy Catalyst" value="1" min="1"></div><button class="buy-btn" onclick="addToCart('BS Energy Catalyst', 'Energy Catalyst', 1500)">+ ADD TO CART</button></div>
+                <div class="item-card theme-blue" id="card-BS Stabilized Core"><img src="icon_core.jpg" class="item-icon"><h3>Stabilized Core</h3><div class="price">Rp 1.000 / Stack</div><div class="Stack">Stack: <span id="stok-BS Stabilized Core">Loading...</span></div><div class="input-group"><input type="number" id="qty-BS Stabilized Core" value="1" min="1"></div><button class="buy-btn" onclick="addToCart('BS Stabilized Core', 'Stabilized Core', 1000)">+ ADD TO CART</button></div>
+                <div class="item-card theme-red" id="card-BS Balkov Pouch"><img src="icon_balkov.jpg" class="item-icon"><h3>Balkov Pouch</h3><div class="price">Rp 1.000 / Pcs</div><div class="Stack">Stack: <span id="stok-BS Balkov Pouch">Loading...</span></div><div class="input-group"><input type="number" id="qty-BS Balkov Pouch" value="1" min="1"></div><button class="buy-btn" onclick="addToCart('BS Balkov Pouch', 'Balkov Pouch', 1000)">+ ADD TO CART</button></div>
             </div>
         </div>
 
         <div id="acc_materials" class="page-section">
             <div class="grid-container">
-                <div class="item-card theme-green" id="card-ACC Faint Accessory Dust">
-                    <img src="icon_faint_dust.jpg" class="item-icon">
-                    <h3>Faint Accessory Dust</h3>
-                    <div class="tier-text">Tier 1-3</div>
-                    <div class="price">Rp 1.000 / Stack</div>
-                    <div class="Stack">Stack: <span id="stok-ACC Faint Accessory Dust">Loading...</span></div>
-                    <div class="input-group"><input type="number" id="qty-ACC Faint Accessory Dust" value="1" min="1"></div>
-                    <button class="buy-btn" onclick="addToCart('ACC Faint Accessory Dust', 'Faint Accessory Dust', 1000)">+ ADD TO CART</button>
-                </div>
-                <div class="item-card theme-rare" id="card-ACC Polished Charm Fragment">
-                    <img src="icon_charm.jpg" class="item-icon">
-                    <h3>Polished Charm Fragment</h3>
-                    <div class="tier-text">Tier 4-5</div>
-                    <div class="price">Rp 5.000 / Stack</div>
-                    <div class="Stack">Stack: <span id="stok-ACC Polished Charm Fragment">Loading...</span></div>
-                    <div class="input-group"><input type="number" id="qty-ACC Polished Charm Fragment" value="1" min="1"></div>
-                    <button class="buy-btn" onclick="addToCart('ACC Polished Charm Fragment', 'Polished Charm Fragment', 5000)">+ ADD TO CART</button>
-                </div>
-                <div class="item-card theme-orange" id="card-ACC Resonant Sigil Piece">
-                    <img src="icon_sigil.jpg" class="item-icon">
-                    <h3>Resonant Sigil Piece</h3>
-                    <div class="tier-text">Tier 6-7</div>
-                    <div class="price">Rp 8.000 / Stack</div>
-                    <div class="Stack">Stack: <span id="stok-ACC Resonant Sigil Piece">Loading...</span></div>
-                    <div class="input-group"><input type="number" id="qty-ACC Resonant Sigil Piece" value="1" min="1"></div>
-                    <button class="buy-btn" onclick="addToCart('ACC Resonant Sigil Piece', 'Resonant Sigil Piece', 8000)">+ ADD TO CART</button>
-                </div>
-                <div class="item-card theme-purple" id="card-ACC Mystic Accessory Core">
-                    <img src="icon_mystic.jpg" class="item-icon">
-                    <h3>Mystic Accessory Core</h3>
-                    <div class="tier-text">Tier 8</div>
-                    <div class="price">Rp 4.000 / Stack</div>
-                    <div class="Stack">Stack: <span id="stok-ACC Mystic Accessory Core">Loading...</span></div>
-                    <div class="input-group"><input type="number" id="qty-ACC Mystic Accessory Core" value="1" min="1"></div>
-                    <button class="buy-btn" onclick="addToCart('ACC Mystic Accessory Core', 'Mystic Accessory Core', 4000)">+ ADD TO CART</button>
-                </div>
-                <div class="item-card theme-red" id="card-ACC Refined Relic Shard">
-                    <img src="icon_relic.jpg" class="item-icon">
-                    <h3>Refined Relic Shard</h3>
-                    <div class="tier-text">Tier 9-10</div>
-                    <div class="price">Rp 5.000 / Stack</div>
-                    <div class="Stack">Stack: <span id="stok-ACC Refined Relic Shard">Loading...</span></div>
-                    <div class="input-group"><input type="number" id="qty-ACC Refined Relic Shard" value="1" min="1"></div>
-                    <button class="buy-btn" onclick="addToCart('ACC Refined Relic Shard', 'Refined Relic Shard', 5000)">+ ADD TO CART</button>
-                </div>
-                <div class="item-card theme-blue" id="card-ACC Sovereign Accessory Essence">
-                    <img src="icon_essence.jpg" class="item-icon">
-                    <h3>Sovereign Accessory Essence</h3>
-                    <div class="tier-text">Tier 11-12</div>
-                    <div class="price">Rp 8.000 / Stack</div>
-                    <div class="Stack">Stack: <span id="stok-ACC Sovereign Accessory Essence">Loading...</span></div>
-                    <div class="input-group"><input type="number" id="qty-ACC Sovereign Accessory Essence" value="1" min="1"></div>
-                    <button class="buy-btn" onclick="addToCart('ACC Sovereign Accessory Essence', 'Sovereign Accessory Essence', 8000)">+ ADD TO CART</button>
-                </div>
+                <div class="item-card theme-green" id="card-ACC Faint Accessory Dust"><img src="icon_faint_dust.jpg" class="item-icon"><h3>Faint Accessory Dust</h3><div class="tier-text">Tier 1-3</div><div class="price">Rp 1.000 / Stack</div><div class="Stack">Stack: <span id="stok-ACC Faint Accessory Dust">Loading...</span></div><div class="input-group"><input type="number" id="qty-ACC Faint Accessory Dust" value="1" min="1"></div><button class="buy-btn" onclick="addToCart('ACC Faint Accessory Dust', 'Faint Accessory Dust', 1000)">+ ADD TO CART</button></div>
+                <div class="item-card theme-rare" id="card-ACC Polished Charm Fragment"><img src="icon_charm.jpg" class="item-icon"><h3>Polished Charm Fragment</h3><div class="tier-text">Tier 4-5</div><div class="price">Rp 5.000 / Stack</div><div class="Stack">Stack: <span id="stok-ACC Polished Charm Fragment">Loading...</span></div><div class="input-group"><input type="number" id="qty-ACC Polished Charm Fragment" value="1" min="1"></div><button class="buy-btn" onclick="addToCart('ACC Polished Charm Fragment', 'Polished Charm Fragment', 5000)">+ ADD TO CART</button></div>
+                <div class="item-card theme-orange" id="card-ACC Resonant Sigil Piece"><img src="icon_sigil.jpg" class="item-icon"><h3>Resonant Sigil Piece</h3><div class="tier-text">Tier 6-7</div><div class="price">Rp 8.000 / Stack</div><div class="Stack">Stack: <span id="stok-ACC Resonant Sigil Piece">Loading...</span></div><div class="input-group"><input type="number" id="qty-ACC Resonant Sigil Piece" value="1" min="1"></div><button class="buy-btn" onclick="addToCart('ACC Resonant Sigil Piece', 'Resonant Sigil Piece', 8000)">+ ADD TO CART</button></div>
+                <div class="item-card theme-purple" id="card-ACC Mystic Accessory Core"><img src="icon_mystic.jpg" class="item-icon"><h3>Mystic Accessory Core</h3><div class="tier-text">Tier 8</div><div class="price">Rp 4.000 / Stack</div><div class="Stack">Stack: <span id="stok-ACC Mystic Accessory Core">Loading...</span></div><div class="input-group"><input type="number" id="qty-ACC Mystic Accessory Core" value="1" min="1"></div><button class="buy-btn" onclick="addToCart('ACC Mystic Accessory Core', 'Mystic Accessory Core', 4000)">+ ADD TO CART</button></div>
+                <div class="item-card theme-red" id="card-ACC Refined Relic Shard"><img src="icon_relic.jpg" class="item-icon"><h3>Refined Relic Shard</h3><div class="tier-text">Tier 9-10</div><div class="price">Rp 5.000 / Stack</div><div class="Stack">Stack: <span id="stok-ACC Refined Relic Shard">Loading...</span></div><div class="input-group"><input type="number" id="qty-ACC Refined Relic Shard" value="1" min="1"></div><button class="buy-btn" onclick="addToCart('ACC Refined Relic Shard', 'Refined Relic Shard', 5000)">+ ADD TO CART</button></div>
+                <div class="item-card theme-blue" id="card-ACC Sovereign Accessory Essence"><img src="icon_essence.jpg" class="item-icon"><h3>Sovereign Accessory Essence</h3><div class="tier-text">Tier 11-12</div><div class="price">Rp 8.000 / Stack</div><div class="Stack">Stack: <span id="stok-ACC Sovereign Accessory Essence">Loading...</span></div><div class="input-group"><input type="number" id="qty-ACC Sovereign Accessory Essence" value="1" min="1"></div><button class="buy-btn" onclick="addToCart('ACC Sovereign Accessory Essence', 'Sovereign Accessory Essence', 8000)">+ ADD TO CART</button></div>
             </div>
         </div>
 
         <div id="jade" class="page-section">
             <div class="grid-container">
-                <div class="item-card theme-orange" id="card-Jade Polisher">
-                    <div class="hot-badge">HOT!</div>
-                    <img src="icon_jade_polisher.jpg" class="item-icon" onerror="this.src='logo_tatsuya.png'">
-                    <h3>Jade Polisher</h3>
-                    <div class="price">PM Me</div>
-                    <div class="Stack">Stack: <span id="stok-Jade Polisher">Loading...</span></div>
-                    <div class="input-group"><input type="number" id="qty-Jade Polisher" value="1" min="1"></div>
-                    <button class="buy-btn" onclick="addToCart('Jade Polisher', 'Jade Polisher', 0)">+ ADD TO CART</button>
-                </div>
-                <div class="item-card theme-purple" id="card-Jade Dust">
-                    <div class="hot-badge">HOT!</div>
-                    <img src="icon_jade_dust.jpg" class="item-icon" onerror="this.src='logo_tatsuya.png'">
-                    <h3>Jade Dust</h3>
-                    <div class="price">PM Me</div>
-                    <div class="Stack">Stack: <span id="stok-Jade Dust">Loading...</span></div>
-                    <div class="input-group"><input type="number" id="qty-Jade Dust" value="1" min="1"></div>
-                    <button class="buy-btn" onclick="addToCart('Jade Dust', 'Jade Dust', 0)">+ ADD TO CART</button>
-                </div>
-                <div class="item-card theme-blue" id="card-Jade Binding Core">
-                    <div class="hot-badge">HOT!</div>
-                    <img src="icon_jade_core.jpg" class="item-icon" onerror="this.src='logo_tatsuya.png'">
-                    <h3>Jade Binding Core</h3>
-                    <div class="price">PM Me</div>
-                    <div class="Stack">Stack: <span id="stok-Jade Binding Core">Loading...</span></div>
-                    <div class="input-group"><input type="number" id="qty-Jade Binding Core" value="1" min="1"></div>
-                    <button class="buy-btn" onclick="addToCart('Jade Binding Core', 'Jade Binding Core', 0)">+ ADD TO CART</button>
-                </div>
+                <div class="item-card theme-orange" id="card-Jade Polisher"><div class="hot-badge">HOT!</div><img src="icon_jade_polisher.jpg" class="item-icon" onerror="this.src='logo_tatsuya.png'"><h3>Jade Polisher</h3><div class="price">PM Me</div><div class="Stack">Stack: <span id="stok-Jade Polisher">Loading...</span></div><div class="input-group"><input type="number" id="qty-Jade Polisher" value="1" min="1"></div><button class="buy-btn" onclick="addToCart('Jade Polisher', 'Jade Polisher', 0)">+ ADD TO CART</button></div>
+                <div class="item-card theme-purple" id="card-Jade Dust"><div class="hot-badge">HOT!</div><img src="icon_jade_dust.jpg" class="item-icon" onerror="this.src='logo_tatsuya.png'"><h3>Jade Dust</h3><div class="price">PM Me</div><div class="Stack">Stack: <span id="stok-Jade Dust">Loading...</span></div><div class="input-group"><input type="number" id="qty-Jade Dust" value="1" min="1"></div><button class="buy-btn" onclick="addToCart('Jade Dust', 'Jade Dust', 0)">+ ADD TO CART</button></div>
+                <div class="item-card theme-blue" id="card-Jade Binding Core"><div class="hot-badge">HOT!</div><img src="icon_jade_core.jpg" class="item-icon" onerror="this.src='logo_tatsuya.png'"><h3>Jade Binding Core</h3><div class="price">PM Me</div><div class="Stack">Stack: <span id="stok-Jade Binding Core">Loading...</span></div><div class="input-group"><input type="number" id="qty-Jade Binding Core" value="1" min="1"></div><button class="buy-btn" onclick="addToCart('Jade Binding Core', 'Jade Binding Core', 0)">+ ADD TO CART</button></div>
             </div>
         </div>
 
         <div id="conversion" class="page-section">
             <div class="grid-container">
-                <div class="item-card theme-blue" id="card-Costume Adaptive Essence">
-                    <img src="icon_adaptive.jpg" class="item-icon">
-                    <h3>Adaptive Essence</h3>
-                    <div class="price">Rp 3.000 / Stack</div>
-                    <div class="Stack">Stack: <span id="stok-Costume Adaptive Essence">Loading...</span></div>
-                    <div class="input-group"><input type="number" id="qty-Costume Adaptive Essence" value="1" min="1"></div>
-                    <button class="buy-btn" onclick="addToCart('Costume Adaptive Essence', 'Adaptive Essence', 3000)">+ ADD TO CART</button>
-                </div>
-                <div class="item-card theme-purple" id="card-Costume Transmutation Shard">
-                    <img src="icon_transmutation.jpg" class="item-icon">
-                    <h3>Transmutation Shard</h3>
-                    <div class="price">Rp 2.000 / Stack</div>
-                    <div class="Stack">Stack: <span id="stok-Costume Transmutation Shard">Loading...</span></div>
-                    <div class="input-group"><input type="number" id="qty-Costume Transmutation Shard" value="1" min="1"></div>
-                    <button class="buy-btn" onclick="addToCart('Costume Transmutation Shard', 'Transmutation Shard', 2000)">+ ADD TO CART</button>
-                </div>
-                <div class="item-card theme-orange" id="card-Costume Conversion Fragment">
-                    <img src="icon_conversion.jpg" class="item-icon">
-                    <h3>Conversion Fragment</h3>
-                    <div class="price">Rp 1.000 / Stack</div>
-                    <div class="Stack">Stack: <span id="stok-Costume Conversion Fragment">Loading...</span></div>
-                    <div class="input-group"><input type="number" id="qty-Costume Conversion Fragment" value="1" min="1"></div>
-                    <button class="buy-btn" onclick="addToCart('Costume Conversion Fragment', 'Conversion Fragment', 1000)">+ ADD TO CART</button>
-                </div>
+                <div class="item-card theme-blue" id="card-Costume Adaptive Essence"><img src="icon_adaptive.jpg" class="item-icon"><h3>Adaptive Essence</h3><div class="price">Rp 3.000 / Stack</div><div class="Stack">Stack: <span id="stok-Costume Adaptive Essence">Loading...</span></div><div class="input-group"><input type="number" id="qty-Costume Adaptive Essence" value="1" min="1"></div><button class="buy-btn" onclick="addToCart('Costume Adaptive Essence', 'Adaptive Essence', 3000)">+ ADD TO CART</button></div>
+                <div class="item-card theme-purple" id="card-Costume Transmutation Shard"><img src="icon_transmutation.jpg" class="item-icon"><h3>Transmutation Shard</h3><div class="price">Rp 2.000 / Stack</div><div class="Stack">Stack: <span id="stok-Costume Transmutation Shard">Loading...</span></div><div class="input-group"><input type="number" id="qty-Costume Transmutation Shard" value="1" min="1"></div><button class="buy-btn" onclick="addToCart('Costume Transmutation Shard', 'Transmutation Shard', 2000)">+ ADD TO CART</button></div>
+                <div class="item-card theme-orange" id="card-Costume Conversion Fragment"><img src="icon_conversion.jpg" class="item-icon"><h3>Conversion Fragment</h3><div class="price">Rp 1.000 / Stack</div><div class="Stack">Stack: <span id="stok-Costume Conversion Fragment">Loading...</span></div><div class="input-group"><input type="number" id="qty-Costume Conversion Fragment" value="1" min="1"></div><button class="buy-btn" onclick="addToCart('Costume Conversion Fragment', 'Conversion Fragment', 1000)">+ ADD TO CART</button></div>
             </div>
         </div>
 
         <div id="coupons" class="page-section">
             <div class="grid-container">
-                <div class="item-card theme-blue" id="card-Coupon Mount">
-                    <img src="icon_mount.jpg" class="item-icon">
-                    <h3>Mount Coupon</h3>
-                    <div class="price">Rp 5.000 / Pcs</div>
-                    <div class="Stack">Stack: <span id="stok-Coupon Mount">Loading...</span></div>
-                    <div class="input-group"><input type="number" id="qty-Coupon Mount" value="1" min="1"></div>
-                    <button class="buy-btn" onclick="addToCart('Coupon Mount', 'Mount Coupon', 5000)">+ ADD TO CART</button>
-                </div>
-                <div class="item-card theme-blue" id="card-Coupon Pet">
-                    <img src="icon_pet.jpg" class="item-icon">
-                    <h3>Pet Coupon</h3>
-                    <div class="price">Rp 5.000 / Pcs</div>
-                    <div class="Stack">Stack: <span id="stok-Coupon Pet">Loading...</span></div>
-                    <div class="input-group"><input type="number" id="qty-Coupon Pet" value="1" min="1"></div>
-                    <button class="buy-btn" onclick="addToCart('Coupon Pet', 'Pet Coupon', 5000)">+ ADD TO CART</button>
-                </div>
-                <div class="item-card theme-blue" id="card-Coupon Spirit">
-                    <img src="icon_spirit.jpg" class="item-icon">
-                    <h3>Spirit Coupon</h3>
-                    <div class="price">Rp 5.000 / Pcs</div>
-                    <div class="Stack">Stack: <span id="stok-Coupon Spirit">Loading...</span></div>
-                    <div class="input-group"><input type="number" id="qty-Coupon Spirit" value="1" min="1"></div>
-                    <button class="buy-btn" onclick="addToCart('Coupon Spirit', 'Spirit Coupon', 5000)">+ ADD TO CART</button>
-                </div>
+                <div class="item-card theme-blue" id="card-Coupon Mount"><img src="icon_mount.jpg" class="item-icon"><h3>Mount Coupon</h3><div class="price">Rp 5.000 / Pcs</div><div class="Stack">Stack: <span id="stok-Coupon Mount">Loading...</span></div><div class="input-group"><input type="number" id="qty-Coupon Mount" value="1" min="1"></div><button class="buy-btn" onclick="addToCart('Coupon Mount', 'Mount Coupon', 5000)">+ ADD TO CART</button></div>
+                <div class="item-card theme-blue" id="card-Coupon Pet"><img src="icon_pet.jpg" class="item-icon"><h3>Pet Coupon</h3><div class="price">Rp 5.000 / Pcs</div><div class="Stack">Stack: <span id="stok-Coupon Pet">Loading...</span></div><div class="input-group"><input type="number" id="qty-Coupon Pet" value="1" min="1"></div><button class="buy-btn" onclick="addToCart('Coupon Pet', 'Pet Coupon', 5000)">+ ADD TO CART</button></div>
+                <div class="item-card theme-blue" id="card-Coupon Spirit"><img src="icon_spirit.jpg" class="item-icon"><h3>Spirit Coupon</h3><div class="price">Rp 5.000 / Pcs</div><div class="Stack">Stack: <span id="stok-Coupon Spirit">Loading...</span></div><div class="input-group"><input type="number" id="qty-Coupon Spirit" value="1" min="1"></div><button class="buy-btn" onclick="addToCart('Coupon Spirit', 'Spirit Coupon', 5000)">+ ADD TO CART</button></div>
             </div>
         </div>
 
@@ -410,7 +260,6 @@
                 <div class="item-card theme-gold" id="card-Gold (1m)" style="width: 100%; max-width: 400px;">
                     <img src="icon_gold.jpg" class="item-icon" style="width: 120px; height: 120px;" onerror="this.src='logo_tatsuya.png'">
                     <h3>Gold Currency</h3>
-                    <!-- Tampilan Harga Grosir Gold -->
                     <div class="price" style="font-size: 1.1em; color: var(--primary-gold); line-height: 1.5; margin: 15px 0;">
                         💎 1m = Rp 1.000<br>
                         💎 100m = Rp 70.000 <span style="color: #10b981; font-size: 0.8em; font-weight: bold;">(Hemat!)</span><br>
@@ -418,17 +267,17 @@
                     </div>
                     <div class="Stack">Stock: <span id="stok-Gold (1m)">Loading...</span>m</div>
                     <div class="input-group"><input type="number" id="qty-Gold (1m)" value="1" min="1"></div>
-                    <!-- Harga didalam fungsi tidak masalah karena akan di-override oleh fungsi baru -->
                     <button class="buy-btn" onclick="addToCart('Gold (1m)', 'Gold (1m)', 1000)">+ ADD TO CART</button>
                 </div>
             </div>
         </div>
-
     </div>
 
+    <!-- FLOATING ACTION BUTTONS -->
     <div class="cart-fab" onclick="toggleCart()">🛒<div class="cart-badge" id="cart-count">0</div></div>
     <div class="history-fab" onclick="toggleHistory()">📜</div>
 
+    <!-- MODALS -->
     <div id="zoom-overlay" onclick="toggleZoom()">
         <img src="qris_tatsuya.jpg" alt="QRIS Zoomed" onerror="this.src='logo_tatsuya.png'">
     </div>
@@ -441,16 +290,39 @@
         </div>
     </div>
 
+    <!-- CART MODAL -->
     <div class="modal-overlay" id="cart-modal">
         <div class="modal-content">
             <span class="close-btn" onclick="toggleCart()">&times;</span>
             <h2 style="color: var(--primary-cyan);">🛒 Your Cart</h2>
             <div id="cart-items-container"></div>
             <div class="cart-total" id="cart-total-price">Total: Rp 0</div>
-            <button class="checkout-btn" onclick="checkoutOrder()">CHECKOUT NOW</button>
+            <button class="checkout-btn" onclick="openCheckoutForm()">PROCEED TO CHECKOUT</button>
         </div>
     </div>
 
+    <!-- NEW: CHECKOUT FORM MODAL (REPLACES PROMPT) -->
+    <div class="modal-overlay" id="checkout-form-modal">
+        <div class="modal-content" style="border-color: #10b981; max-width: 400px; text-align: left;">
+            <span class="close-btn" onclick="closeCheckoutForm()">&times;</span>
+            <h2 style="color: #10b981; text-align: center; margin-top: 0;">📝 Order Details</h2>
+            <p style="color: #94a3b8; font-size: 0.85em; text-align: center; margin-bottom: 20px;">Please fill in your details to finalize the order.</p>
+            
+            <div style="margin-bottom: 20px;">
+                <label class="form-label">🔥 IGN (In-Game Name) <span style="color: #e11d48;">*</span></label>
+                <input type="text" id="input-ign" class="form-input" placeholder="Enter your DN character name..." required>
+            </div>
+            
+            <div style="margin-bottom: 25px;">
+                <label class="form-label">👾 Discord Username <span style="color: #64748b; font-weight: normal;">(Optional)</span></label>
+                <input type="text" id="input-discord" class="form-input" placeholder="e.g., madara_6666">
+            </div>
+            
+            <button class="checkout-btn" onclick="processCheckout()" style="margin-top: 0;">CONFIRM & PAY</button>
+        </div>
+    </div>
+
+    <!-- QRIS MODAL -->
     <div class="modal-overlay" id="qris-modal">
         <div class="modal-content" style="text-align: center; border-color: var(--primary-cyan); max-width: 400px;">
             <span class="close-btn" onclick="closeQrisModal()">&times;</span>
@@ -472,26 +344,13 @@
         </div>
     </div>
 
-    <div class="modal-overlay" id="lore-modal">
-        <div class="modal-content" style="border-color: var(--primary-gold);">
-            <span class="close-btn" onclick="closeLore()">&times;</span>
-            <div class="lore-title" id="lore-title"></div>
-            <div class="lore-rarity" id="lore-rarity"></div>
-            <div class="lore-desc" id="lore-desc"></div>
-            <div class="lore-drop" id="lore-drop"></div>
-        </div>
-    </div>
-
-    <div class="modal-overlay" id="custom-alert-modal">
-        <div class="modal-content" style="text-align: center;">
-            <h2 style="color: var(--primary-cyan);">TATSUYA STORE</h2>
-            <p id="custom-alert-text"></p>
-            <button class="buy-btn" onclick="closeCustomAlert()">OK</button>
-        </div>
-    </div>
+    <!-- LORE & ALERT MODALS -->
+    <div class="modal-overlay" id="lore-modal"><div class="modal-content" style="border-color: var(--primary-gold);"><span class="close-btn" onclick="closeLore()">&times;</span><div class="lore-title" id="lore-title"></div><div class="lore-rarity" id="lore-rarity"></div><div class="lore-desc" id="lore-desc"></div><div class="lore-drop" id="lore-drop"></div></div></div>
+    <div class="modal-overlay" id="custom-alert-modal"><div class="modal-content" style="text-align: center;"><h2 style="color: var(--primary-cyan);">TATSUYA STORE</h2><p id="custom-alert-text"></p><button class="buy-btn" onclick="closeCustomAlert()">OK</button></div></div>
 
     <footer><p>&copy; 2026 <span>Tatsuya Store</span>. Trusted Seller in Insane DN</p></footer>
 
+    <!-- MAIN JAVASCRIPT -->
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-app.js";
         import { getDatabase, ref, onValue, set } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-database.js";
@@ -506,6 +365,7 @@
         let historyData = [];
         const aliasNames = ['Monogram', 'Bigram', 'Trigram', 'Tetragram', 'Pentagram', 'Hexagram', 'Heptagram', 'Octagram', 'Enneagram', 'Decagram'];
 
+        // FIREBASE SYNC
         const stokRef = ref(db, 'stok_tatsuya');
         onValue(stokRef, (snapshot) => {
             const data = snapshot.val();
@@ -522,17 +382,13 @@
                 
                 itemsToCheck.forEach(name => {
                     if(stokRealtime[name] === undefined) stokRealtime[name] = 0;
-                    
                     const el = document.getElementById(`stok-${name}`);
                     if(el) el.innerText = stokRealtime[name];
 
                     const cardElement = document.getElementById(`card-${name}`);
                     if(cardElement) {
-                        if(stokRealtime[name] <= 0) {
-                            cardElement.classList.add('out-of-Stack');
-                        } else {
-                            cardElement.classList.remove('out-of-Stack');
-                        }
+                        if(stokRealtime[name] <= 0) cardElement.classList.add('out-of-Stack');
+                        else cardElement.classList.remove('out-of-Stack');
                     }
                 });
             }
@@ -545,45 +401,37 @@
             if(document.getElementById('history-modal').style.display === 'flex') renderHistory();
         });
 
-        // FUNGSI BARU: Kalkulasi otomatis harga grosir Gold
+        // ALGORITMA HARGA GOLD
         window.getGoldTotalPrice = function(qty) {
             let remaining = qty;
             let total = 0;
             
-            // Hitung paketan 500m
             let qty500 = Math.floor(remaining / 500);
             total += qty500 * 300000;
             remaining = remaining % 500;
             
-            // Hitung paketan 100m
             let qty100 = Math.floor(remaining / 100);
             total += qty100 * 70000;
             remaining = remaining % 100;
             
-            // Sisa eceran 1m
             total += remaining * 1000;
-            
             return total;
         }
 
+        // UTILITIES
         window.toggleZoom = function() {
             const overlay = document.getElementById('zoom-overlay');
-            if (overlay.style.display === 'flex') {
-                overlay.style.display = 'none';
-            } else {
-                overlay.style.display = 'flex';
-            }
+            overlay.style.display = (overlay.style.display === 'flex') ? 'none' : 'flex';
         }
-
         window.showCustomAlert = function(msg) { document.getElementById('custom-alert-text').innerHTML = msg; document.getElementById('custom-alert-modal').style.display = 'flex'; }
         window.closeCustomAlert = function() { document.getElementById('custom-alert-modal').style.display = 'none'; }
-
         window.showPage = function(id, btn) {
             document.querySelectorAll('.page-section').forEach(s => s.classList.remove('active'));
             document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
             document.getElementById(id).classList.add('active'); btn.classList.add('active');
         }
 
+        // CART LOGIC
         window.addToCart = function(id, name, price) {
             const qty = parseInt(document.getElementById(`qty-${id}`).value);
             if(qty <= 0 || isNaN(qty)) return showCustomAlert("Please enter a valid quantity!");
@@ -607,11 +455,8 @@
                 const item = cart[id]; 
                 totalItem += item.qty; 
                 
-                let itemTotal = 0;
-                let itemPriceDisplay = "";
-                let itemTotalDisplay = "";
+                let itemTotal = 0, itemPriceDisplay = "", itemTotalDisplay = "";
 
-                // MODIFIKASI: Deteksi jika barangnya Gold, panggil fungsi harga otomatis
                 if(id === 'Gold (1m)') {
                     itemTotal = window.getGoldTotalPrice(item.qty);
                     subTotal += itemTotal;
@@ -624,7 +469,7 @@
                     itemTotalDisplay = item.price === 0 ? "Rp 0" : `Rp ${itemTotal.toLocaleString('id-ID')}`;
                 }
                 
-                container.innerHTML += `<div class="cart-item"><div><b>${item.name}</b><br><small>${item.qty}x @ ${itemPriceDisplay}</small></div><b>${itemTotalDisplay}</b><button onclick="removeFromCart('${id}')" style="background:red; color:white; border:none; padding: 2px 8px; cursor:pointer;">X</button></div>`;
+                container.innerHTML += `<div class="cart-item"><div><b>${item.name}</b><br><small>${item.qty}x @ ${itemPriceDisplay}</small></div><b>${itemTotalDisplay}</b><button onclick="removeFromCart('${id}')" style="background:red; color:white; border:none; padding: 2px 8px; cursor:pointer; border-radius: 4px;">X</button></div>`;
             }
             
             if(totalItem === 0) {
@@ -641,18 +486,38 @@
         window.toggleHistory = function() { const m = document.getElementById('history-modal'); if(m.style.display==='flex') m.style.display='none'; else { m.style.display='flex'; renderHistory(); } }
         function renderHistory() { const c = document.getElementById('history-items-container'); c.innerHTML = ''; for(let i=historyData.length-1; i>=0; i--) c.innerHTML += `<div class="history-item">${historyData[i]}</div>`; }
 
+        // CHECKOUT FLOW (MODERNIZED)
+        window.openCheckoutForm = function() {
+            if(Object.keys(cart).length === 0) return showCustomAlert("Your cart is empty!");
+            document.getElementById('cart-modal').style.display = 'none';
+            document.getElementById('checkout-form-modal').style.display = 'flex';
+        }
+
+        window.closeCheckoutForm = function() {
+            document.getElementById('checkout-form-modal').style.display = 'none';
+        }
+
         window.closeQrisModal = function() { 
             document.getElementById('qris-modal').style.display = 'none'; 
             document.getElementById('zoom-overlay').style.display = 'none';
+            // Clear Inputs after done
+            document.getElementById('input-ign').value = '';
+            document.getElementById('input-discord').value = '';
         }
 
-        window.checkoutOrder = function() {
-            if(Object.keys(cart).length === 0) return showCustomAlert("Empty!");
-            
-            const discordUser = prompt("👾 Enter your Discord Username:");
-            const ign = prompt("🔥 Enter your IGN (Important!):"); if(!ign) return;
+        window.processCheckout = function() {
+            // Ambil data dari Form Modal
+            const ignInput = document.getElementById('input-ign').value.trim();
+            const discordInput = document.getElementById('input-discord').value.trim();
 
-            let invoice = `🛒 **INVOICE TATSUYA STORE** 🛒\n👾 **Discord:** ${discordUser || "-"}\n👤 **IGN:** \`${ign}\`\n\n**Order Details:**\n`;
+            // Validasi di sisi Client (DOM)
+            if(!ignInput) {
+                showCustomAlert("IGN is required! Please enter your character name.");
+                document.getElementById('input-ign').focus();
+                return;
+            }
+
+            let invoice = `🛒 **INVOICE TATSUYA STORE** 🛒\n👾 **Discord:** ${discordInput || "-"}\n👤 **IGN:** \`${ignInput}\`\n\n**Order Details:**\n`;
             let subTotal = 0, itemsArr = [];
             let hasPmItem = false;
             
@@ -661,7 +526,6 @@
                 stokRealtime[id] -= item.qty; 
                 
                 let itemTotal = 0;
-                // MODIFIKASI: Terapkan juga pemotongan otomatis untuk cetak bon Discord
                 if(id === 'Gold (1m)') {
                     itemTotal = window.getGoldTotalPrice(item.qty);
                     subTotal += itemTotal;
@@ -669,7 +533,6 @@
                 } else {
                     itemTotal = (item.qty * item.price);
                     subTotal += itemTotal;
-                    
                     if (item.price === 0) {
                         invoice += `📦 ${item.qty}x ${item.name} = [PM ME FOR PRICE]\n`;
                         hasPmItem = true;
@@ -682,25 +545,30 @@
             }
 
             let finalTotalDisplay = hasPmItem ? `Rp ${subTotal.toLocaleString('id-ID')} + PM items` : `Rp ${subTotal.toLocaleString('id-ID')}`;
-            
             invoice += `\n💰 **GRAND TOTAL: ${finalTotalDisplay}**\n💳 **Payment:** DANA / QRIS\n\n**Reply text:**\n\`\`\`Thank you for purchasing in Tatsuya Store. Please send the payment proof.\`\`\``;
 
+            // Proses ke Firebase
             set(stokRef, stokRealtime).then(() => {
                 let alias = aliasNames[historyData.length % 10];
                 historyData.push(`🔔 Player <span>${alias}</span> just bought <span>${itemsArr.join(" & ")}</span>!`);
                 if(historyData.length > 20) historyData.shift();
                 set(historyRef, historyData); 
                 
+                // Proses ke Discord Webhook
                 fetch(discordWebhookURL, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ content: `@everyone 🚨 **NEW ORDER!** 🚨\n\n${invoice}` }) }).then(() => {
+                    
+                    // Transisi UI (Tutup form, Buka QRIS)
+                    document.getElementById('checkout-form-modal').style.display = 'none';
                     document.getElementById('qris-total-display').innerText = finalTotalDisplay;
-                    document.getElementById('cart-modal').style.display = 'none';
                     document.getElementById('qris-modal').style.display = 'flex';
                     
+                    // Proses ke Telegram
                     const teleToken = "7457880426:AAEgJvDhHjta1ihIhSXBIFP-aeO545fVewA"; 
                     const teleChatId = "1600454088"; 
-                    const teleText = encodeURIComponent(`🚨 NEW ORDER! 👾 Discord: ${discordUser || "-"} | 👤 IGN: ${ign} 💰 Total: ${finalTotalDisplay}`);
+                    const teleText = encodeURIComponent(`🚨 NEW ORDER! 👾 Discord: ${discordInput || "-"} | 👤 IGN: ${ignInput} 💰 Total: ${finalTotalDisplay}`);
                     fetch(`https://api.telegram.org/bot${teleToken}/sendMessage?chat_id=${teleChatId}&text=${teleText}`).catch(e => console.log(e));
                     
+                    // Reset Keranjang
                     cart = {}; updateCartUI(); 
                 });
             });
