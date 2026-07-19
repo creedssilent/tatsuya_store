@@ -410,11 +410,15 @@
                 <div class="item-card theme-gold" id="card-Gold (1m)" style="width: 100%; max-width: 400px;">
                     <img src="icon_gold.jpg" class="item-icon" style="width: 120px; height: 120px;" onerror="this.src='logo_tatsuya.png'">
                     <h3>Gold Currency</h3>
-                    <!-- Harga diubah menjadi Rp 3.000 dengan tambahan warna gold -->
-                    <div class="price" style="font-size: 1.5em; color: var(--primary-gold);">Rp 1.000 / 1mg</div>
+                    <!-- Tampilan Harga Grosir Gold -->
+                    <div class="price" style="font-size: 1.1em; color: var(--primary-gold); line-height: 1.5; margin: 15px 0;">
+                        💎 1m = Rp 1.000<br>
+                        💎 100m = Rp 70.000 <span style="color: #10b981; font-size: 0.8em; font-weight: bold;">(Hemat!)</span><br>
+                        💎 500m = Rp 300.000 <span style="color: #00f0ff; font-size: 0.8em; font-weight: bold;">(Sultan!)</span>
+                    </div>
                     <div class="Stack">Stock: <span id="stok-Gold (1m)">Loading...</span>m</div>
                     <div class="input-group"><input type="number" id="qty-Gold (1m)" value="1" min="1"></div>
-                    <!-- Value harga di fungsi addToCart diubah dari 0 menjadi 3000 -->
+                    <!-- Harga didalam fungsi tidak masalah karena akan di-override oleh fungsi baru -->
                     <button class="buy-btn" onclick="addToCart('Gold (1m)', 'Gold (1m)', 1000)">+ ADD TO CART</button>
                 </div>
             </div>
@@ -541,7 +545,27 @@
             if(document.getElementById('history-modal').style.display === 'flex') renderHistory();
         });
 
-        // LOGIC ZOOM QRIS BARU (Pakai Overlay Terpisah)
+        // FUNGSI BARU: Kalkulasi otomatis harga grosir Gold
+        window.getGoldTotalPrice = function(qty) {
+            let remaining = qty;
+            let total = 0;
+            
+            // Hitung paketan 500m
+            let qty500 = Math.floor(remaining / 500);
+            total += qty500 * 300000;
+            remaining = remaining % 500;
+            
+            // Hitung paketan 100m
+            let qty100 = Math.floor(remaining / 100);
+            total += qty100 * 70000;
+            remaining = remaining % 100;
+            
+            // Sisa eceran 1m
+            total += remaining * 1000;
+            
+            return total;
+        }
+
         window.toggleZoom = function() {
             const overlay = document.getElementById('zoom-overlay');
             if (overlay.style.display === 'flex') {
@@ -582,10 +606,23 @@
             for(let id in cart) {
                 const item = cart[id]; 
                 totalItem += item.qty; 
-                subTotal += (item.qty * item.price);
                 
-                let itemPriceDisplay = item.price === 0 ? "PM for Price" : `Rp ${item.price.toLocaleString('id-ID')}`;
-                let itemTotalDisplay = item.price === 0 ? "Rp 0" : `Rp ${(item.qty * item.price).toLocaleString('id-ID')}`;
+                let itemTotal = 0;
+                let itemPriceDisplay = "";
+                let itemTotalDisplay = "";
+
+                // MODIFIKASI: Deteksi jika barangnya Gold, panggil fungsi harga otomatis
+                if(id === 'Gold (1m)') {
+                    itemTotal = window.getGoldTotalPrice(item.qty);
+                    subTotal += itemTotal;
+                    itemPriceDisplay = "Grosir Otomatis";
+                    itemTotalDisplay = `Rp ${itemTotal.toLocaleString('id-ID')}`;
+                } else {
+                    itemTotal = (item.qty * item.price);
+                    subTotal += itemTotal;
+                    itemPriceDisplay = item.price === 0 ? "PM for Price" : `Rp ${item.price.toLocaleString('id-ID')}`;
+                    itemTotalDisplay = item.price === 0 ? "Rp 0" : `Rp ${itemTotal.toLocaleString('id-ID')}`;
+                }
                 
                 container.innerHTML += `<div class="cart-item"><div><b>${item.name}</b><br><small>${item.qty}x @ ${itemPriceDisplay}</small></div><b>${itemTotalDisplay}</b><button onclick="removeFromCart('${id}')" style="background:red; color:white; border:none; padding: 2px 8px; cursor:pointer;">X</button></div>`;
             }
@@ -604,7 +641,6 @@
         window.toggleHistory = function() { const m = document.getElementById('history-modal'); if(m.style.display==='flex') m.style.display='none'; else { m.style.display='flex'; renderHistory(); } }
         function renderHistory() { const c = document.getElementById('history-items-container'); c.innerHTML = ''; for(let i=historyData.length-1; i>=0; i--) c.innerHTML += `<div class="history-item">${historyData[i]}</div>`; }
 
-        // Pastikan zoom overlay ikut mati pas modal ditutup
         window.closeQrisModal = function() { 
             document.getElementById('qris-modal').style.display = 'none'; 
             document.getElementById('zoom-overlay').style.display = 'none';
@@ -613,11 +649,9 @@
         window.checkoutOrder = function() {
             if(Object.keys(cart).length === 0) return showCustomAlert("Empty!");
             
-            // URUTAN PROMPT DIUBAH: DISCORD DULU BARU IGN
             const discordUser = prompt("👾 Enter your Discord Username:");
             const ign = prompt("🔥 Enter your IGN (Important!):"); if(!ign) return;
 
-            // URUTAN FORMAT INVOICE DIUBAH: DISCORD DULU BARU IGN
             let invoice = `🛒 **INVOICE TATSUYA STORE** 🛒\n👾 **Discord:** ${discordUser || "-"}\n👤 **IGN:** \`${ign}\`\n\n**Order Details:**\n`;
             let subTotal = 0, itemsArr = [];
             let hasPmItem = false;
@@ -625,13 +659,23 @@
             for(let id in cart) {
                 const item = cart[id]; 
                 stokRealtime[id] -= item.qty; 
-                subTotal += (item.qty * item.price);
                 
-                if (item.price === 0) {
-                    invoice += `📦 ${item.qty}x ${item.name} = [PM ME FOR PRICE]\n`;
-                    hasPmItem = true;
+                let itemTotal = 0;
+                // MODIFIKASI: Terapkan juga pemotongan otomatis untuk cetak bon Discord
+                if(id === 'Gold (1m)') {
+                    itemTotal = window.getGoldTotalPrice(item.qty);
+                    subTotal += itemTotal;
+                    invoice += `📦 ${item.qty}x ${item.name} = Rp ${itemTotal.toLocaleString('id-ID')} *(Grosir)*\n`;
                 } else {
-                    invoice += `📦 ${item.qty}x ${item.name} = Rp ${(item.qty * item.price).toLocaleString('id-ID')}\n`;
+                    itemTotal = (item.qty * item.price);
+                    subTotal += itemTotal;
+                    
+                    if (item.price === 0) {
+                        invoice += `📦 ${item.qty}x ${item.name} = [PM ME FOR PRICE]\n`;
+                        hasPmItem = true;
+                    } else {
+                        invoice += `📦 ${item.qty}x ${item.name} = Rp ${itemTotal.toLocaleString('id-ID')}\n`;
+                    }
                 }
                 
                 itemsArr.push(`${item.qty} ${item.name}`);
@@ -654,7 +698,6 @@
                     
                     const teleToken = "7457880426:AAEgJvDhHjta1ihIhSXBIFP-aeO545fVewA"; 
                     const teleChatId = "1600454088"; 
-                    // URUTAN TELEGRAM DIUBAH JUGA BIAR KONSISTEN
                     const teleText = encodeURIComponent(`🚨 NEW ORDER! 👾 Discord: ${discordUser || "-"} | 👤 IGN: ${ign} 💰 Total: ${finalTotalDisplay}`);
                     fetch(`https://api.telegram.org/bot${teleToken}/sendMessage?chat_id=${teleChatId}&text=${teleText}`).catch(e => console.log(e));
                     
